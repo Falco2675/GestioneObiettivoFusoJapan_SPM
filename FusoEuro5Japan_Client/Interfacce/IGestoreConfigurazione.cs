@@ -2,7 +2,7 @@
 {
     public interface IGestoreConfigurazione
     {
-        //int IdApp { get; }
+        int IdApp { get; }
 
     }
 }

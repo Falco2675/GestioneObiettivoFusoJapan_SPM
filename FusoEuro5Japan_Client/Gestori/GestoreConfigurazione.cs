@@ -5,7 +5,7 @@ namespace FusoEuro5Japan_Client
 {
     public class GestoreConfigurazione : IGestoreConfigurazione
     {
-        //public int IdApp => 1;
+        public int IdApp => 2;
 
         //public bool Permetti_Chiusura_Pedana_Anticipata { get; private set; } = true;
         //public int Num_minimo_per_chiusura_pedana { get; private set; } = 2;

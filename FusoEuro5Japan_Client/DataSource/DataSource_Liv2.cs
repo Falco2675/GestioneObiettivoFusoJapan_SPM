@@ -21,10 +21,10 @@ namespace FusoEuro5Japan_Client
         }
         #endregion
 
-        public MotoreFuso GetMotore(string matricola)
+        public Motore GetMotore(string matricola)
         {
             System.Data.DataTable tabella = new System.Data.DataTable();
-            var motore = new MotoreFuso();
+            var motore = new Motore();
             try
             {
 

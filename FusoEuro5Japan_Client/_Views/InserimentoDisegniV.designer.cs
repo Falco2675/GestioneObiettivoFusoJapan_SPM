@@ -1,4 +1,4 @@
-﻿namespace Predac._Views
+﻿namespace FusoEuro5Japan_Client
 {
     partial class InserimentoDisegniV
     {

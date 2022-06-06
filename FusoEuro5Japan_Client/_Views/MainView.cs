@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 namespace FusoEuro5Japan_Client
 {
-    public partial class MainView : Form
+    public partial class MainView : Form, IMainV
     {
 
         #region EVENTI

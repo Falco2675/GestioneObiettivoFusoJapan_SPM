@@ -136,7 +136,7 @@ namespace FusoEuro5Japan_Client
                 DataIns = DateTime.Now
             };
 
-            _gestoreDisegni.AggiungiDisegni(disegnoFPT_TMC);
+            _gestoreDisegni.AggiungiDisegno(disegnoFPT_TMC);
 
             ElencoDisegniInseriti.Add(disegnoFPT_TMC);
 

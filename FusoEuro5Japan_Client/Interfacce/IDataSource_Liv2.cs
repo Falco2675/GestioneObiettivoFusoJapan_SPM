@@ -3,8 +3,9 @@ namespace FusoEuro5Japan_Client
 {
     public interface IDataSource_Liv2
     {
-        MotoreFuso GetMotore(string matricola);
-        void InserisciDisegni(DisegnoFPT_TMC disegnoFPT_TMC);
+        Motore GetMotore(string matricola);
+        bool Is_FareTestACaldo();
+        void InserisciDisegni(string disegno);
         bool IsConnessioneDS_Ok();
     }
 }

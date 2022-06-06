@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using LoginFPT.Gestori;
+using System;
 using System.Windows.Forms;
 using Unity;
 using Unity.Lifetime;
@@ -32,16 +30,11 @@ namespace FusoEuro5Japan_Client
             _container = new UnityContainer();
 
             _container
-                .RegisterType<IEventAggregator, EventAggregator>(new ContainerControlledLifetimeManager())
-                .RegisterType<IMainV, MainV>(new ContainerControlledLifetimeManager())
+                .RegisterType<IMainV, MainView>(new ContainerControlledLifetimeManager())
                 .RegisterType<IMainP, MainP>(new ContainerControlledLifetimeManager())
                 .RegisterType<IDataSource_Liv2, DataSource_Liv2>(new ContainerControlledLifetimeManager())
                 //.RegisterType<IDataSource_Liv2, DataSourceFake_Liv2>(new ContainerControlledLifetimeManager())
-                .RegisterType<IDataSource_ServicePMS, DataSourceFake_ServicePMS>(new ContainerControlledLifetimeManager())
                 //.RegisterType<IDataSource_ServicePMS, DataSource_ServicePMS>(new ContainerControlledLifetimeManager())
-                .RegisterType<IGestoreStampa, GestoreStampa>(new ContainerControlledLifetimeManager())
-                .RegisterType<IGestorePedana, GestorePedana>(new ContainerControlledLifetimeManager())
-                .RegisterType<IGestoreCronologiaPedaneCompletate, GestoreCronologiaPedaneCompletate>(new ContainerControlledLifetimeManager())
                 .RegisterType<IGestoreConfigurazione, GestoreConfigurazione>(new ContainerControlledLifetimeManager())
                 .RegisterType<ILoginP, LoginP>(new ContainerControlledLifetimeManager())
                 .RegisterType<ILoginV, LoginV>(new ContainerControlledLifetimeManager())
