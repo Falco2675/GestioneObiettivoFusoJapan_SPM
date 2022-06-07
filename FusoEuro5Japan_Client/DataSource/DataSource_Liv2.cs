@@ -21,7 +21,7 @@ namespace FusoEuro5Japan_Client
         }
         #endregion
 
-        public Motore GetMotore(string matricola)
+        public Motore GetMotore(string datoRicevuto, TipoDatoRicevuto tipoDatoRicevuto)
         {
             System.Data.DataTable tabella = new System.Data.DataTable();
             var motore = new Motore();
@@ -38,7 +38,7 @@ namespace FusoEuro5Japan_Client
                     conn.Open();
                     using (OdbcCommand cmd = new OdbcCommand(query, conn))
                     {
-                        cmd.Parameters.Add("@matricola", OdbcType.Char, 20).Value = matricola.Trim();
+                        cmd.Parameters.Add("@matricola", OdbcType.Char, 20).Value = datoRicevuto.Trim();
                         using (OdbcDataReader dr = cmd.ExecuteReader())
                         {
                             if (dr.HasRows)
@@ -67,7 +67,7 @@ namespace FusoEuro5Japan_Client
             }
         }
 
-        public void InserisciDisegni(DisegnoFPT_TMC disegnoFPT_TMC)
+        public void InserisciDisegni(string disegnoMotore)
         {
             try
             {
@@ -81,9 +81,9 @@ namespace FusoEuro5Japan_Client
                     conn.Open();
                     using (OdbcCommand cmd = new OdbcCommand(query, conn))
                     {
-                        cmd.Parameters.Add("@disegnoFPT", OdbcType.Char, 15).Value = disegnoFPT_TMC.DisegnoFPT.Trim();
-                        cmd.Parameters.Add("@disegnoTMC", OdbcType.Char, 15).Value = disegnoFPT_TMC.DisegnoTMC.Trim();
-                        cmd.Parameters.Add("@ricambi", OdbcType.Numeric, 1).Value = disegnoFPT_TMC.IsPerRicambi ? 1 : 0;
+                        cmd.Parameters.Add("@disegnoFPT", OdbcType.Char, 15).Value = disegnoMotore.DisegnoFPT.Trim();
+                        cmd.Parameters.Add("@disegnoTMC", OdbcType.Char, 15).Value = disegnoMotore.DisegnoTMC.Trim();
+                        cmd.Parameters.Add("@ricambi", OdbcType.Numeric, 1).Value = disegnoMotore.IsPerRicambi ? 1 : 0;
 
                         cmd.ExecuteNonQuery();
 
@@ -120,5 +120,11 @@ namespace FusoEuro5Japan_Client
 
             return output;
         }
+
+        public bool IsMotoreTarget(Motore motoreLetto)
+        {
+            throw new NotImplementedException();
+        }
+
     }
 }

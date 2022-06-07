@@ -7,6 +7,7 @@ namespace FusoEuro5Japan_Client
         public string Matricola { get; set; }
         public string Disegno { get; set; }
         public string CodBasamento { get; set; }
+        public bool IsTargetCandidate { get; set; }
 
         public Motore()
         {

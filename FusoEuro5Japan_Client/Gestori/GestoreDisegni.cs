@@ -18,9 +18,9 @@ namespace FusoEuro5Japan_Client
             _dataSource = dataSource;
         }
 
-        public void AggiungiDisegno(DisegnoFPT_TMC disegni)
+        public void AggiungiDisegno(string disegno)
         {
-            _dataSource.InserisciDisegni(disegni);
+            _dataSource.InserisciDisegni(disegno);
         }
     }
 }

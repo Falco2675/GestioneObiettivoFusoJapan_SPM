@@ -1,7 +1,4 @@
-﻿using Predac._Views;
-using Predac.Gestori;
-using Predac.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -25,7 +22,7 @@ namespace FusoEuro5Japan_Client
         private string _messaggio;
         private BindingList<DisegnoFPT_TMC> _elencoDisegniInseriti = new BindingList<DisegnoFPT_TMC>();
         private readonly IGestoreDisegni _gestoreDisegni;
-        private readonly IValidatoreDisegni _validatoreDisegni;
+        private readonly IGestoreConvalidaDatoRicevuto _validatoreDisegni;
 
         #endregion
 
@@ -70,7 +67,7 @@ namespace FusoEuro5Japan_Client
             (
                 IInserimentoDisegniV view,
                 IGestoreDisegni gestoreDisegni,
-                IValidatoreDisegni validatoreDisegni
+                IGestoreConvalidaDatoRicevuto validatoreDisegni
             )
         {
             _view = view;
@@ -124,7 +121,7 @@ namespace FusoEuro5Japan_Client
 
         private void ConvalidaDisegni()
         {
-            _validatoreDisegni.ConvalidaDisegni(DisegnoFPT.Trim(), DisegnoTMC.Trim());
+            _validatoreDisegni.ConvalidaDato(DisegnoFPT.Trim(), DisegnoTMC.Trim());
         }
         private void AggiungiDisegniSuDB()
         {

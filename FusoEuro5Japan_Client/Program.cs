@@ -42,7 +42,7 @@ namespace FusoEuro5Japan_Client
                 .RegisterType<IInserimentoDisegniV, InserimentoDisegniV>(new ContainerControlledLifetimeManager())
                 .RegisterType<IInserimentoDisegniP, InserimentoDisegniP>(new ContainerControlledLifetimeManager())
                 .RegisterType<IGestoreDisegni, GestoreDisegni>(new ContainerControlledLifetimeManager())
-                .RegisterType<IValidatoreDisegni, ValidatoreDisegni>(new ContainerControlledLifetimeManager())
+                .RegisterType<IGestoreConvalidaDatoRicevuto, GestoreConvalidaDatoRicevuto>(new ContainerControlledLifetimeManager())
 
                 ;
         }

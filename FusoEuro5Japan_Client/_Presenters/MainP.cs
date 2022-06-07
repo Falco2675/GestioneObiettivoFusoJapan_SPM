@@ -17,19 +17,22 @@ namespace FusoEuro5Japan_Client
         private readonly Color COLORE_RICAMBI = Color.SandyBrown;
 
         private readonly IMainV _view;
-
-
-
-        private bool _isAliveDataSource;
-        private string _warningMessage;
-        private readonly Timer _timerOrario, _timerIsAliveDS;
-        private bool _isMultiDisegnoDaConfigurazione;
-
-        private string _orario;
-        private System.Timers.Timer _timeShowMessage;
         private readonly IDataSource_Liv2 _dataSourceLIV2;
         private readonly IGestoreConfigurazione _gestoreConfigurazione;
         private readonly ILoginP _loginP;
+        private readonly IGestoreConvalidaDatoRicevuto _gestoreConvalidaDatoRicevuto;
+
+        private bool _isAliveDataSource;
+        //private string _warningMessage;
+        private Motore _motoreLetto;
+        private string _azioneDaCompiere;
+
+        private readonly Timer _timerOrario, _timerIsAliveDS;
+        private TipoDatoRicevuto _tipoDatoRicevuto;
+
+        private string _orario;
+        private System.Timers.Timer _timeShowMessage;
+
         //private readonly IValidatoreDisegni _validatoreDisegni;
 
         //private string _datoLetto;
@@ -57,18 +60,39 @@ namespace FusoEuro5Japan_Client
                 Notify();
             }
         }
-        public string WarningMessage
-        {
-            get { return _warningMessage; }
-            set 
-            {
-                _warningMessage = value;
-                if (!string.IsNullOrEmpty(_warningMessage))
-                    AvviaTimerShowMessage();
 
+        public Motore MotoreLetto
+        {
+            get { return _motoreLetto; }
+            set { _motoreLetto = value; Notify(); }
+        }
+        private readonly IGestoreAzioniDaCompiere _gestoreAzioniDaCompiere;
+
+        public string AzioneDaCompiere_string
+        {
+            get { return _azioneDaCompiere; }
+            set
+            {
+                _azioneDaCompiere = value;
+                if (!string.IsNullOrEmpty(_azioneDaCompiere))
+                    AvviaTimerShowMessage();
                 Notify();
             }
         }
+
+
+        //public string WarningMessage
+        //{
+        //    get { return _warningMessage; }
+        //    set 
+        //    {
+        //        _warningMessage = value;
+        //        if (!string.IsNullOrEmpty(_warningMessage))
+        //            AvviaTimerShowMessage();
+
+        //        Notify();
+        //    }
+        //}
         public string Versione => $"v. {Assembly.GetExecutingAssembly().GetName().Version.ToString()}";
         #endregion
 
@@ -77,14 +101,19 @@ namespace FusoEuro5Japan_Client
             (
                IMainV view,
                IDataSource_Liv2 dataSourceLIV2,
-               IGestoreConfigurazione gestoreConfigurazione
-
+               IGestoreConfigurazione gestoreConfigurazione,
+               IGestoreConvalidaDatoRicevuto gestoreConvalidaDatoRicevuto,
+               IGestoreAzioniDaCompiere gestoreAzioniDaCompiere,
+               ILoginP loginP
             )
         {
             _view = view;
             //_validatoreDisegni = validatoreDisegni;
             _dataSourceLIV2 = dataSourceLIV2;
             _gestoreConfigurazione = gestoreConfigurazione;
+            _gestoreConvalidaDatoRicevuto = gestoreConvalidaDatoRicevuto;
+            _gestoreAzioniDaCompiere = gestoreAzioniDaCompiere;
+            _loginP = loginP;
 
             _view.SetPresenter(this);
 
@@ -97,7 +126,6 @@ namespace FusoEuro5Japan_Client
             _timeShowMessage.Interval = 5000;
 
             Color_SfondoMatricoleDisegni = DEFAULT_COLOR;
-            _view.SettaPerDisegnoMisti(_isMultiDisegnoDaConfigurazione);
 
         }
 
@@ -112,8 +140,6 @@ namespace FusoEuro5Japan_Client
             _view.ResetEvent += OnResetEvent;
             _view.AvviaStrumentiEvent += OnAvviaStrumentiEvent;
 
-
-            //_GestoreCronologiaPedaneCompletate.CronologiaPedaneChanged += OnCronologiaPedaneChanged;
         }
 
 
@@ -122,22 +148,39 @@ namespace FusoEuro5Japan_Client
         #region GESTORI EVENTI
         private void _timeShowMessage_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
-            WarningMessage = "";
+            AzioneDaCompiere_string = "";
             _timeShowMessage.Stop();
         }
 
         private void OnStringaRicevutaEvent(object sender, string stringaRicevuta)
         {
-            WarningMessage = "";
+            AzioneDaCompiere_string = "";
             _timeShowMessage.Stop();
-            ElaboraStringaRicevuta(stringaRicevuta);
+            try
+            {
+                _gestoreConvalidaDatoRicevuto.ConvalidaDato(stringaRicevuta);
+                _tipoDatoRicevuto = _gestoreConvalidaDatoRicevuto.GetTipoDatoRicevuto(stringaRicevuta);
+                MotoreLetto = _dataSourceLIV2.GetMotore(stringaRicevuta, _tipoDatoRicevuto);
+                if (string.IsNullOrEmpty(MotoreLetto.Matricola))
+                    throw new Exception("Dato non conforme! \nLEGGERE MATRICOLA MOTORE o COD. BASAMENTO.");
+                if (MotoreLetto.IsTargetCandidate)
+                    AzioneDaCompiere_string = _gestoreAzioniDaCompiere.GetAzioniDaCompiere(MotoreLetto);
+                else
+                {
+                    AzioneDaCompiere_string = "Nessuna azione da eseguire.";
+                }
+            }
+            catch (Exception ex)
+            {
+                AzioneDaCompiere_string = ex.Message;
+            }
+
         }
 
 
 
         private void OnResetEvent(object sender, EventArgs e)
         {
-            _view.SettaPerDisegnoMisti(_isMultiDisegnoDaConfigurazione);
             Color_SfondoMatricoleDisegni = DEFAULT_COLOR;
             Notify(nameof(Color_SfondoMatricoleDisegni));
         }
@@ -151,41 +194,53 @@ namespace FusoEuro5Japan_Client
         #endregion
 
         #region METODI PRIVATI
-        private void ElaboraStringaRicevuta(string stringaRicevuta)
-        {
-            if (string.IsNullOrEmpty(stringaRicevuta)) return;
-            if (stringaRicevuta.Trim().ToUpper() == "RESET")
-            {
-                _view.ResettaCampi();
-                return;
-            }
+        //private void ElaboraStringaRicevuta(string stringaRicevuta)
+        //{
+        //    try
+        //    {
+               
+        //    }
+        //    catch (Exception ex)
+        //    {
 
-            //try
-            //{
-            //    _validatoreDisegni.ConvalidaMatricola(stringaRicevuta);
-            //    _gestorePedana.AggiungiMotore(stringaRicevuta);
-            //}
-            //catch (Exception ex)
-            //{
-            //    WarningMessage = ex.Message;
-            //}
+        //        WarningMessage = ex.Message;
+        //    }
+
+
+
+        //    if (string.IsNullOrEmpty(stringaRicevuta)) return;
+        //    if (stringaRicevuta.Trim().ToUpper() == "RESET")
+        //    {
+        //        _view.ResettaCampi();
+        //        return;
+        //    }
+
+        //    //try
+        //    //{
+        //    //    _validatoreDisegni.ConvalidaMatricola(stringaRicevuta);
+        //    //    _gestorePedana.AggiungiMotore(stringaRicevuta);
+        //    //}
+        //    //catch (Exception ex)
+        //    //{
+        //    //    WarningMessage = ex.Message;
+        //    //}
 
 
                 
-            if (!IsMatricolaValida(stringaRicevuta.Trim()))
-            {
-                WarningMessage = "Matricola non conforme! \nLEGGERE MATRICOLA MOTORE.";
-                return;
-            }
-            try
-            {
-                _gestorePedana.ElaboraMatricola(stringaRicevuta);
-            }
-            catch (Exception ex)
-            {
-                WarningMessage = ex.Message;
-            }
-        }
+        //    if (!IsMatricolaValida(stringaRicevuta.Trim()))
+        //    {
+        //        WarningMessage = "Dato non conforme! \nLEGGERE MATRICOLA MOTORE o COD. BASAMENTO.";
+        //        return;
+        //    }
+        //    try
+        //    {
+        //        _gestorePedana.ElaboraMatricola(stringaRicevuta);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        WarningMessage = ex.Message;
+        //    }
+        //}
         private bool IsMatricolaValida(string matricola)
         {
             return

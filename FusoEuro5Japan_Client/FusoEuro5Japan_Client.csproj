@@ -67,10 +67,13 @@
   <ItemGroup>
     <Compile Include="DataSource\DataSourceFake_Liv2.cs" />
     <Compile Include="DataSource\DataSource_Liv2.cs" />
+    <Compile Include="Gestori\GestoreAzioniDaCompiere.cs" />
     <Compile Include="Gestori\GestoreConfigurazione.cs" />
     <Compile Include="Gestori\GestoreDisegni.cs" />
+    <Compile Include="Interfacce\IGestoreAzioniDaCompiere.cs" />
+    <Compile Include="Helpers\Enums.cs" />
     <Compile Include="Interfacce\IGestoreDisegni.cs" />
-    <Compile Include="Gestori\ValidatoreDisegni.cs" />
+    <Compile Include="Gestori\GestoreConvalidaDatoRicevuto.cs" />
     <Compile Include="Helpers\BaseP.cs" />
     <Compile Include="Interfacce\IDataSource_Liv2.cs" />
     <Compile Include="Interfacce\IGestoreConfigurazione.cs" />
@@ -79,7 +82,7 @@
     <Compile Include="Interfacce\ILoginV.cs" />
     <Compile Include="Interfacce\IMainP.cs" />
     <Compile Include="Interfacce\IMainV.cs" />
-    <Compile Include="Interfacce\IValidatoreDisegni.cs" />
+    <Compile Include="Interfacce\IGestoreConvalidaDatoRicevuto.cs" />
     <Compile Include="Interfacce\IView.cs" />
     <Compile Include="Interfacce\IInserimentoDisegniP.cs" />
     <Compile Include="Models\Motore.cs" />
@@ -145,7 +148,18 @@
   <ItemGroup>
     <None Include="Resources\LOGO IVECO_orizzontale_trasp.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\Tools_2-48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Ok-48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Ok-96.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\reboot-48.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
