@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace FusoEuro5Japan_Client
 {
-    public class DataSource_Liv2 : IDataSource_Liv2
+    public class DataSource_Liv2 : IDataSource
     {
         static string connString = "DSN=iveco; Uid=IVECO; Pwd=bedede;";
         private readonly IGestoreConfigurazione _gestoreConfigurazione;

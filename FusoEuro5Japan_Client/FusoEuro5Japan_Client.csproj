@@ -37,6 +37,7 @@
       <HintPath>.\LoginFPT.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.2\lib\netstandard1.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
@@ -65,17 +66,21 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataSource\DataSourceFake_Liv2.cs" />
+    <Compile Include="DataSource\DataSourceFake_Access.cs" />
     <Compile Include="DataSource\DataSource_Liv2.cs" />
     <Compile Include="Gestori\GestoreAzioniDaCompiere.cs" />
     <Compile Include="Gestori\GestoreConfigurazione.cs" />
     <Compile Include="Gestori\GestoreDisegni.cs" />
+    <Compile Include="Gestori\Strategia_abs.cs" />
+    <Compile Include="Gestori\Strategia_NonDefinita.cs" />
+    <Compile Include="Gestori\Strategia_N_PezziDefinito.cs" />
+    <Compile Include="Gestori\Strategia_Ogni_N_Pezzi.cs" />
     <Compile Include="Interfacce\IGestoreAzioniDaCompiere.cs" />
     <Compile Include="Helpers\Enums.cs" />
     <Compile Include="Interfacce\IGestoreDisegni.cs" />
     <Compile Include="Gestori\GestoreConvalidaDatoRicevuto.cs" />
     <Compile Include="Helpers\BaseP.cs" />
-    <Compile Include="Interfacce\IDataSource_Liv2.cs" />
+    <Compile Include="Interfacce\IDataSource.cs" />
     <Compile Include="Interfacce\IGestoreConfigurazione.cs" />
     <Compile Include="Interfacce\IInserimentoDisegniV.cs" />
     <Compile Include="Interfacce\ILoginP.cs" />
@@ -83,8 +88,10 @@
     <Compile Include="Interfacce\IMainP.cs" />
     <Compile Include="Interfacce\IMainV.cs" />
     <Compile Include="Interfacce\IGestoreConvalidaDatoRicevuto.cs" />
+    <Compile Include="Interfacce\IStrategia.cs" />
     <Compile Include="Interfacce\IView.cs" />
     <Compile Include="Interfacce\IInserimentoDisegniP.cs" />
+    <Compile Include="Models\Config.cs" />
     <Compile Include="Models\Motore.cs" />
     <Compile Include="_Presenters\InserimentoDisegniP.cs" />
     <Compile Include="_Presenters\LoginP.cs" />

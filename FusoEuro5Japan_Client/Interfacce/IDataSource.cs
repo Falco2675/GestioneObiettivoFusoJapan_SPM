@@ -1,11 +1,14 @@
 ﻿
 namespace FusoEuro5Japan_Client
 {
-    public interface IDataSource_Liv2
+    public interface IDataSource
     {
         Motore GetMotore(string datoRicevuto, TipoDatoRicevuto tipoDatoRicevuto);
         void InserisciDisegni(string disegno);
         bool IsConnessioneDS_Ok();
-        bool IsMotoreTarget(Motore motoreLetto);
+        Config GetConfigurazione();
+        int GetContatoreDiComodo();
+        void SetContatoreDiComoodo(int ogni_N_Pezzi);
+        void SettaPerMotoreTarget(int v1, int v2);
     }
 }

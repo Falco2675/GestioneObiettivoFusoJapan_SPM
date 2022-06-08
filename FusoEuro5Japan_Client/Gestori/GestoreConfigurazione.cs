@@ -1,44 +1,60 @@
 ﻿using System;
 using System.Configuration;
+using System.Threading;
 
 namespace FusoEuro5Japan_Client
 {
     public class GestoreConfigurazione : IGestoreConfigurazione
     {
+        private Config _configurazione;
+        private readonly Timer _timerGetConfig;
+        private readonly IDataSource _dataSource;
+
         public int IdApp => 2;
 
-        //public bool Permetti_Chiusura_Pedana_Anticipata { get; private set; } = true;
-        //public int Num_minimo_per_chiusura_pedana { get; private set; } = 2;
-        //public bool Permetti_Predac_DisegnoMisto { get; private set; } = false;
+        public Config Configurazione
+        {
+            get { return _configurazione; }
+            set { _configurazione = value; }
+        }
+
+        #region EVENTI
+        public event EventHandler<StrategiaEnum> CambioStrategiaChanged;
+        public event EventHandler<int> ContatoreDelTurnoChanged;
+
+        #endregion
+
 
         #region CTOR
-        public GestoreConfigurazione()
+        public GestoreConfigurazione
+            (
+                IDataSource dataSource
+            )
         {
-            LoadConfigurazione();
-        }
-
-        private void LoadConfigurazione()
-        {
-            try
-            {
-                //Num_minimo_per_chiusura_pedana = Convert.ToInt16(ConfigurationManager.AppSettings["Num_minimo_per_chiusura_pedana"]);
-                //if (Num_minimo_per_chiusura_pedana < 1)
-                //    Num_minimo_per_chiusura_pedana = 1;
-                //if (Num_minimo_per_chiusura_pedana > 3)
-                //    Num_minimo_per_chiusura_pedana = 3;
-
-                //Permetti_Chiusura_Pedana_Anticipata = Convert.ToBoolean(ConfigurationManager.AppSettings["Permetti_Chiusura_Pedana_Anticipata"]);
-                //if (Permetti_Chiusura_Pedana_Anticipata == false)
-                //    Num_minimo_per_chiusura_pedana = 3;
-
-                //Permetti_Predac_DisegnoMisto = Convert.ToBoolean(ConfigurationManager.AppSettings["Permetti_Predac_DisegnoMisto"]);
-                
-            }
-            catch (System.Exception)
-            {}
-
+            _dataSource = dataSource;
+            _timerGetConfig = new Timer((o) => { GetConfigurazione(); }, null, 500, 5000);
         }
         #endregion
+
+        public Config GetConfigurazione()
+        {
+            _timerGetConfig?.Change(-1, -1);
+
+            try
+            {
+                return _dataSource.GetConfigurazione();
+
+            }
+            catch (System.Exception)
+            {
+                throw new Exception("Errore DB. Configurazione!");
+            }
+            finally
+            {
+                _timerGetConfig.Change(5000, 5000);
+            }
+
+        }
 
 
     }

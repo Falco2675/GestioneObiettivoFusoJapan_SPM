@@ -32,8 +32,8 @@ namespace FusoEuro5Japan_Client
             _container
                 .RegisterType<IMainV, MainView>(new ContainerControlledLifetimeManager())
                 .RegisterType<IMainP, MainP>(new ContainerControlledLifetimeManager())
-                .RegisterType<IDataSource_Liv2, DataSource_Liv2>(new ContainerControlledLifetimeManager())
-                //.RegisterType<IDataSource_Liv2, DataSourceFake_Liv2>(new ContainerControlledLifetimeManager())
+                //.RegisterType<IDataSource, DataSource_Liv2>(new ContainerControlledLifetimeManager())
+                .RegisterType<IDataSource, DataSourceFake_Access>(new ContainerControlledLifetimeManager())
                 //.RegisterType<IDataSource_ServicePMS, DataSource_ServicePMS>(new ContainerControlledLifetimeManager())
                 .RegisterType<IGestoreConfigurazione, GestoreConfigurazione>(new ContainerControlledLifetimeManager())
                 .RegisterType<ILoginP, LoginP>(new ContainerControlledLifetimeManager())

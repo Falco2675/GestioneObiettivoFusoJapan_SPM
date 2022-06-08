@@ -17,14 +17,19 @@ namespace FusoEuro5Japan_Client
         private readonly Color COLORE_RICAMBI = Color.SandyBrown;
 
         private readonly IMainV _view;
-        private readonly IDataSource_Liv2 _dataSourceLIV2;
+        private readonly IDataSource _dataSource;
         private readonly IGestoreConfigurazione _gestoreConfigurazione;
         private readonly ILoginP _loginP;
         private readonly IGestoreConvalidaDatoRicevuto _gestoreConvalidaDatoRicevuto;
+        private IStrategia _strategia;
 
         private bool _isAliveDataSource;
+        private string _strategia_string;
+        private string _produzione_string;
+
         //private string _warningMessage;
         private Motore _motoreLetto;
+        private Config _configurazione;
         private string _azioneDaCompiere;
 
         private readonly Timer _timerOrario, _timerIsAliveDS;
@@ -49,7 +54,6 @@ namespace FusoEuro5Japan_Client
             set { _isAliveDataSource = value; Notify(); }
         }
         public Color IsAliveColor => IsAliveDataSource ? Color.Green : Color.Red;
-        public Color Color_SfondoMatricoleDisegni { get; private set; }
 
         public string Orario
         {
@@ -66,6 +70,31 @@ namespace FusoEuro5Japan_Client
             get { return _motoreLetto; }
             set { _motoreLetto = value; Notify(); }
         }
+
+        
+
+
+        public Config Configurazione
+        {
+            get { return _configurazione; }
+            set
+            {
+                var old_Ogni_N_pezzi = _configurazione.Ogni_N_Pezzi;
+                var old_Ogni_N_pezzi_definito = _configurazione.N_pezzi_definito;
+                _configurazione = value;
+
+                if ((_configurazione.Ogni_N_Pezzi != old_Ogni_N_pezzi) || (_configurazione.N_pezzi_definito != old_Ogni_N_pezzi_definito))
+                {
+                    Notify(nameof(Strategia_string));
+                    Notify(nameof(Produzione_string));
+                }
+
+            }
+        }
+        public string Strategia_string => _strategia.Strategia_String;
+
+        public string Produzione_string => _strategia.Produzione_String;
+
         private readonly IGestoreAzioniDaCompiere _gestoreAzioniDaCompiere;
 
         public string AzioneDaCompiere_string
@@ -100,7 +129,7 @@ namespace FusoEuro5Japan_Client
         public MainP
             (
                IMainV view,
-               IDataSource_Liv2 dataSourceLIV2,
+               IDataSource dataSource,
                IGestoreConfigurazione gestoreConfigurazione,
                IGestoreConvalidaDatoRicevuto gestoreConvalidaDatoRicevuto,
                IGestoreAzioniDaCompiere gestoreAzioniDaCompiere,
@@ -109,23 +138,22 @@ namespace FusoEuro5Japan_Client
         {
             _view = view;
             //_validatoreDisegni = validatoreDisegni;
-            _dataSourceLIV2 = dataSourceLIV2;
+            _dataSource = dataSource;
             _gestoreConfigurazione = gestoreConfigurazione;
             _gestoreConvalidaDatoRicevuto = gestoreConvalidaDatoRicevuto;
             _gestoreAzioniDaCompiere = gestoreAzioniDaCompiere;
             _loginP = loginP;
+            _strategia = new Strategia_NonDefinita(_dataSource, _gestoreConfigurazione);
 
             _view.SetPresenter(this);
 
             SottoscriviEventi();
 
             _timerOrario = new Timer((o) => { Orario = DateTime.Now.ToString("HH:mm:ss"); }, null, 500, 1000);
-            _timerIsAliveDS = new Timer((o) => { IsAliveDataSource = _dataSourceLIV2.IsConnessioneDS_Ok(); }, null, 500, 15000);
+            _timerIsAliveDS = new Timer((o) => { IsAliveDataSource = _dataSource.IsConnessioneDS_Ok(); }, null, 500, 15000);
             _timeShowMessage = new System.Timers.Timer();
             _timeShowMessage.Elapsed += _timeShowMessage_Elapsed;
             _timeShowMessage.Interval = 5000;
-
-            Color_SfondoMatricoleDisegni = DEFAULT_COLOR;
 
         }
 
@@ -135,12 +163,14 @@ namespace FusoEuro5Japan_Client
         #region SOTTOSCRIZIONE EVENTI
         public void SottoscriviEventi()
         {
-
             _view.StringaRicevutaEvent += OnStringaRicevutaEvent;
             _view.ResetEvent += OnResetEvent;
             _view.AvviaStrumentiEvent += OnAvviaStrumentiEvent;
+            _gestoreConfigurazione.CambioStrategiaChanged += OnCambioStrategiaChanged;
+            _gestoreConfigurazione.ContatoreDelTurnoChanged += OnContatoreDelTurnoChanged;
 
         }
+
 
 
         #endregion
@@ -151,7 +181,6 @@ namespace FusoEuro5Japan_Client
             AzioneDaCompiere_string = "";
             _timeShowMessage.Stop();
         }
-
         private void OnStringaRicevutaEvent(object sender, string stringaRicevuta)
         {
             AzioneDaCompiere_string = "";
@@ -160,15 +189,20 @@ namespace FusoEuro5Japan_Client
             {
                 _gestoreConvalidaDatoRicevuto.ConvalidaDato(stringaRicevuta);
                 _tipoDatoRicevuto = _gestoreConvalidaDatoRicevuto.GetTipoDatoRicevuto(stringaRicevuta);
-                MotoreLetto = _dataSourceLIV2.GetMotore(stringaRicevuta, _tipoDatoRicevuto);
+                MotoreLetto = _dataSource.GetMotore(stringaRicevuta, _tipoDatoRicevuto);
                 if (string.IsNullOrEmpty(MotoreLetto.Matricola))
                     throw new Exception("Dato non conforme! \nLEGGERE MATRICOLA MOTORE o COD. BASAMENTO.");
-                if (MotoreLetto.IsTargetCandidate)
-                    AzioneDaCompiere_string = _gestoreAzioniDaCompiere.GetAzioniDaCompiere(MotoreLetto);
-                else
-                {
-                    AzioneDaCompiere_string = "Nessuna azione da eseguire.";
-                }
+
+
+                _strategia.EseguiSuMotore(MotoreLetto);
+                //if (MotoreLetto.IsTargetCandidate)
+                //{
+                //    //AzioneDaCompiere_string = _gestoreAzioniDaCompiere.GetAzioniDaCompiere(MotoreLetto);
+                //}
+                //else
+                //{
+                //    AzioneDaCompiere_string = "Nessuna azione da eseguire.";
+                //}
             }
             catch (Exception ex)
             {
@@ -176,20 +210,37 @@ namespace FusoEuro5Japan_Client
             }
 
         }
-
-
-
         private void OnResetEvent(object sender, EventArgs e)
         {
-            Color_SfondoMatricoleDisegni = DEFAULT_COLOR;
-            Notify(nameof(Color_SfondoMatricoleDisegni));
+            //Color_SfondoMatricoleDisegni = DEFAULT_COLOR;
+            //Notify(nameof(Color_SfondoMatricoleDisegni));
         }
-
         private void OnAvviaStrumentiEvent(object sender, EventArgs e)
         {
             _loginP.ShowView();
         }
-
+        private void OnContatoreDelTurnoChanged(object sender, int contatoreTurno)
+        {
+            Notify(nameof(Produzione_string));
+        }
+        private void OnCambioStrategiaChanged(object sender, StrategiaEnum strategia)
+        {
+            switch (strategia)
+            {
+                case StrategiaEnum.Ogni_N_pezzi:
+                    _strategia = new Strategia_Ogni_N_Pezzi(_dataSource, _gestoreConfigurazione);
+                    break;
+                case StrategiaEnum.N_Pezzi_Definito:
+                    _strategia = new Strategia_N_PezziDefinito(_dataSource, _gestoreConfigurazione);
+                    break;
+                case StrategiaEnum.Non_Definita:
+                    _strategia = new Strategia_NonDefinita(_dataSource, _gestoreConfigurazione);
+                    break;
+                default:
+                    break;
+            }
+            Notify(nameof(Strategia_string));
+        }
 
         #endregion
 
@@ -198,7 +249,7 @@ namespace FusoEuro5Japan_Client
         //{
         //    try
         //    {
-               
+
         //    }
         //    catch (Exception ex)
         //    {
@@ -226,7 +277,7 @@ namespace FusoEuro5Japan_Client
         //    //}
 
 
-                
+
         //    if (!IsMatricolaValida(stringaRicevuta.Trim()))
         //    {
         //        WarningMessage = "Dato non conforme! \nLEGGERE MATRICOLA MOTORE o COD. BASAMENTO.";

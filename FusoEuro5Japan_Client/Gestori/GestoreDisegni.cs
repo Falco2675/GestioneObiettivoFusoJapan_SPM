@@ -8,11 +8,11 @@ namespace FusoEuro5Japan_Client
 {
     public class GestoreDisegni : IGestoreDisegni
     {
-        private readonly IDataSource_Liv2 _dataSource;
+        private readonly IDataSource _dataSource;
 
         public GestoreDisegni
             (
-                IDataSource_Liv2 dataSource
+                IDataSource dataSource
             )
         {
             _dataSource = dataSource;
