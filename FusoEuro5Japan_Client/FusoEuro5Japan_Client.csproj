@@ -71,9 +71,11 @@
     <Compile Include="Gestori\GestoreAzioniDaCompiere.cs" />
     <Compile Include="Gestori\GestoreConfigurazione.cs" />
     <Compile Include="Gestori\GestoreDisegni.cs" />
+    <Compile Include="Gestori\GestoreTurni.cs" />
+    <Compile Include="Gestori\IGestoreTurni.cs" />
     <Compile Include="Gestori\Strategia_abs.cs" />
     <Compile Include="Gestori\Strategia_NonDefinita.cs" />
-    <Compile Include="Gestori\Strategia_N_PezziDefinito.cs" />
+    <Compile Include="Gestori\Strategia_TargetTurno.cs" />
     <Compile Include="Gestori\Strategia_Ogni_N_Pezzi.cs" />
     <Compile Include="Interfacce\IGestoreAzioniDaCompiere.cs" />
     <Compile Include="Helpers\Enums.cs" />

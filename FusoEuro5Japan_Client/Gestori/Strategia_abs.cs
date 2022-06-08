@@ -10,7 +10,7 @@ namespace FusoEuro5Japan_Client
     {
         protected readonly IDataSource _dataSource;
         protected readonly IGestoreConfigurazione _gestoreConfigurazione;
-        protected string DEFAULT_AZIONE = "Nessuna azione.";
+        protected string NESSUNA_AZIONE = "Nessuna azione.";
         protected string AZIONE_DA_SVOLGERE = "EFFETTUARE PROVA A CALDO.";
         private string _azioneDaCompiere;
 

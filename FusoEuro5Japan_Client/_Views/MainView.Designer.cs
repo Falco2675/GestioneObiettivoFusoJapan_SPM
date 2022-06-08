@@ -29,14 +29,7 @@
         private void InitializeComponent()
         {
             this.tlpPrincipale = new System.Windows.Forms.TableLayoutPanel();
-            this.tableLayoutPanel9 = new System.Windows.Forms.TableLayoutPanel();
-            this.lblConnessioneDS = new System.Windows.Forms.Label();
-            this.panel5 = new System.Windows.Forms.Panel();
-            this.lblVersion = new System.Windows.Forms.Label();
-            this.panel11 = new System.Windows.Forms.Panel();
-            this.lblCopyright = new System.Windows.Forms.Label();
-            this.txtDato = new System.Windows.Forms.TextBox();
-            this.panel8 = new System.Windows.Forms.Panel();
+            this.pnlHeader = new System.Windows.Forms.Panel();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.panel9 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel8 = new System.Windows.Forms.TableLayoutPanel();
@@ -47,32 +40,40 @@
             this.lblOrario = new System.Windows.Forms.Label();
             this.panel10 = new System.Windows.Forms.Panel();
             this.pBoxStrumenti = new System.Windows.Forms.PictureBox();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.pnlBody = new System.Windows.Forms.Panel();
+            this.tlpBody = new System.Windows.Forms.TableLayoutPanel();
+            this.tlpDatiMotore = new System.Windows.Forms.TableLayoutPanel();
+            this.pnlMatricola = new System.Windows.Forms.Panel();
+            this.lblMatricola = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.pnlDisegno = new System.Windows.Forms.Panel();
+            this.lblDisegno = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.pnlCodBasamento = new System.Windows.Forms.Panel();
+            this.lblCodBasamento = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.tlpObiettiviProduzione = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.lblDataProduzione = new System.Windows.Forms.Label();
+            this.pnlStrategia = new System.Windows.Forms.Panel();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.lblStrategia = new System.Windows.Forms.Label();
+            this.lblProduzione = new System.Windows.Forms.Label();
             this.pnlContenitoreAzione_errori = new System.Windows.Forms.Panel();
             this.pnlAzione = new System.Windows.Forms.Panel();
             this.lblAzione = new System.Windows.Forms.Label();
             this.pnlErrori = new System.Windows.Forms.Panel();
             this.lblErrori = new System.Windows.Forms.Label();
-            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.lblCodBasamento = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.panel6 = new System.Windows.Forms.Panel();
-            this.lblMatricola = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.panel7 = new System.Windows.Forms.Panel();
-            this.lblDisegno = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.pnlStrategia = new System.Windows.Forms.Panel();
-            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.lblStrategia = new System.Windows.Forms.Label();
-            this.lblProduzione = new System.Windows.Forms.Label();
+            this.tlpFooter = new System.Windows.Forms.TableLayoutPanel();
+            this.lblConnessioneDS = new System.Windows.Forms.Label();
+            this.pnlCopyright_Versione = new System.Windows.Forms.Panel();
+            this.lblVersion = new System.Windows.Forms.Label();
+            this.pnlCopyright = new System.Windows.Forms.Panel();
+            this.lblCopyright = new System.Windows.Forms.Label();
+            this.txtDato = new System.Windows.Forms.TextBox();
+            this.lblProduzioneGiornaliera = new System.Windows.Forms.Label();
             this.tlpPrincipale.SuspendLayout();
-            this.tableLayoutPanel9.SuspendLayout();
-            this.panel5.SuspendLayout();
-            this.panel11.SuspendLayout();
-            this.panel8.SuspendLayout();
+            this.pnlHeader.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
             this.panel9.SuspendLayout();
             this.tableLayoutPanel6.SuspendLayout();
@@ -81,26 +82,31 @@
             this.tableLayoutPanel7.SuspendLayout();
             this.panel10.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pBoxStrumenti)).BeginInit();
-            this.panel1.SuspendLayout();
+            this.pnlBody.SuspendLayout();
+            this.tlpBody.SuspendLayout();
+            this.tlpDatiMotore.SuspendLayout();
+            this.pnlMatricola.SuspendLayout();
+            this.pnlDisegno.SuspendLayout();
+            this.pnlCodBasamento.SuspendLayout();
+            this.tlpObiettiviProduzione.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
+            this.pnlStrategia.SuspendLayout();
+            this.tableLayoutPanel2.SuspendLayout();
             this.pnlContenitoreAzione_errori.SuspendLayout();
             this.pnlAzione.SuspendLayout();
             this.pnlErrori.SuspendLayout();
-            this.tableLayoutPanel3.SuspendLayout();
-            this.panel4.SuspendLayout();
-            this.panel6.SuspendLayout();
-            this.panel7.SuspendLayout();
-            this.pnlStrategia.SuspendLayout();
-            this.tableLayoutPanel2.SuspendLayout();
+            this.tlpFooter.SuspendLayout();
+            this.pnlCopyright_Versione.SuspendLayout();
+            this.pnlCopyright.SuspendLayout();
             this.SuspendLayout();
             // 
             // tlpPrincipale
             // 
             this.tlpPrincipale.ColumnCount = 1;
             this.tlpPrincipale.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpPrincipale.Controls.Add(this.tableLayoutPanel9, 0, 2);
-            this.tlpPrincipale.Controls.Add(this.panel8, 0, 0);
-            this.tlpPrincipale.Controls.Add(this.panel1, 0, 1);
+            this.tlpPrincipale.Controls.Add(this.pnlHeader, 0, 0);
+            this.tlpPrincipale.Controls.Add(this.pnlBody, 0, 1);
+            this.tlpPrincipale.Controls.Add(this.tlpFooter, 0, 2);
             this.tlpPrincipale.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlpPrincipale.Location = new System.Drawing.Point(0, 0);
             this.tlpPrincipale.Name = "tlpPrincipale";
@@ -108,100 +114,19 @@
             this.tlpPrincipale.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 80F));
             this.tlpPrincipale.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tlpPrincipale.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
-            this.tlpPrincipale.Size = new System.Drawing.Size(713, 527);
+            this.tlpPrincipale.Size = new System.Drawing.Size(948, 640);
             this.tlpPrincipale.TabIndex = 0;
             // 
-            // tableLayoutPanel9
+            // pnlHeader
             // 
-            this.tableLayoutPanel9.ColumnCount = 2;
-            this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 50F));
-            this.tableLayoutPanel9.Controls.Add(this.lblConnessioneDS, 1, 0);
-            this.tableLayoutPanel9.Controls.Add(this.panel5, 0, 0);
-            this.tableLayoutPanel9.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel9.Location = new System.Drawing.Point(0, 487);
-            this.tableLayoutPanel9.Margin = new System.Windows.Forms.Padding(0);
-            this.tableLayoutPanel9.Name = "tableLayoutPanel9";
-            this.tableLayoutPanel9.RowCount = 1;
-            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
-            this.tableLayoutPanel9.Size = new System.Drawing.Size(713, 40);
-            this.tableLayoutPanel9.TabIndex = 5;
-            // 
-            // lblConnessioneDS
-            // 
-            this.lblConnessioneDS.BackColor = System.Drawing.Color.Red;
-            this.lblConnessioneDS.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblConnessioneDS.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblConnessioneDS.Location = new System.Drawing.Point(666, 0);
-            this.lblConnessioneDS.Name = "lblConnessioneDS";
-            this.lblConnessioneDS.Size = new System.Drawing.Size(44, 40);
-            this.lblConnessioneDS.TabIndex = 0;
-            this.lblConnessioneDS.Text = "DS";
-            this.lblConnessioneDS.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // panel5
-            // 
-            this.panel5.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.panel5.Controls.Add(this.lblVersion);
-            this.panel5.Controls.Add(this.panel11);
-            this.panel5.Controls.Add(this.txtDato);
-            this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel5.Location = new System.Drawing.Point(0, 0);
-            this.panel5.Margin = new System.Windows.Forms.Padding(0);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(663, 40);
-            this.panel5.TabIndex = 1;
-            // 
-            // lblVersion
-            // 
-            this.lblVersion.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblVersion.AutoSize = true;
-            this.lblVersion.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblVersion.Location = new System.Drawing.Point(604, 22);
-            this.lblVersion.Name = "lblVersion";
-            this.lblVersion.Size = new System.Drawing.Size(51, 13);
-            this.lblVersion.TabIndex = 3;
-            this.lblVersion.Text = "v. 1.1.1.1";
-            // 
-            // panel11
-            // 
-            this.panel11.Controls.Add(this.lblCopyright);
-            this.panel11.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel11.Location = new System.Drawing.Point(0, 0);
-            this.panel11.Name = "panel11";
-            this.panel11.Size = new System.Drawing.Size(565, 40);
-            this.panel11.TabIndex = 2;
-            // 
-            // lblCopyright
-            // 
-            this.lblCopyright.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblCopyright.Location = new System.Drawing.Point(0, 0);
-            this.lblCopyright.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblCopyright.Name = "lblCopyright";
-            this.lblCopyright.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.lblCopyright.Size = new System.Drawing.Size(565, 40);
-            this.lblCopyright.TabIndex = 0;
-            this.lblCopyright.Text = "ICT - Foggia - IVECO GROUP - 2022";
-            this.lblCopyright.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // txtDato
-            // 
-            this.txtDato.Location = new System.Drawing.Point(571, 10);
-            this.txtDato.Name = "txtDato";
-            this.txtDato.Size = new System.Drawing.Size(0, 20);
-            this.txtDato.TabIndex = 1;
-            // 
-            // panel8
-            // 
-            this.panel8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.panel8.Controls.Add(this.tableLayoutPanel4);
-            this.panel8.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel8.Location = new System.Drawing.Point(0, 0);
-            this.panel8.Margin = new System.Windows.Forms.Padding(0);
-            this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(713, 80);
-            this.panel8.TabIndex = 2;
+            this.pnlHeader.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.pnlHeader.Controls.Add(this.tableLayoutPanel4);
+            this.pnlHeader.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlHeader.Location = new System.Drawing.Point(0, 0);
+            this.pnlHeader.Margin = new System.Windows.Forms.Padding(0);
+            this.pnlHeader.Name = "pnlHeader";
+            this.pnlHeader.Size = new System.Drawing.Size(948, 80);
+            this.pnlHeader.TabIndex = 2;
             // 
             // tableLayoutPanel4
             // 
@@ -218,7 +143,7 @@
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
             this.tableLayoutPanel4.RowCount = 1;
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(713, 80);
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(948, 80);
             this.tableLayoutPanel4.TabIndex = 0;
             // 
             // panel9
@@ -228,7 +153,7 @@
             this.panel9.Location = new System.Drawing.Point(204, 4);
             this.panel9.Margin = new System.Windows.Forms.Padding(4);
             this.panel9.Name = "panel9";
-            this.panel9.Size = new System.Drawing.Size(305, 72);
+            this.panel9.Size = new System.Drawing.Size(540, 72);
             this.panel9.TabIndex = 1;
             // 
             // tableLayoutPanel8
@@ -240,7 +165,7 @@
             this.tableLayoutPanel8.Name = "tableLayoutPanel8";
             this.tableLayoutPanel8.RowCount = 1;
             this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel8.Size = new System.Drawing.Size(305, 72);
+            this.tableLayoutPanel8.Size = new System.Drawing.Size(540, 72);
             this.tableLayoutPanel8.TabIndex = 0;
             // 
             // tableLayoutPanel6
@@ -289,7 +214,7 @@
             this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tableLayoutPanel7.Controls.Add(this.lblOrario, 0, 0);
             this.tableLayoutPanel7.Controls.Add(this.panel10, 1, 0);
-            this.tableLayoutPanel7.Location = new System.Drawing.Point(516, 3);
+            this.tableLayoutPanel7.Location = new System.Drawing.Point(751, 3);
             this.tableLayoutPanel7.Name = "tableLayoutPanel7";
             this.tableLayoutPanel7.RowCount = 1;
             this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -329,151 +254,63 @@
             this.pBoxStrumenti.TabStop = false;
             this.pBoxStrumenti.Click += new System.EventHandler(this.pBoxStrumenti_Click);
             // 
-            // panel1
+            // pnlBody
             // 
-            this.panel1.Controls.Add(this.tableLayoutPanel1);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(0, 80);
-            this.panel1.Margin = new System.Windows.Forms.Padding(0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(713, 407);
-            this.panel1.TabIndex = 0;
+            this.pnlBody.Controls.Add(this.tlpBody);
+            this.pnlBody.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlBody.Location = new System.Drawing.Point(0, 80);
+            this.pnlBody.Margin = new System.Windows.Forms.Padding(0);
+            this.pnlBody.Name = "pnlBody";
+            this.pnlBody.Size = new System.Drawing.Size(948, 520);
+            this.pnlBody.TabIndex = 0;
             // 
-            // tableLayoutPanel1
+            // tlpBody
             // 
-            this.tableLayoutPanel1.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
-            this.tableLayoutPanel1.ColumnCount = 2;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 70F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
-            this.tableLayoutPanel1.Controls.Add(this.pnlStrategia, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.pnlContenitoreAzione_errori, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel3, 0, 0);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 3;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 200F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(713, 407);
-            this.tableLayoutPanel1.TabIndex = 0;
+            this.tlpBody.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
+            this.tlpBody.ColumnCount = 2;
+            this.tlpBody.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 56F));
+            this.tlpBody.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 44F));
+            this.tlpBody.Controls.Add(this.tlpDatiMotore, 0, 0);
+            this.tlpBody.Controls.Add(this.tlpObiettiviProduzione, 1, 0);
+            this.tlpBody.Controls.Add(this.pnlContenitoreAzione_errori, 0, 1);
+            this.tlpBody.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tlpBody.Location = new System.Drawing.Point(0, 0);
+            this.tlpBody.Margin = new System.Windows.Forms.Padding(0);
+            this.tlpBody.Name = "tlpBody";
+            this.tlpBody.RowCount = 3;
+            this.tlpBody.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 200F));
+            this.tlpBody.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlpBody.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlpBody.Size = new System.Drawing.Size(948, 520);
+            this.tlpBody.TabIndex = 0;
             // 
-            // pnlContenitoreAzione_errori
+            // tlpDatiMotore
             // 
-            this.tableLayoutPanel1.SetColumnSpan(this.pnlContenitoreAzione_errori, 2);
-            this.pnlContenitoreAzione_errori.Controls.Add(this.pnlAzione);
-            this.pnlContenitoreAzione_errori.Controls.Add(this.pnlErrori);
-            this.pnlContenitoreAzione_errori.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlContenitoreAzione_errori.Location = new System.Drawing.Point(4, 205);
-            this.pnlContenitoreAzione_errori.Name = "pnlContenitoreAzione_errori";
-            this.pnlContenitoreAzione_errori.Size = new System.Drawing.Size(705, 177);
-            this.pnlContenitoreAzione_errori.TabIndex = 1;
+            this.tlpDatiMotore.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
+            this.tlpDatiMotore.ColumnCount = 2;
+            this.tlpDatiMotore.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tlpDatiMotore.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tlpDatiMotore.Controls.Add(this.pnlMatricola, 0, 0);
+            this.tlpDatiMotore.Controls.Add(this.pnlDisegno, 1, 0);
+            this.tlpDatiMotore.Controls.Add(this.pnlCodBasamento, 0, 1);
+            this.tlpDatiMotore.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tlpDatiMotore.Location = new System.Drawing.Point(4, 4);
+            this.tlpDatiMotore.Name = "tlpDatiMotore";
+            this.tlpDatiMotore.RowCount = 2;
+            this.tlpDatiMotore.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tlpDatiMotore.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tlpDatiMotore.Size = new System.Drawing.Size(523, 194);
+            this.tlpDatiMotore.TabIndex = 2;
             // 
-            // pnlAzione
+            // pnlMatricola
             // 
-            this.pnlAzione.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
-            this.pnlAzione.Controls.Add(this.lblAzione);
-            this.pnlAzione.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlAzione.Font = new System.Drawing.Font("Microsoft Sans Serif", 50F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.pnlAzione.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.pnlAzione.Location = new System.Drawing.Point(0, 0);
-            this.pnlAzione.Name = "pnlAzione";
-            this.pnlAzione.Size = new System.Drawing.Size(705, 116);
-            this.pnlAzione.TabIndex = 1;
-            // 
-            // lblAzione
-            // 
-            this.lblAzione.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblAzione.Location = new System.Drawing.Point(0, 0);
-            this.lblAzione.Name = "lblAzione";
-            this.lblAzione.Size = new System.Drawing.Size(705, 116);
-            this.lblAzione.TabIndex = 0;
-            this.lblAzione.Text = "Azione";
-            this.lblAzione.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // pnlErrori
-            // 
-            this.pnlErrori.BackColor = System.Drawing.Color.Red;
-            this.pnlErrori.Controls.Add(this.lblErrori);
-            this.pnlErrori.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlErrori.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.pnlErrori.ForeColor = System.Drawing.Color.White;
-            this.pnlErrori.Location = new System.Drawing.Point(0, 116);
-            this.pnlErrori.Name = "pnlErrori";
-            this.pnlErrori.Size = new System.Drawing.Size(705, 61);
-            this.pnlErrori.TabIndex = 0;
-            // 
-            // lblErrori
-            // 
-            this.lblErrori.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblErrori.Location = new System.Drawing.Point(0, 0);
-            this.lblErrori.Name = "lblErrori";
-            this.lblErrori.Size = new System.Drawing.Size(705, 61);
-            this.lblErrori.TabIndex = 0;
-            this.lblErrori.Text = "Errori";
-            this.lblErrori.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // tableLayoutPanel3
-            // 
-            this.tableLayoutPanel3.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
-            this.tableLayoutPanel3.ColumnCount = 2;
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel3.Controls.Add(this.panel4, 0, 1);
-            this.tableLayoutPanel3.Controls.Add(this.panel6, 0, 0);
-            this.tableLayoutPanel3.Controls.Add(this.panel7, 1, 0);
-            this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(4, 4);
-            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
-            this.tableLayoutPanel3.RowCount = 2;
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(491, 194);
-            this.tableLayoutPanel3.TabIndex = 2;
-            // 
-            // panel4
-            // 
-            this.tableLayoutPanel3.SetColumnSpan(this.panel4, 2);
-            this.panel4.Controls.Add(this.lblCodBasamento);
-            this.panel4.Controls.Add(this.label8);
-            this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel4.Location = new System.Drawing.Point(4, 100);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(483, 90);
-            this.panel4.TabIndex = 0;
-            // 
-            // lblCodBasamento
-            // 
-            this.lblCodBasamento.AutoSize = true;
-            this.lblCodBasamento.Font = new System.Drawing.Font("Microsoft Sans Serif", 25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCodBasamento.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            this.lblCodBasamento.Location = new System.Drawing.Point(8, 40);
-            this.lblCodBasamento.Name = "lblCodBasamento";
-            this.lblCodBasamento.Size = new System.Drawing.Size(407, 39);
-            this.lblCodBasamento.TabIndex = 0;
-            this.lblCodBasamento.Text = "2127802576111167665 ";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label8.Location = new System.Drawing.Point(8, 6);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(137, 20);
-            this.label8.TabIndex = 0;
-            this.label8.Text = "Cod.Basamento";
-            // 
-            // panel6
-            // 
-            this.panel6.Controls.Add(this.lblMatricola);
-            this.panel6.Controls.Add(this.label4);
-            this.panel6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel6.Location = new System.Drawing.Point(4, 4);
-            this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(238, 89);
-            this.panel6.TabIndex = 1;
+            this.pnlMatricola.Controls.Add(this.lblMatricola);
+            this.pnlMatricola.Controls.Add(this.label4);
+            this.pnlMatricola.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlMatricola.Location = new System.Drawing.Point(4, 4);
+            this.pnlMatricola.Name = "pnlMatricola";
+            this.pnlMatricola.Size = new System.Drawing.Size(254, 89);
+            this.pnlMatricola.TabIndex = 1;
             // 
             // lblMatricola
             // 
@@ -497,15 +334,15 @@
             this.label4.TabIndex = 0;
             this.label4.Text = "Matricola:";
             // 
-            // panel7
+            // pnlDisegno
             // 
-            this.panel7.Controls.Add(this.lblDisegno);
-            this.panel7.Controls.Add(this.label6);
-            this.panel7.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel7.Location = new System.Drawing.Point(249, 4);
-            this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(238, 89);
-            this.panel7.TabIndex = 2;
+            this.pnlDisegno.Controls.Add(this.lblDisegno);
+            this.pnlDisegno.Controls.Add(this.label6);
+            this.pnlDisegno.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlDisegno.Location = new System.Drawing.Point(265, 4);
+            this.pnlDisegno.Name = "pnlDisegno";
+            this.pnlDisegno.Size = new System.Drawing.Size(254, 89);
+            this.pnlDisegno.TabIndex = 2;
             // 
             // lblDisegno
             // 
@@ -529,14 +366,90 @@
             this.label6.TabIndex = 0;
             this.label6.Text = "Disegno:";
             // 
+            // pnlCodBasamento
+            // 
+            this.tlpDatiMotore.SetColumnSpan(this.pnlCodBasamento, 2);
+            this.pnlCodBasamento.Controls.Add(this.lblCodBasamento);
+            this.pnlCodBasamento.Controls.Add(this.label8);
+            this.pnlCodBasamento.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlCodBasamento.Location = new System.Drawing.Point(4, 100);
+            this.pnlCodBasamento.Name = "pnlCodBasamento";
+            this.pnlCodBasamento.Size = new System.Drawing.Size(515, 90);
+            this.pnlCodBasamento.TabIndex = 0;
+            // 
+            // lblCodBasamento
+            // 
+            this.lblCodBasamento.AutoSize = true;
+            this.lblCodBasamento.Font = new System.Drawing.Font("Microsoft Sans Serif", 25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCodBasamento.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.lblCodBasamento.Location = new System.Drawing.Point(8, 40);
+            this.lblCodBasamento.Name = "lblCodBasamento";
+            this.lblCodBasamento.Size = new System.Drawing.Size(407, 39);
+            this.lblCodBasamento.TabIndex = 0;
+            this.lblCodBasamento.Text = "2127802576111167665 ";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.label8.Location = new System.Drawing.Point(8, 6);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(137, 20);
+            this.label8.TabIndex = 0;
+            this.label8.Text = "Cod.Basamento";
+            // 
+            // tlpObiettiviProduzione
+            // 
+            this.tlpObiettiviProduzione.ColumnCount = 2;
+            this.tlpObiettiviProduzione.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tlpObiettiviProduzione.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tlpObiettiviProduzione.Controls.Add(this.tableLayoutPanel1, 1, 0);
+            this.tlpObiettiviProduzione.Controls.Add(this.pnlStrategia, 0, 0);
+            this.tlpObiettiviProduzione.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tlpObiettiviProduzione.Location = new System.Drawing.Point(534, 4);
+            this.tlpObiettiviProduzione.Name = "tlpObiettiviProduzione";
+            this.tlpObiettiviProduzione.RowCount = 1;
+            this.tlpObiettiviProduzione.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlpObiettiviProduzione.Size = new System.Drawing.Size(410, 194);
+            this.tlpObiettiviProduzione.TabIndex = 3;
+            // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.ColumnCount = 1;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.Controls.Add(this.lblDataProduzione, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.lblProduzioneGiornaliera, 0, 1);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(205, 0);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 2;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 43.08511F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 56.91489F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(205, 194);
+            this.tableLayoutPanel1.TabIndex = 5;
+            // 
+            // lblDataProduzione
+            // 
+            this.lblDataProduzione.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblDataProduzione.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDataProduzione.ForeColor = System.Drawing.Color.Green;
+            this.lblDataProduzione.Location = new System.Drawing.Point(3, 0);
+            this.lblDataProduzione.Name = "lblDataProduzione";
+            this.lblDataProduzione.Size = new System.Drawing.Size(199, 83);
+            this.lblDataProduzione.TabIndex = 0;
+            this.lblDataProduzione.Text = "PRODUZIONE\r\n08/06/2022";
+            this.lblDataProduzione.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // pnlStrategia
             // 
             this.pnlStrategia.Controls.Add(this.tableLayoutPanel2);
             this.pnlStrategia.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlStrategia.Location = new System.Drawing.Point(502, 4);
+            this.pnlStrategia.Location = new System.Drawing.Point(3, 3);
             this.pnlStrategia.Name = "pnlStrategia";
-            this.pnlStrategia.Size = new System.Drawing.Size(207, 194);
-            this.pnlStrategia.TabIndex = 3;
+            this.pnlStrategia.Size = new System.Drawing.Size(199, 188);
+            this.pnlStrategia.TabIndex = 4;
             // 
             // tableLayoutPanel2
             // 
@@ -549,9 +462,9 @@
             this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 2;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.69565F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 66.30434F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(207, 194);
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 43.08511F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 56.91489F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(199, 188);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
             // lblStrategia
@@ -561,9 +474,9 @@
             this.lblStrategia.ForeColor = System.Drawing.Color.Green;
             this.lblStrategia.Location = new System.Drawing.Point(3, 0);
             this.lblStrategia.Name = "lblStrategia";
-            this.lblStrategia.Size = new System.Drawing.Size(201, 65);
+            this.lblStrategia.Size = new System.Drawing.Size(193, 81);
             this.lblStrategia.TabIndex = 0;
-            this.lblStrategia.Text = "Obiettivo";
+            this.lblStrategia.Text = "Obiettivo\r\n1° Turno";
             this.lblStrategia.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lblProduzione
@@ -571,18 +484,165 @@
             this.lblProduzione.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblProduzione.Font = new System.Drawing.Font("Microsoft Sans Serif", 50F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblProduzione.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            this.lblProduzione.Location = new System.Drawing.Point(3, 65);
+            this.lblProduzione.Location = new System.Drawing.Point(3, 81);
             this.lblProduzione.Name = "lblProduzione";
-            this.lblProduzione.Size = new System.Drawing.Size(201, 129);
+            this.lblProduzione.Size = new System.Drawing.Size(193, 107);
             this.lblProduzione.TabIndex = 1;
             this.lblProduzione.Text = "2/10";
             this.lblProduzione.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // pnlContenitoreAzione_errori
+            // 
+            this.tlpBody.SetColumnSpan(this.pnlContenitoreAzione_errori, 2);
+            this.pnlContenitoreAzione_errori.Controls.Add(this.pnlAzione);
+            this.pnlContenitoreAzione_errori.Controls.Add(this.pnlErrori);
+            this.pnlContenitoreAzione_errori.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlContenitoreAzione_errori.Location = new System.Drawing.Point(4, 205);
+            this.pnlContenitoreAzione_errori.Name = "pnlContenitoreAzione_errori";
+            this.pnlContenitoreAzione_errori.Size = new System.Drawing.Size(940, 290);
+            this.pnlContenitoreAzione_errori.TabIndex = 1;
+            // 
+            // pnlAzione
+            // 
+            this.pnlAzione.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
+            this.pnlAzione.Controls.Add(this.lblAzione);
+            this.pnlAzione.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlAzione.Font = new System.Drawing.Font("Microsoft Sans Serif", 50F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.pnlAzione.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.pnlAzione.Location = new System.Drawing.Point(0, 0);
+            this.pnlAzione.Name = "pnlAzione";
+            this.pnlAzione.Size = new System.Drawing.Size(940, 229);
+            this.pnlAzione.TabIndex = 1;
+            // 
+            // lblAzione
+            // 
+            this.lblAzione.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblAzione.Location = new System.Drawing.Point(0, 0);
+            this.lblAzione.Name = "lblAzione";
+            this.lblAzione.Size = new System.Drawing.Size(940, 229);
+            this.lblAzione.TabIndex = 0;
+            this.lblAzione.Text = "Azione";
+            this.lblAzione.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // pnlErrori
+            // 
+            this.pnlErrori.BackColor = System.Drawing.Color.Red;
+            this.pnlErrori.Controls.Add(this.lblErrori);
+            this.pnlErrori.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.pnlErrori.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.pnlErrori.ForeColor = System.Drawing.Color.White;
+            this.pnlErrori.Location = new System.Drawing.Point(0, 229);
+            this.pnlErrori.Name = "pnlErrori";
+            this.pnlErrori.Size = new System.Drawing.Size(940, 61);
+            this.pnlErrori.TabIndex = 0;
+            // 
+            // lblErrori
+            // 
+            this.lblErrori.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblErrori.Location = new System.Drawing.Point(0, 0);
+            this.lblErrori.Name = "lblErrori";
+            this.lblErrori.Size = new System.Drawing.Size(940, 61);
+            this.lblErrori.TabIndex = 0;
+            this.lblErrori.Text = "Errori";
+            this.lblErrori.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // tlpFooter
+            // 
+            this.tlpFooter.ColumnCount = 2;
+            this.tlpFooter.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlpFooter.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tlpFooter.Controls.Add(this.lblConnessioneDS, 1, 0);
+            this.tlpFooter.Controls.Add(this.pnlCopyright_Versione, 0, 0);
+            this.tlpFooter.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tlpFooter.Location = new System.Drawing.Point(0, 600);
+            this.tlpFooter.Margin = new System.Windows.Forms.Padding(0);
+            this.tlpFooter.Name = "tlpFooter";
+            this.tlpFooter.RowCount = 1;
+            this.tlpFooter.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlpFooter.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.tlpFooter.Size = new System.Drawing.Size(948, 40);
+            this.tlpFooter.TabIndex = 5;
+            // 
+            // lblConnessioneDS
+            // 
+            this.lblConnessioneDS.BackColor = System.Drawing.Color.Red;
+            this.lblConnessioneDS.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblConnessioneDS.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblConnessioneDS.Location = new System.Drawing.Point(901, 0);
+            this.lblConnessioneDS.Name = "lblConnessioneDS";
+            this.lblConnessioneDS.Size = new System.Drawing.Size(44, 40);
+            this.lblConnessioneDS.TabIndex = 0;
+            this.lblConnessioneDS.Text = "DS";
+            this.lblConnessioneDS.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // pnlCopyright_Versione
+            // 
+            this.pnlCopyright_Versione.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.pnlCopyright_Versione.Controls.Add(this.lblVersion);
+            this.pnlCopyright_Versione.Controls.Add(this.pnlCopyright);
+            this.pnlCopyright_Versione.Controls.Add(this.txtDato);
+            this.pnlCopyright_Versione.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlCopyright_Versione.Location = new System.Drawing.Point(0, 0);
+            this.pnlCopyright_Versione.Margin = new System.Windows.Forms.Padding(0);
+            this.pnlCopyright_Versione.Name = "pnlCopyright_Versione";
+            this.pnlCopyright_Versione.Size = new System.Drawing.Size(898, 40);
+            this.pnlCopyright_Versione.TabIndex = 1;
+            // 
+            // lblVersion
+            // 
+            this.lblVersion.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblVersion.AutoSize = true;
+            this.lblVersion.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblVersion.Location = new System.Drawing.Point(839, 22);
+            this.lblVersion.Name = "lblVersion";
+            this.lblVersion.Size = new System.Drawing.Size(51, 13);
+            this.lblVersion.TabIndex = 3;
+            this.lblVersion.Text = "v. 1.1.1.1";
+            // 
+            // pnlCopyright
+            // 
+            this.pnlCopyright.Controls.Add(this.lblCopyright);
+            this.pnlCopyright.Dock = System.Windows.Forms.DockStyle.Left;
+            this.pnlCopyright.Location = new System.Drawing.Point(0, 0);
+            this.pnlCopyright.Name = "pnlCopyright";
+            this.pnlCopyright.Size = new System.Drawing.Size(565, 40);
+            this.pnlCopyright.TabIndex = 2;
+            // 
+            // lblCopyright
+            // 
+            this.lblCopyright.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblCopyright.Location = new System.Drawing.Point(0, 0);
+            this.lblCopyright.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblCopyright.Name = "lblCopyright";
+            this.lblCopyright.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.lblCopyright.Size = new System.Drawing.Size(565, 40);
+            this.lblCopyright.TabIndex = 0;
+            this.lblCopyright.Text = "ICT - Foggia - IVECO GROUP - 2022";
+            this.lblCopyright.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // txtDato
+            // 
+            this.txtDato.Location = new System.Drawing.Point(571, 10);
+            this.txtDato.Name = "txtDato";
+            this.txtDato.Size = new System.Drawing.Size(0, 20);
+            this.txtDato.TabIndex = 1;
+            // 
+            // lblProduzioneGiornaliera
+            // 
+            this.lblProduzioneGiornaliera.Font = new System.Drawing.Font("Microsoft Sans Serif", 60F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblProduzioneGiornaliera.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.lblProduzioneGiornaliera.Location = new System.Drawing.Point(3, 83);
+            this.lblProduzioneGiornaliera.Name = "lblProduzioneGiornaliera";
+            this.lblProduzioneGiornaliera.Size = new System.Drawing.Size(199, 111);
+            this.lblProduzioneGiornaliera.TabIndex = 1;
+            this.lblProduzioneGiornaliera.Text = "20";
+            this.lblProduzioneGiornaliera.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // MainView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(713, 527);
+            this.ClientSize = new System.Drawing.Size(948, 640);
             this.Controls.Add(this.tlpPrincipale);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "MainView";
@@ -591,11 +651,7 @@
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.MainView_Load);
             this.tlpPrincipale.ResumeLayout(false);
-            this.tableLayoutPanel9.ResumeLayout(false);
-            this.panel5.ResumeLayout(false);
-            this.panel5.PerformLayout();
-            this.panel11.ResumeLayout(false);
-            this.panel8.ResumeLayout(false);
+            this.pnlHeader.ResumeLayout(false);
             this.tableLayoutPanel4.ResumeLayout(false);
             this.panel9.ResumeLayout(false);
             this.tableLayoutPanel6.ResumeLayout(false);
@@ -604,20 +660,26 @@
             this.tableLayoutPanel7.ResumeLayout(false);
             this.panel10.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pBoxStrumenti)).EndInit();
-            this.panel1.ResumeLayout(false);
+            this.pnlBody.ResumeLayout(false);
+            this.tlpBody.ResumeLayout(false);
+            this.tlpDatiMotore.ResumeLayout(false);
+            this.pnlMatricola.ResumeLayout(false);
+            this.pnlMatricola.PerformLayout();
+            this.pnlDisegno.ResumeLayout(false);
+            this.pnlDisegno.PerformLayout();
+            this.pnlCodBasamento.ResumeLayout(false);
+            this.pnlCodBasamento.PerformLayout();
+            this.tlpObiettiviProduzione.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
+            this.pnlStrategia.ResumeLayout(false);
+            this.tableLayoutPanel2.ResumeLayout(false);
             this.pnlContenitoreAzione_errori.ResumeLayout(false);
             this.pnlAzione.ResumeLayout(false);
             this.pnlErrori.ResumeLayout(false);
-            this.tableLayoutPanel3.ResumeLayout(false);
-            this.panel4.ResumeLayout(false);
-            this.panel4.PerformLayout();
-            this.panel6.ResumeLayout(false);
-            this.panel6.PerformLayout();
-            this.panel7.ResumeLayout(false);
-            this.panel7.PerformLayout();
-            this.pnlStrategia.ResumeLayout(false);
-            this.tableLayoutPanel2.ResumeLayout(false);
+            this.tlpFooter.ResumeLayout(false);
+            this.pnlCopyright_Versione.ResumeLayout(false);
+            this.pnlCopyright_Versione.PerformLayout();
+            this.pnlCopyright.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -625,10 +687,10 @@
         #endregion
 
         private System.Windows.Forms.TableLayoutPanel tlpPrincipale;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.Panel pnlBody;
+        private System.Windows.Forms.TableLayoutPanel tlpBody;
         private System.Windows.Forms.Panel pnlContenitoreAzione_errori;
-        private System.Windows.Forms.Panel panel8;
+        private System.Windows.Forms.Panel pnlHeader;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
         private System.Windows.Forms.Panel panel9;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel8;
@@ -639,31 +701,35 @@
         private System.Windows.Forms.Label lblOrario;
         private System.Windows.Forms.Panel panel10;
         private System.Windows.Forms.PictureBox pBoxStrumenti;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
-        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.TableLayoutPanel tlpDatiMotore;
+        private System.Windows.Forms.Panel pnlCodBasamento;
         private System.Windows.Forms.Label lblCodBasamento;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Panel panel6;
+        private System.Windows.Forms.Panel pnlMatricola;
         private System.Windows.Forms.Label lblMatricola;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Panel panel7;
+        private System.Windows.Forms.Panel pnlDisegno;
         private System.Windows.Forms.Label lblDisegno;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Panel pnlErrori;
         private System.Windows.Forms.Label lblErrori;
         private System.Windows.Forms.Panel pnlAzione;
         private System.Windows.Forms.Label lblAzione;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel9;
+        private System.Windows.Forms.TableLayoutPanel tlpFooter;
         private System.Windows.Forms.Label lblConnessioneDS;
-        private System.Windows.Forms.Panel panel5;
+        private System.Windows.Forms.Panel pnlCopyright_Versione;
         private System.Windows.Forms.Label lblVersion;
-        private System.Windows.Forms.Panel panel11;
+        private System.Windows.Forms.Panel pnlCopyright;
         private System.Windows.Forms.Label lblCopyright;
         private System.Windows.Forms.TextBox txtDato;
+        private System.Windows.Forms.TableLayoutPanel tlpObiettiviProduzione;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.Label lblDataProduzione;
         private System.Windows.Forms.Panel pnlStrategia;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.Label lblStrategia;
         private System.Windows.Forms.Label lblProduzione;
+        private System.Windows.Forms.Label lblProduzioneGiornaliera;
     }
 }
 

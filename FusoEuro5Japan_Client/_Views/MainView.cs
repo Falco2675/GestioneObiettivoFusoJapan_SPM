@@ -88,6 +88,8 @@ namespace FusoEuro5Japan_Client
 
             lblStrategia.DataBindings.Add("Text", _presenter, "Strategia_string");
             lblProduzione.DataBindings.Add("Text", _presenter, "Produzione_string");
+            lblProduzioneGiornaliera.DataBindings.Add("Text", _presenter, "ProduzioneGiornaliera");
+            lblDataProduzione.DataBindings.Add("Text", _presenter, "DataProduzione");
 
             lblAzione.DataBindings.Add("Text", _presenter, "AzioneDaCompiere_string");
             lblConnessioneDS.DataBindings.Add("BackColor", _presenter, "IsAliveColor");

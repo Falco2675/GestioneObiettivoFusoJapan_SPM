@@ -56,6 +56,9 @@ namespace FusoEuro5Japan_Client
 
         }
 
-
+        public void ResettaTurno()
+        {
+            _dataSource.ResettaTurno(_configurazione.Ogni_N_Pezzi);
+        }
     }
 }

@@ -24,34 +24,33 @@ namespace FusoEuro5Japan_Client
         {
 
         }
+        #endregion
 
         internal override void EseguiSuMotoreCandidato(Motore motoreLetto)
         {
             var config = _dataSource.GetConfigurazione();
             var cont_di_Comodo = config.Contatore_di_comodo;
-            if (cont_di_Comodo == config.Ogni_N_Pezzi)
+            if (cont_di_Comodo == config.Ogni_N_Pezzi)  
             {
-                //_dataSource.SetContatoreDiComoodo(cont_di_Comodo - 1);
-                _dataSource.SettaPerMotoreTarget(cont_di_Comodo - 1, config.Contatore_del_turno + 1);
+                //Questo è un motore obiettivo, che dovrà quindi andare alle Prove a Caldo.
+                _dataSource.SettaPerMotoreTarget(cont_di_Comodo - 1, config.Contatore_del_turno + 1, config.Contatore_del_giorno + 1);
                 AzioneDaCompiere = AZIONE_DA_SVOLGERE;
                 return;
             }
             if (cont_di_Comodo == 1)
             {
-                _dataSource.SetContatoreDiComoodo(config.Ogni_N_Pezzi);
-                AzioneDaCompiere = DEFAULT_AZIONE;
+                _dataSource.SetContatoreDiComoodo(config.Ogni_N_Pezzi); // Porto il contatore di comodo al numero "Ogni_N_Pezzi"
+                AzioneDaCompiere = NESSUNA_AZIONE;
                 return;
             }
             if(cont_di_Comodo < config.Ogni_N_Pezzi)
             {
-                _dataSource.SetContatoreDiComoodo(cont_di_Comodo - 1);
-                AzioneDaCompiere = DEFAULT_AZIONE;
+                _dataSource.SetContatoreDiComoodo(cont_di_Comodo - 1);  // Decremento du db il contatore di comodo
+                AzioneDaCompiere = NESSUNA_AZIONE;
                 return;
             }
 
         }
-        #endregion
-
 
     }
 }

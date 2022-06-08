@@ -13,4 +13,12 @@
         N_Pezzi_Definito,
         Non_Definita
     }
+
+    public enum TurnoEnum
+    {
+        PrimoTurno,
+        SecondoTurno,
+        TerzoTurno
+    }
+
 }

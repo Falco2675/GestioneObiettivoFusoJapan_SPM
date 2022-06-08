@@ -26,13 +26,15 @@ namespace FusoEuro5Japan_Client
         private bool _isAliveDataSource;
         private string _strategia_string;
         private string _produzione_string;
+        private string _dataProduzione;
+        private string _produzioneGiornaliera;
 
         //private string _warningMessage;
         private Motore _motoreLetto;
         private Config _configurazione;
         private string _azioneDaCompiere;
 
-        private readonly Timer _timerOrario, _timerIsAliveDS;
+        //private readonly Timer _timerOrario, _timerIsAliveDS;
         private TipoDatoRicevuto _tipoDatoRicevuto;
 
         private string _orario;
@@ -55,24 +57,15 @@ namespace FusoEuro5Japan_Client
         }
         public Color IsAliveColor => IsAliveDataSource ? Color.Green : Color.Red;
 
-        public string Orario
-        {
-            get { return _orario; }
-            set
-            {
-                _orario = value;
-                Notify();
-            }
-        }
+        public string Orario => _gestoreTurni.Orario.ToString("HH:mm:ss");
+        public string DataProduzione => $"PRODUZIONE\n{DateTime.Now.Date}";
+        public string ProduzioneGiornaliera => _gestoreConfigurazione.Configurazione.
 
         public Motore MotoreLetto
         {
             get { return _motoreLetto; }
             set { _motoreLetto = value; Notify(); }
         }
-
-        
-
 
         public Config Configurazione
         {
@@ -96,6 +89,7 @@ namespace FusoEuro5Japan_Client
         public string Produzione_string => _strategia.Produzione_String;
 
         private readonly IGestoreAzioniDaCompiere _gestoreAzioniDaCompiere;
+        private readonly IGestoreTurni _gestoreTurni;
 
         public string AzioneDaCompiere_string
         {
@@ -133,7 +127,8 @@ namespace FusoEuro5Japan_Client
                IGestoreConfigurazione gestoreConfigurazione,
                IGestoreConvalidaDatoRicevuto gestoreConvalidaDatoRicevuto,
                IGestoreAzioniDaCompiere gestoreAzioniDaCompiere,
-               ILoginP loginP
+               ILoginP loginP,
+               IGestoreTurni gestoreTurni
             )
         {
             _view = view;
@@ -143,14 +138,15 @@ namespace FusoEuro5Japan_Client
             _gestoreConvalidaDatoRicevuto = gestoreConvalidaDatoRicevuto;
             _gestoreAzioniDaCompiere = gestoreAzioniDaCompiere;
             _loginP = loginP;
+            _gestoreTurni = gestoreTurni;
             _strategia = new Strategia_NonDefinita(_dataSource, _gestoreConfigurazione);
 
             _view.SetPresenter(this);
 
             SottoscriviEventi();
 
-            _timerOrario = new Timer((o) => { Orario = DateTime.Now.ToString("HH:mm:ss"); }, null, 500, 1000);
-            _timerIsAliveDS = new Timer((o) => { IsAliveDataSource = _dataSource.IsConnessioneDS_Ok(); }, null, 500, 15000);
+            //_timerOrario = new Timer((o) => { Orario = DateTime.Now.ToString("HH:mm:ss"); }, null, 500, 1000);
+            //_timerIsAliveDS = new Timer((o) => { IsAliveDataSource = _dataSource.IsConnessioneDS_Ok(); }, null, 500, 15000);
             _timeShowMessage = new System.Timers.Timer();
             _timeShowMessage.Elapsed += _timeShowMessage_Elapsed;
             _timeShowMessage.Interval = 5000;
@@ -168,7 +164,12 @@ namespace FusoEuro5Japan_Client
             _view.AvviaStrumentiEvent += OnAvviaStrumentiEvent;
             _gestoreConfigurazione.CambioStrategiaChanged += OnCambioStrategiaChanged;
             _gestoreConfigurazione.ContatoreDelTurnoChanged += OnContatoreDelTurnoChanged;
+            _gestoreTurni.OrarioChanged += OnOrarioChanged;
+        }
 
+        private void OnOrarioChanged(object sender, string ora)
+        {
+            Orario = ora;
         }
 
 
@@ -231,7 +232,7 @@ namespace FusoEuro5Japan_Client
                     _strategia = new Strategia_Ogni_N_Pezzi(_dataSource, _gestoreConfigurazione);
                     break;
                 case StrategiaEnum.N_Pezzi_Definito:
-                    _strategia = new Strategia_N_PezziDefinito(_dataSource, _gestoreConfigurazione);
+                    _strategia = new Strategia_TargetTurno(_dataSource, _gestoreConfigurazione);
                     break;
                 case StrategiaEnum.Non_Definita:
                     _strategia = new Strategia_NonDefinita(_dataSource, _gestoreConfigurazione);

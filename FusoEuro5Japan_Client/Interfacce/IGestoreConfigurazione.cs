@@ -12,7 +12,6 @@ namespace FusoEuro5Japan_Client
 
 
         Config GetConfigurazione();
-
-        
+        void ResettaTurno();
     }
 }

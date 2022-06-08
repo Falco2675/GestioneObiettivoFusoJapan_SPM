@@ -9,6 +9,7 @@ namespace FusoEuro5Japan_Client
         Config GetConfigurazione();
         int GetContatoreDiComodo();
         void SetContatoreDiComoodo(int ogni_N_Pezzi);
-        void SettaPerMotoreTarget(int v1, int v2);
+        void SettaPerMotoreTarget(int cont_di_comodo, int cont_turno, int cont_giorno);
+        void ResettaTurno(int contat_di_comodo);
     }
 }
