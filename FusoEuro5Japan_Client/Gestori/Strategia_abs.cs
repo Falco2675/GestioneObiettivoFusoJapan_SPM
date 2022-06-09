@@ -14,6 +14,7 @@ namespace FusoEuro5Japan_Client
         protected string AZIONE_DA_SVOLGERE = "EFFETTUARE PROVA A CALDO.";
         private string _azioneDaCompiere;
 
+        public abstract StrategiaEnum TipoStrategia { get; }
         public abstract string Strategia_String { get; }
         public abstract string Produzione_String { get; }
         public abstract string NomeStrategia { get; }

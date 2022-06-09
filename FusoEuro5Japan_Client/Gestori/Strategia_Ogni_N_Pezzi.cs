@@ -10,6 +10,7 @@ namespace FusoEuro5Japan_Client
     {
 
         #region PROPRIETA'
+        public override StrategiaEnum TipoStrategia => StrategiaEnum.Ogni_N_pezzi;
         public override string Strategia_String => $"1 Ogni {_gestoreConfigurazione.Configurazione.Ogni_N_Pezzi} motori";
         public override string Produzione_String => $"{_gestoreConfigurazione.Configurazione.Contatore_del_turno}";
 

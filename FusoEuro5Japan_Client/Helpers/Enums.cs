@@ -10,7 +10,7 @@
     public enum StrategiaEnum
     {
         Ogni_N_pezzi,
-        N_Pezzi_Definito,
+        ProduzioneTurni,
         Non_Definita
     }
 

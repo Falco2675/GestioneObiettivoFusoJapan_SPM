@@ -10,14 +10,17 @@ namespace FusoEuro5Japan_Client
     {
         static string connString = "DSN=iveco; Uid=IVECO; Pwd=bedede;";
         private readonly IGestoreConfigurazione _gestoreConfigurazione;
+        private readonly IGestoreContatoriObiettivi _gestoreContatoriObiettivi;
 
         #region CTOR
         public DataSource_Liv2
             (
-                IGestoreConfigurazione gestoreConfigurazione
+                IGestoreConfigurazione gestoreConfigurazione,
+                IGestoreContatoriObiettivi gestoreContatoriObiettivi
             )
         {
             _gestoreConfigurazione = gestoreConfigurazione;
+            _gestoreContatoriObiettivi = gestoreContatoriObiettivi;
         }
         #endregion
 
@@ -146,10 +149,22 @@ namespace FusoEuro5Japan_Client
                             {
                                 tabella.Load(dr);
                                 config.Ogni_N_Pezzi = tabella.Rows[0].Field<int>("OGNI_N_PEZZI");
-                                config.N_pezzi_definito = tabella.Rows[0].Field<int>("N_PEZZI_A_TURNO");
                                 config.Contatore_di_comodo = tabella.Rows[0].Field<int>("CONTATORE_DI_COMODO");
-                                config.Contatore_del_turno = tabella.Rows[0].Field<int>("CONTATORE_TURNO");
-                                config.Contatore_del_giorno = tabella.Rows[0].Field<int>("CONTATORE_GIORNO");
+
+                                
+                                _gestoreContatoriObiettivi.Obiettivo_1T = tabella.Rows[0].Field<int>("OBIETTIVO_1T");
+                                _gestoreContatoriObiettivi.Obiettivo_2T = tabella.Rows[0].Field<int>("OBIETTIVO_2T");
+                                _gestoreContatoriObiettivi.Obiettivo_3T = tabella.Rows[0].Field<int>("OBIETTIVO_3T");
+
+                                _gestoreContatoriObiettivi.Prod_1T = tabella.Rows[0].Field<int>("PROD_1T");
+                                _gestoreContatoriObiettivi.Prod_2T = tabella.Rows[0].Field<int>("PROD_2T");
+                                _gestoreContatoriObiettivi.Prod_3T = tabella.Rows[0].Field<int>("PROD_3T");
+
+                                _gestoreContatoriObiettivi.Prod_All_Turni = tabella.Rows[0].Field<int>("CONTATORE_GIORNO");
+
+                                config.Prod_1T_ieri = tabella.Rows[0].Field<int>("PROD_1T_IERI");
+                                config.Prod_2T_ieri = tabella.Rows[0].Field<int>("PROD_2T_IERI");
+                                config.Prod_3T_ieri = tabella.Rows[0].Field<int>("PROD_3T_IERI");
 
                             }
                         }

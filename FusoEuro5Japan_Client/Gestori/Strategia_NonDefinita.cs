@@ -17,6 +17,8 @@ namespace FusoEuro5Japan_Client
 
         public override string NomeStrategia => "N.D.";
 
+        public override StrategiaEnum TipoStrategia => StrategiaEnum.Non_Definita;
+
         public override event EventHandler ObiettivoTurnoRaggiuntoEvent;
 
         internal override void EseguiSuMotoreCandidato(Motore motoreLetto)

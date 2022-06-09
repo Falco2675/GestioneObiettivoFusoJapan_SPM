@@ -9,9 +9,20 @@ namespace FusoEuro5Japan_Client
     public class Config
     {
         public int Ogni_N_Pezzi { get; set; }
-        public int N_pezzi_definito { get; set; }
+        public int Obiettivo_1T { get; set; }
+        public int Obiettivo_2T { get; set; }
+        public int Obiettivo_3T { get; set; }
+
         public int Contatore_di_comodo { get; set; }
-        public int Contatore_del_turno { get; set; }
+
+        public int Prod_1T { get; set; }
+        public int Prod_2T { get; set; }
+        public int Prod_3T { get; set; }
+
+        public int Prod_1T_ieri { get; set; }
+        public int Prod_2T_ieri { get; set; }
+        public int Prod_3T_ieri { get; set; }
+
         public int Contatore_del_giorno { get; set; }
 
     }

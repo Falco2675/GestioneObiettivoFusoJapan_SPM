@@ -13,8 +13,8 @@ namespace FusoEuro5Japan_Client
     public class MainP : BaseP, IMainP
     {
         #region CAMPI PRIVATI
-        private readonly Color DEFAULT_COLOR = SystemColors.ButtonShadow;
-        private readonly Color COLORE_RICAMBI = Color.SandyBrown;
+        private readonly Color GREEN_COLOR = Color.FromArgb(192, 0, 0);
+        private readonly Color RED_COLOR = Color.Green;
 
         private readonly IMainV _view;
         private readonly IDataSource _dataSource;
@@ -37,6 +37,9 @@ namespace FusoEuro5Japan_Client
         private string _azioneDaCompiere;
         private string _errore_string;
 
+        private Color _backColor_Prod_1T;
+        private Color _backColor_Prod_2T;
+        private Color _backColor_Prod_3T;
 
         //private readonly Timer _timerOrario, _timerIsAliveDS;
         private TipoDatoRicevuto _tipoDatoRicevuto;
@@ -76,16 +79,20 @@ namespace FusoEuro5Japan_Client
         }
         public string Strategia_string => $"{_strategia.Strategia_String}\n{_gestoreTurni.Turno_string}";
         public string ProduzioneTurno => _strategia.Produzione_String;
-        public string ProduzioneGiornaliera => _gestoreConfigurazione.ContatoreGiorno_string;
         public string TitoloProduzioneGiornaliera => $"PRODUZIONE DEL\n{DateTime.Now.Date.ToString("dd/MM/yyyy")}";
-        private Color _backColor_ProdTurno;
 
-        public Color BackColor_ProdTurno
-        {
-            get { return _backColor_ProdTurno; }
-            set { _backColor_ProdTurno = value; Notify(); }
-        }
+        public string Prod_1T => _gestoreContatoreObiettivi.Prod_1T.ToString();
+        public string Prod_2T => _gestoreContatoreObiettivi.Prod_2T.ToString();
+        public string Prod_3T => _gestoreContatoreObiettivi.Prod_3T.ToString();
+        public string ProduzioneGiornaliera => _gestoreContatoreObiettivi.Prod_All_Turni.ToString();
+        public Color ForeColor_Prod_All_Turni => _gestoreContatoreObiettivi.IsTarget_All_Turni_Raggiunto ? GREEN_COLOR : RED_COLOR;
+        public Color BackColor_Prod_1T => _gestoreContatoreObiettivi.IsTarget_1T_Raggiunto ? GREEN_COLOR : RED_COLOR;
+        public Color BackColor_Prod_2T => _gestoreContatoreObiettivi.IsTarget_2T_Raggiunto ? GREEN_COLOR : RED_COLOR;
+        public Color BackColor_Prod_3T => _gestoreContatoreObiettivi.IsTarget_3T_Raggiunto ? GREEN_COLOR : RED_COLOR;
 
+        public Color ForeColor_Prod_1T => _gestoreContatoreObiettivi.IsTarget_1T_Raggiunto ? GREEN_COLOR : RED_COLOR;
+        public Color ForeColor_Prod_2T => _gestoreContatoreObiettivi.IsTarget_2T_Raggiunto ? GREEN_COLOR : RED_COLOR;
+        public Color ForeColor_Prod_3T => _gestoreContatoreObiettivi.IsTarget_3T_Raggiunto ? GREEN_COLOR : RED_COLOR;
 
         public string Errore_string
         {
@@ -94,16 +101,7 @@ namespace FusoEuro5Japan_Client
         }
 
         public string AzioneDaCompiere_string => _strategia.AzioneDaCompiere;
-        //{
-        //    get { return _azioneDaCompiere; }
-        //    set
-        //    {
-        //        _azioneDaCompiere = value;
-        //        if (!string.IsNullOrEmpty(_azioneDaCompiere))
-        //            AvviaTimerShowMessage();
-        //        Notify();
-        //    }
-        //}
+        
         public Color IsAliveColor => IsAliveDataSource ? Color.Green : Color.Red;
         public string Versione => $"v. {Assembly.GetExecutingAssembly().GetName().Version.ToString()}";
 
@@ -128,6 +126,7 @@ namespace FusoEuro5Japan_Client
 
         private readonly IGestoreAzioniDaCompiere _gestoreAzioniDaCompiere;
         private readonly IGestoreTurni _gestoreTurni;
+        private readonly IGestoreContatoriObiettivi _gestoreContatoreObiettivi;
 
         #endregion
 
@@ -138,6 +137,7 @@ namespace FusoEuro5Japan_Client
                IDataSource dataSource,
                IGestoreConfigurazione gestoreConfigurazione,
                IGestoreConvalidaDatoRicevuto gestoreConvalidaDatoRicevuto,
+               IGestoreContatoriObiettivi gestoreContatoreObiettivi,
                //IGestoreAzioniDaCompiere gestoreAzioniDaCompiere,
                ILoginP loginP,
                IGestoreTurni gestoreTurni
@@ -147,6 +147,7 @@ namespace FusoEuro5Japan_Client
             _dataSource = dataSource;
             _gestoreConfigurazione = gestoreConfigurazione;
             _gestoreConvalidaDatoRicevuto = gestoreConvalidaDatoRicevuto;
+            _gestoreContatoreObiettivi = gestoreContatoreObiettivi;
             _loginP = loginP;
             _gestoreTurni = gestoreTurni;
             _strategia = new Strategia_NonDefinita(_dataSource, _gestoreConfigurazione);
@@ -182,7 +183,21 @@ namespace FusoEuro5Japan_Client
             _strategia.ObiettivoTurnoRaggiuntoEvent += OnObiettivoTurnoRaggiuntoEvent;
 
             _gestoreTurni.TurnoChanged += OnTurnoChanged;
+
+            _gestoreContatoreObiettivi.Obiettivo_1T_Changed += OnObiettivo_1T_Changed;
+            _gestoreContatoreObiettivi.Obiettivo_2T_Changed += OnObiettivo_2T_Changed;
+            _gestoreContatoreObiettivi.Obiettivo_3T_Changed += OnObiettivo_3T_Changed;
+            _gestoreContatoreObiettivi.Obiettivo_All_Turni_Changed += OnObiettivo_All_Turni_Changed;
+            _gestoreContatoreObiettivi.ProduzioneGiornalieraChanged += OnProduzioneGiornalieraChanged;
+            _gestoreContatoreObiettivi.ProduzioniIeriChanged += OnProduzioniIeriChanged;
+            _gestoreContatoreObiettivi.Prod_1TChanged += OnProd_1TChanged;
+            _gestoreContatoreObiettivi.Prod_2TChanged += OnProd_2TChanged;
+            _gestoreContatoreObiettivi.Prod_3TChanged += OnProd_3TChanged;
+            _gestoreContatoreObiettivi.Target_Prod_1T_RaggiuntoChanged += OnTarget_Prod_1T_RaggiuntoChanged;
+            _gestoreContatoreObiettivi.Target_Prod_2T_RaggiuntoChanged += OnTarget_Prod_2T_RaggiuntoChanged;
+            _gestoreContatoreObiettivi.Target_Prod_3T_RaggiuntoChanged += OnTarget_Prod_3T_RaggiuntoChanged;
         }
+
 
         #endregion
 
@@ -233,7 +248,7 @@ namespace FusoEuro5Japan_Client
                 case StrategiaEnum.Ogni_N_pezzi:
                     _strategia = new Strategia_Ogni_N_Pezzi(_dataSource, _gestoreConfigurazione);
                     break;
-                case StrategiaEnum.N_Pezzi_Definito:
+                case StrategiaEnum.ProduzioneTurni:
                     _strategia = new Strategia_TargetTurno(_dataSource, _gestoreConfigurazione);
                     break;
                 case StrategiaEnum.Non_Definita:
@@ -254,7 +269,56 @@ namespace FusoEuro5Japan_Client
         }
         private void OnObiettivoTurnoRaggiuntoEvent(object sender, EventArgs e)
         {
-            BackColor_ProdTurno = Color.Green;
+            BackColor_Prod_1T = Color.Green;
+        }
+
+        private void OnTarget_Prod_3T_RaggiuntoChanged(object sender, EventArgs e)
+        {
+            Notify(nameof(BackColor_Prod_3T));
+        }
+        private void OnTarget_Prod_2T_RaggiuntoChanged(object sender, EventArgs e)
+        {
+            Notify(nameof(BackColor_Prod_2T));
+        }
+        private void OnTarget_Prod_1T_RaggiuntoChanged(object sender, EventArgs e)
+        {
+            Notify(nameof(BackColor_Prod_1T));
+        }
+        private void OnProd_3TChanged(object sender, EventArgs e)
+        {
+            Notify(nameof(Prod_3T));
+        }
+        private void OnProd_2TChanged(object sender, EventArgs e)
+        {
+            Notify(nameof(Prod_2T));
+        }
+        private void OnProd_1TChanged(object sender, EventArgs e)
+        {
+            Notify(nameof(Prod_1T));
+        }
+        private void OnProduzioniIeriChanged(object sender, EventArgs e)
+        {
+            
+        }
+        private void OnProduzioneGiornalieraChanged(object sender, EventArgs e)
+        {
+            Notify(nameof(ProduzioneGiornaliera));
+        }
+        private void OnObiettivo_All_Turni_Changed(object sender, EventArgs e)
+        {
+            Notify(nameof(ForeColor_Prod_All_Turni));
+        }
+        private void OnObiettivo_3T_Changed(object sender, EventArgs e)
+        {
+            Notify(nameof(ForeColor_Prod_3T));
+        }
+        private void OnObiettivo_2T_Changed(object sender, EventArgs e)
+        {
+            Notify(nameof(ForeColor_Prod_3T));
+        }
+        private void OnObiettivo_1T_Changed(object sender, EventArgs e)
+        {
+            Notify(nameof(ForeColor_Prod_3T));
         }
 
 

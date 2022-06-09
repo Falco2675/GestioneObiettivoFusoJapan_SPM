@@ -71,7 +71,9 @@
     <Compile Include="Gestori\GestoreAzioniDaCompiere.cs" />
     <Compile Include="Gestori\GestoreConfigurazione.cs" />
     <Compile Include="Gestori\GestoreDisegni.cs" />
+    <Compile Include="Gestori\GestoreStrategiaDiProduzione.cs" />
     <Compile Include="Gestori\GestoreTurni.cs" />
+    <Compile Include="Interfacce\IGestoreStrategiaDiProduzione.cs" />
     <Compile Include="Interfacce\IGestoreTurni.cs" />
     <Compile Include="Gestori\Strategia_abs.cs" />
     <Compile Include="Gestori\Strategia_NonDefinita.cs" />
@@ -94,6 +96,8 @@
     <Compile Include="Interfacce\IView.cs" />
     <Compile Include="Interfacce\IInserimentoDisegniP.cs" />
     <Compile Include="Models\Config.cs" />
+    <Compile Include="Gestori\GestoreContatoriObiettivi.cs" />
+    <Compile Include="Interfacce\IGestoreContatoriObiettivi.cs" />
     <Compile Include="Models\Motore.cs" />
     <Compile Include="_Presenters\InserimentoDisegniP.cs" />
     <Compile Include="_Presenters\LoginP.cs" />

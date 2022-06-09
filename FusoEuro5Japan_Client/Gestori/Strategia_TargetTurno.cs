@@ -9,6 +9,7 @@ namespace FusoEuro5Japan_Client
     public class Strategia_TargetTurno : Strategia_abs
     {
 
+        public override StrategiaEnum TipoStrategia => StrategiaEnum.ProduzioneTurni;
         public override string Strategia_String => "Produzione";
             
         public override string Produzione_String => $"{_gestoreConfigurazione.Configurazione.Contatore_del_turno}/{_gestoreConfigurazione.Configurazione.N_pezzi_definito}";

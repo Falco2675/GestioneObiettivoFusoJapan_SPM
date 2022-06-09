@@ -10,6 +10,7 @@ namespace FusoEuro5Japan_Client
         private Config _configurazione;
         private readonly Timer _timerGetConfig;
         private readonly IDataSource _dataSource;
+        private readonly IGestoreContatoriObiettivi _gestoreContatoriObiettivi;
         #endregion
 
         #region PROPRIETA'
@@ -31,23 +32,23 @@ namespace FusoEuro5Japan_Client
 
         #endregion
 
-
-
         #region EVENTI
         public event EventHandler StrategiaChanged;
         public event EventHandler ContatoriChanged;
 
         #endregion
 
-
         #region CTOR
         public GestoreConfigurazione
             (
-                IDataSource dataSource
+                IDataSource dataSource,
+                IGestoreContatoriObiettivi gestoreContatoriObiettivi
             )
         {
             _dataSource = dataSource;
+            _gestoreContatoriObiettivi = gestoreContatoriObiettivi;
             _configurazione = new Config();
+
             _timerGetConfig = new Timer((o) => { Configurazione = GetConfigurazione(); }, null, 500, 5000);
         }
         #endregion
@@ -79,12 +80,11 @@ namespace FusoEuro5Japan_Client
         } 
         #endregion
 
-
         #region METODI PRIVATI
         private void ControllaStrategia(Config newConfig)
         {
-            var strategiaInCorso = GetStrategia(_configurazione.Ogni_N_Pezzi, _configurazione.N_pezzi_definito);
-            var strategiaDaAdottare = GetStrategia(newConfig.Ogni_N_Pezzi, newConfig.N_pezzi_definito);
+            var strategiaInCorso = GetStrategia(_configurazione);
+            var strategiaDaAdottare = GetStrategia(newConfig);
 
             if (strategiaInCorso != strategiaDaAdottare)
             {
@@ -93,12 +93,12 @@ namespace FusoEuro5Japan_Client
             }
 
         }
-        private StrategiaEnum GetStrategia(int ogni_N_Pezzi, int n_pezzi_definito)
+        private StrategiaEnum GetStrategia(Config config)
         {
-            if (ogni_N_Pezzi > 0 && n_pezzi_definito == 0)
+            if (config.Ogni_N_Pezzi > 0 && (config.Obiettivo_1T == 0 && config.Obiettivo_2T == 0 && config.Obiettivo_3T == 0))
                 return StrategiaEnum.Ogni_N_pezzi;
-            if (ogni_N_Pezzi == 0 && n_pezzi_definito > 0)
-                return StrategiaEnum.N_Pezzi_Definito;
+            if (config.Ogni_N_Pezzi == 0 && (config.Obiettivo_1T > 0 || config.Obiettivo_2T > 0 || config.Obiettivo_3T > 0))
+                return StrategiaEnum.ProduzioneTurni;
 
             return StrategiaEnum.Non_Definita;
         }

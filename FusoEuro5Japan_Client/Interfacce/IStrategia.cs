@@ -8,6 +8,7 @@ namespace FusoEuro5Japan_Client
 {
     public interface IStrategia
     {
+        StrategiaEnum TipoStrategia { get; }
         string Strategia_String { get; }
         string Produzione_String { get; }
         string AzioneDaCompiere { get; }
