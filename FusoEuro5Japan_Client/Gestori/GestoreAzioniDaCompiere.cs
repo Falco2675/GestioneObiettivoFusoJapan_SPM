@@ -8,28 +8,28 @@ namespace FusoEuro5Japan_Client
 {
     public class GestoreAzioniDaCompiere  : IGestoreAzioniDaCompiere
     {
-        private readonly IDataSource _dataSource_Liv2;
+        private readonly IDataSource _dataSource;
 
         #region CTOR
         public GestoreAzioniDaCompiere
             (
-                IDataSource dataSource_Liv2
+                IDataSource dataSource
             )
         {
-            _dataSource_Liv2 = dataSource_Liv2;
+            _dataSource = dataSource;
         }
         #endregion
 
         #region METODI
-        public string GetAzioniDaCompiere(Motore motoreLetto)
-        {
-            if (_dataSource_Liv2.IsMotoreTarget(motoreLetto))
-            {
-                return "Effettuare PROVA A CALDO.";
-            }
+        //public string GetAzioniDaCompiere(Motore motoreLetto)
+        //{
+        //    if (_dataSource.IsMotoreTarget(motoreLetto))
+        //    {
+        //        return "Effettuare PROVA A CALDO.";
+        //    }
 
-            return "Nessuna azione da eseguire.";
-        }
+        //    return "Nessuna azione da eseguire.";
+        //}
         #endregion
 
 

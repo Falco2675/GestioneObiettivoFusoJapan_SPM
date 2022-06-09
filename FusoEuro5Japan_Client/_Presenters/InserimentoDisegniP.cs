@@ -15,34 +15,22 @@ namespace FusoEuro5Japan_Client
         private readonly IInserimentoDisegniV _view;
         private BindingSource _bs = new BindingSource();
 
-        private string _disegnoFPT;
-        private string _disegnoTMC;
-        private bool _isPerRicambi;
+        private string _disegno;
 
         private string _messaggio;
-        private BindingList<DisegnoFPT_TMC> _elencoDisegniInseriti = new BindingList<DisegnoFPT_TMC>();
         private readonly IGestoreDisegni _gestoreDisegni;
         private readonly IGestoreConvalidaDatoRicevuto _validatoreDisegni;
+        private readonly IDataSource _dataSource;
 
         #endregion
 
         #region PROPRIETA'
         public override SynchronizationContext SynchronizeContext { get; set; }
 
-        public string DisegnoFPT
+        public string Disegno
         {
-            get { return _disegnoFPT; }
-            set { _disegnoFPT = value; Notify(); }
-        }
-        public string DisegnoTMC
-        {
-            get { return _disegnoTMC; }
-            set { _disegnoTMC = value; Notify(); }
-        }
-        public bool IsPerRicambi
-        {
-            get { return _isPerRicambi; }
-            set { _isPerRicambi = value; Notify(); }
+            get { return _disegno; }
+            set { _disegno = value; Notify(); }
         }
 
         public string Messaggio
@@ -51,14 +39,16 @@ namespace FusoEuro5Japan_Client
             set { _messaggio = value; Notify(); }
         }
 
-        public BindingList<DisegnoFPT_TMC> ElencoDisegniInseriti
+        private List<string> _elencoDisegniInseriti;
+
+        public List<string> ElencoDisegniInseriti
         {
             get { return _elencoDisegniInseriti; }
-            set { _elencoDisegniInseriti = value; }
+            set { _elencoDisegniInseriti = value; Notify(); }
         }
 
-        public List<DisegnoFPT_TMC> ElencoDisegniInseritiOrdinati => ElencoDisegniInseriti.OrderByDescending(x => x.DataIns).ToList();
-        public bool AbilitaPulsanteAggiungi => !(string.IsNullOrEmpty(DisegnoFPT) && string.IsNullOrEmpty(DisegnoTMC));
+
+        public bool AbilitaPulsanteAggiungi => !(string.IsNullOrEmpty(Disegno));
 
         #endregion
 
@@ -66,13 +56,11 @@ namespace FusoEuro5Japan_Client
         public InserimentoDisegniP
             (
                 IInserimentoDisegniV view,
-                IGestoreDisegni gestoreDisegni,
-                IGestoreConvalidaDatoRicevuto validatoreDisegni
+                IDataSource dataSource
             )
         {
             _view = view;
-            _gestoreDisegni = gestoreDisegni;
-            _validatoreDisegni = validatoreDisegni;
+            _dataSource = dataSource;
 
             SynchronizeContext = _view.SynchronizeContext;
             _bs.DataSource = this;
@@ -121,31 +109,22 @@ namespace FusoEuro5Japan_Client
 
         private void ConvalidaDisegni()
         {
-            _validatoreDisegni.ConvalidaDato(DisegnoFPT.Trim(), DisegnoTMC.Trim());
+            _validatoreDisegni.ConvalidaDato(Disegno.Trim());
         }
         private void AggiungiDisegniSuDB()
         {
-            var disegnoFPT_TMC = new DisegnoFPT_TMC
-            {
-                DisegnoFPT = DisegnoFPT.Trim(),
-                DisegnoTMC = DisegnoTMC.Trim(),
-                IsPerRicambi = IsPerRicambi,
-                DataIns = DateTime.Now
-            };
+            
+            _dataSource.InserisciDisegni(Disegno);
 
-            _gestoreDisegni.AggiungiDisegno(disegnoFPT_TMC);
-
-            ElencoDisegniInseriti.Add(disegnoFPT_TMC);
+            ElencoDisegniInseriti.Add(Disegno);
 
         }
         private void ResettaCampi()
         {
-            DisegnoFPT = string.Empty;
-            DisegnoTMC = string.Empty;
-            IsPerRicambi = false;
+            Disegno = string.Empty;
 
             Messaggio = string.Empty;
-            Notify(nameof(ElencoDisegniInseritiOrdinati));
+            Notify(nameof(ElencoDisegniInseriti));
         }
 
         #endregion

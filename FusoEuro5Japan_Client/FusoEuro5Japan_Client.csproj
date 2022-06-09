@@ -72,7 +72,7 @@
     <Compile Include="Gestori\GestoreConfigurazione.cs" />
     <Compile Include="Gestori\GestoreDisegni.cs" />
     <Compile Include="Gestori\GestoreTurni.cs" />
-    <Compile Include="Gestori\IGestoreTurni.cs" />
+    <Compile Include="Interfacce\IGestoreTurni.cs" />
     <Compile Include="Gestori\Strategia_abs.cs" />
     <Compile Include="Gestori\Strategia_NonDefinita.cs" />
     <Compile Include="Gestori\Strategia_TargetTurno.cs" />

@@ -41,7 +41,7 @@ namespace FusoEuro5Japan_Client
                 .RegisterType<ILogin_FPT, Login_FPT>(new ContainerControlledLifetimeManager())
                 .RegisterType<IInserimentoDisegniV, InserimentoDisegniV>(new ContainerControlledLifetimeManager())
                 .RegisterType<IInserimentoDisegniP, InserimentoDisegniP>(new ContainerControlledLifetimeManager())
-                .RegisterType<IGestoreDisegni, GestoreDisegni>(new ContainerControlledLifetimeManager())
+                .RegisterType<IGestoreTurni, GestoreTurni>(new ContainerControlledLifetimeManager())
                 .RegisterType<IGestoreConvalidaDatoRicevuto, GestoreConvalidaDatoRicevuto>(new ContainerControlledLifetimeManager())
 
                 ;

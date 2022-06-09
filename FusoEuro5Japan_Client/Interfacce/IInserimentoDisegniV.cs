@@ -9,7 +9,6 @@ namespace FusoEuro5Japan_Client
         SynchronizationContext SynchronizeContext { get; }
 
         string DisegnoFPT { get; set; }
-        string DisegnoTMC { get; set; }
 
         event EventHandler AggiungiDisegnoEvent;
 

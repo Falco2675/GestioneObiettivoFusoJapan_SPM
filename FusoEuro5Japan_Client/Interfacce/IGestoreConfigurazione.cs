@@ -6,9 +6,12 @@ namespace FusoEuro5Japan_Client
     {
         int IdApp { get; }
         Config Configurazione { get; }
+        StrategiaEnum StrategiaAdottata { get; }
+        string ContatoreTurno_string { get; }
+        string ContatoreGiorno_string { get; }
 
-        event EventHandler<StrategiaEnum> CambioStrategiaChanged;
-        event EventHandler<int> ContatoreDelTurnoChanged;
+        event EventHandler StrategiaChanged;
+        event EventHandler ContatoriChanged;
 
 
         Config GetConfigurazione();

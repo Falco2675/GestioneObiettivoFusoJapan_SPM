@@ -11,6 +11,10 @@ namespace FusoEuro5Japan_Client
 
         public Motore()
         {
+            Matricola = "--";
+            Disegno = "--";
+            CodBasamento = "--";
+            IsTargetCandidate = false;
         }
 
 

@@ -15,6 +15,8 @@ namespace FusoEuro5Japan_Client
 
         #endregion
 
+        public override event EventHandler ObiettivoTurnoRaggiuntoEvent;
+
         #region CTOR
         public Strategia_Ogni_N_Pezzi
            (
@@ -39,13 +41,13 @@ namespace FusoEuro5Japan_Client
             }
             if (cont_di_Comodo == 1)
             {
-                _dataSource.SetContatoreDiComoodo(config.Ogni_N_Pezzi); // Porto il contatore di comodo al numero "Ogni_N_Pezzi"
+                _dataSource.SetContatoreDiComodo(config.Ogni_N_Pezzi); // Porto il contatore di comodo al numero "Ogni_N_Pezzi"
                 AzioneDaCompiere = NESSUNA_AZIONE;
                 return;
             }
             if(cont_di_Comodo < config.Ogni_N_Pezzi)
             {
-                _dataSource.SetContatoreDiComoodo(cont_di_Comodo - 1);  // Decremento du db il contatore di comodo
+                _dataSource.SetContatoreDiComodo(cont_di_Comodo - 1);  // Decremento du db il contatore di comodo
                 AzioneDaCompiere = NESSUNA_AZIONE;
                 return;
             }

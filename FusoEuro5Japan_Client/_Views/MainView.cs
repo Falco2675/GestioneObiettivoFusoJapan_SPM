@@ -81,21 +81,33 @@ namespace FusoEuro5Japan_Client
         #region METODI PRIVATI
         private void BindingData()
         {
-            lblOrario.DataBindings.Add("Text", _presenter, "Orario");
-            lblMatricola.DataBindings.Add("Text", _presenter, "Matricola");
-            lblDisegno.DataBindings.Add("Text", _presenter, "Disegno");
-            lblCodBasamento.DataBindings.Add("Text", _presenter, "CodBasamento");
+            lblOrario.DataBindings.Add("Text", _presenter, "Orario_string");
+            lblMatricola.DataBindings.Add("Text", _presenter, "MotoreLetto.Matricola");
+            lblDisegno.DataBindings.Add("Text", _presenter, "MotoreLetto.Disegno");
+            lblCodBasamento.DataBindings.Add("Text", _presenter, "MotoreLetto.CodBasamento");
 
             lblStrategia.DataBindings.Add("Text", _presenter, "Strategia_string");
-            lblProduzione.DataBindings.Add("Text", _presenter, "Produzione_string");
+            lblProduzione.DataBindings.Add("Text", _presenter, "ProduzioneTurno");
+            lblDataProduzione.DataBindings.Add("Text", _presenter, "TitoloProduzioneGiornaliera");
             lblProduzioneGiornaliera.DataBindings.Add("Text", _presenter, "ProduzioneGiornaliera");
-            lblDataProduzione.DataBindings.Add("Text", _presenter, "DataProduzione");
 
             lblAzione.DataBindings.Add("Text", _presenter, "AzioneDaCompiere_string");
+            lblErrori.DataBindings.Add("Text", _presenter, "Errore_string");
             lblConnessioneDS.DataBindings.Add("BackColor", _presenter, "IsAliveColor");
             lblVersion.DataBindings.Add("Text", _presenter, "Versione");
+
+            tlpProduzioneTurno.DataBindings.Add("BackColor", _presenter, "BackColor_ProdTurno");
         }
         #endregion
 
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

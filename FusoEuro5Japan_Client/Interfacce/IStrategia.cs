@@ -13,6 +13,7 @@ namespace FusoEuro5Japan_Client
         string AzioneDaCompiere { get; }
 
         event EventHandler<string> AzioneDaCompiereChanged;
+        event EventHandler ObiettivoTurnoRaggiuntoEvent;
 
         void EseguiSuMotore(Motore motoreLetto);
     }

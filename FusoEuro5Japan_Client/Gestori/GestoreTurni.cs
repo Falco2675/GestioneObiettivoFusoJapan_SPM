@@ -18,19 +18,9 @@ namespace FusoEuro5Japan_Client
         private TimeSpan FINETERZOTURNO = new TimeSpan(05, 59, 59);
 
 
-        private readonly Timer _timerOrario;
-        private DateTime _orario;
+        private DateTime orario;
 
         #region PROPRIETA'
-        public DateTime Orario
-        {
-            get { return _orario; }
-            private set
-            {
-                _orario = value;
-                ControllaTurno();
-            }
-        }
 
         private TurnoEnum _turno;
         private readonly IGestoreConfigurazione _gestoreConfigurazione;
@@ -43,18 +33,38 @@ namespace FusoEuro5Japan_Client
                 if (_turno == value) return;
                 _turno = value;
                 _gestoreConfigurazione.ResettaTurno();
+                TurnoChanged?.Invoke(this, null);
             }
         }
 
+        public string Turno_string
+        {
+            get
+            {
+                string _turno="";
 
+                switch (Turno)
+                {
+                    case TurnoEnum.PrimoTurno:
+                        _turno = "1° Turno";
+                        break;
+                    case TurnoEnum.SecondoTurno:
+                        _turno = "2° Turno";
+                        break;
+                    case TurnoEnum.TerzoTurno:
+                        _turno = "3° Turno";
+                        break;
+                }
+                return _turno;
 
-        
+            }
+        }
 
         #endregion
 
 
         #region EVENTI
-        public event EventHandler<string> OrarioChanged;
+        public event EventHandler TurnoChanged;
         #endregion
 
 
@@ -66,20 +76,20 @@ namespace FusoEuro5Japan_Client
         {
             _gestoreConfigurazione = gestoreConfigurazione;
 
-            _timerOrario = new Timer((o) => { Orario = DateTime.Now; }, null, 500, 1000);
-
         }
         #endregion
 
         #region Metodi
-        private void ControllaTurno()
+        public void ControllaTurno()
         {
-            if(_orario.TimeOfDay>=INIZIOPRIMOTURNO && _orario.TimeOfDay <= FINEPRIMOTURNO)
+            DateTime orario = DateTime.Now;
+
+            if(orario.TimeOfDay>=INIZIOPRIMOTURNO && orario.TimeOfDay <= FINEPRIMOTURNO)
             {
                 Turno = TurnoEnum.PrimoTurno;
                 return;
             }
-            if (_orario.TimeOfDay >= INIZIOSECONDOTURNO && _orario.TimeOfDay <= FINESECONDOTURNO)
+            if (orario.TimeOfDay >= INIZIOSECONDOTURNO && orario.TimeOfDay <= FINESECONDOTURNO)
             {
                 Turno = TurnoEnum.SecondoTurno;
                 return;

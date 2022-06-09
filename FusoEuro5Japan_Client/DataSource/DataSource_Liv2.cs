@@ -203,7 +203,7 @@ namespace FusoEuro5Japan_Client
             }
         }
 
-        public void SetContatoreDiComoodo(int contdiComodo)
+        public void SetContatoreDiComodo(int contdiComodo)
         {
             try
             {
@@ -276,6 +276,36 @@ namespace FusoEuro5Japan_Client
                     using (OdbcCommand cmd = new OdbcCommand(query, conn))
                     {
                         cmd.Parameters.Add("@cont_di_Comodo", OdbcType.Int).Value = cont_di_comodo;
+
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Errore DB!");
+            }
+        }
+
+        public void AggiornaContatori(int contTurno, int contGiorno)
+        {
+            try
+            {
+                using (OdbcConnection conn = new OdbcConnection(connString))
+                {
+
+                    string query = @"UPDATE OBIETTIVO_JAPAN_SPM_CONFIG
+                                    SET 
+                                    (
+                                        CONTATORE_TURNO = :contTurno,
+                                        CONTATORE_GIORNO = :contGiorno
+                                    ) ";
+
+                    conn.Open();
+                    using (OdbcCommand cmd = new OdbcCommand(query, conn))
+                    {
+                        cmd.Parameters.Add("@contTurno", OdbcType.Int).Value = contTurno;
+                        cmd.Parameters.Add("@contGiorno", OdbcType.Int).Value = contGiorno;
 
                         cmd.ExecuteNonQuery();
                     }

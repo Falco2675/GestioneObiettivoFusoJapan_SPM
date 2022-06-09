@@ -23,8 +23,10 @@ namespace FusoEuro5Japan_Client
         private readonly IGestoreConvalidaDatoRicevuto _gestoreConvalidaDatoRicevuto;
         private IStrategia _strategia;
 
+        private readonly Timer _timerOrario, _timerIsAliveDS;
+        private DateTime _orario;
         private bool _isAliveDataSource;
-        private string _strategia_string;
+        //private string _strategia_string;
         private string _produzione_string;
         private string _dataProduzione;
         private string _produzioneGiornaliera;
@@ -33,11 +35,12 @@ namespace FusoEuro5Japan_Client
         private Motore _motoreLetto;
         private Config _configurazione;
         private string _azioneDaCompiere;
+        private string _errore_string;
+
 
         //private readonly Timer _timerOrario, _timerIsAliveDS;
         private TipoDatoRicevuto _tipoDatoRicevuto;
 
-        private string _orario;
         private System.Timers.Timer _timeShowMessage;
 
         //private readonly IValidatoreDisegni _validatoreDisegni;
@@ -55,17 +58,55 @@ namespace FusoEuro5Japan_Client
             get { return _isAliveDataSource; }
             set { _isAliveDataSource = value; Notify(); }
         }
-        public Color IsAliveColor => IsAliveDataSource ? Color.Green : Color.Red;
-
-        public string Orario => _gestoreTurni.Orario.ToString("HH:mm:ss");
-        public string DataProduzione => $"PRODUZIONE\n{DateTime.Now.Date}";
-        public string ProduzioneGiornaliera => _gestoreConfigurazione.Configurazione.
-
+        public DateTime Orario
+        {
+            get { return _orario; }
+            private set
+            {
+                _orario = value;
+                _gestoreTurni.ControllaTurno();
+                Notify(nameof(Orario_string));
+            }
+        }
+        public string Orario_string => Orario.ToString("HH:mm:ss");
         public Motore MotoreLetto
         {
             get { return _motoreLetto; }
             set { _motoreLetto = value; Notify(); }
         }
+        public string Strategia_string => $"{_strategia.Strategia_String}\n{_gestoreTurni.Turno_string}";
+        public string ProduzioneTurno => _strategia.Produzione_String;
+        public string ProduzioneGiornaliera => _gestoreConfigurazione.ContatoreGiorno_string;
+        public string TitoloProduzioneGiornaliera => $"PRODUZIONE DEL\n{DateTime.Now.Date.ToString("dd/MM/yyyy")}";
+        private Color _backColor_ProdTurno;
+
+        public Color BackColor_ProdTurno
+        {
+            get { return _backColor_ProdTurno; }
+            set { _backColor_ProdTurno = value; Notify(); }
+        }
+
+
+        public string Errore_string
+        {
+            get { return _errore_string; }
+            set { _errore_string = value; Notify(); }
+        }
+
+        public string AzioneDaCompiere_string => _strategia.AzioneDaCompiere;
+        //{
+        //    get { return _azioneDaCompiere; }
+        //    set
+        //    {
+        //        _azioneDaCompiere = value;
+        //        if (!string.IsNullOrEmpty(_azioneDaCompiere))
+        //            AvviaTimerShowMessage();
+        //        Notify();
+        //    }
+        //}
+        public Color IsAliveColor => IsAliveDataSource ? Color.Green : Color.Red;
+        public string Versione => $"v. {Assembly.GetExecutingAssembly().GetName().Version.ToString()}";
+
 
         public Config Configurazione
         {
@@ -79,44 +120,15 @@ namespace FusoEuro5Japan_Client
                 if ((_configurazione.Ogni_N_Pezzi != old_Ogni_N_pezzi) || (_configurazione.N_pezzi_definito != old_Ogni_N_pezzi_definito))
                 {
                     Notify(nameof(Strategia_string));
-                    Notify(nameof(Produzione_string));
+                    Notify(nameof(ProduzioneTurno));
                 }
 
             }
         }
-        public string Strategia_string => _strategia.Strategia_String;
-
-        public string Produzione_string => _strategia.Produzione_String;
 
         private readonly IGestoreAzioniDaCompiere _gestoreAzioniDaCompiere;
         private readonly IGestoreTurni _gestoreTurni;
 
-        public string AzioneDaCompiere_string
-        {
-            get { return _azioneDaCompiere; }
-            set
-            {
-                _azioneDaCompiere = value;
-                if (!string.IsNullOrEmpty(_azioneDaCompiere))
-                    AvviaTimerShowMessage();
-                Notify();
-            }
-        }
-
-
-        //public string WarningMessage
-        //{
-        //    get { return _warningMessage; }
-        //    set 
-        //    {
-        //        _warningMessage = value;
-        //        if (!string.IsNullOrEmpty(_warningMessage))
-        //            AvviaTimerShowMessage();
-
-        //        Notify();
-        //    }
-        //}
-        public string Versione => $"v. {Assembly.GetExecutingAssembly().GetName().Version.ToString()}";
         #endregion
 
         #region CTOR
@@ -126,24 +138,26 @@ namespace FusoEuro5Japan_Client
                IDataSource dataSource,
                IGestoreConfigurazione gestoreConfigurazione,
                IGestoreConvalidaDatoRicevuto gestoreConvalidaDatoRicevuto,
-               IGestoreAzioniDaCompiere gestoreAzioniDaCompiere,
+               //IGestoreAzioniDaCompiere gestoreAzioniDaCompiere,
                ILoginP loginP,
                IGestoreTurni gestoreTurni
             )
         {
             _view = view;
-            //_validatoreDisegni = validatoreDisegni;
             _dataSource = dataSource;
             _gestoreConfigurazione = gestoreConfigurazione;
             _gestoreConvalidaDatoRicevuto = gestoreConvalidaDatoRicevuto;
-            _gestoreAzioniDaCompiere = gestoreAzioniDaCompiere;
             _loginP = loginP;
             _gestoreTurni = gestoreTurni;
             _strategia = new Strategia_NonDefinita(_dataSource, _gestoreConfigurazione);
+            MotoreLetto = new Motore();
 
             _view.SetPresenter(this);
 
+            
             SottoscriviEventi();
+
+            _timerOrario = new Timer((o) => { Orario = DateTime.Now; }, null, 500, 1000);
 
             //_timerOrario = new Timer((o) => { Orario = DateTime.Now.ToString("HH:mm:ss"); }, null, 500, 1000);
             //_timerIsAliveDS = new Timer((o) => { IsAliveDataSource = _dataSource.IsConnessioneDS_Ok(); }, null, 500, 15000);
@@ -162,29 +176,23 @@ namespace FusoEuro5Japan_Client
             _view.StringaRicevutaEvent += OnStringaRicevutaEvent;
             _view.ResetEvent += OnResetEvent;
             _view.AvviaStrumentiEvent += OnAvviaStrumentiEvent;
-            _gestoreConfigurazione.CambioStrategiaChanged += OnCambioStrategiaChanged;
-            _gestoreConfigurazione.ContatoreDelTurnoChanged += OnContatoreDelTurnoChanged;
-            _gestoreTurni.OrarioChanged += OnOrarioChanged;
+            _gestoreConfigurazione.StrategiaChanged += OnCambioStrategiaChanged;
+            _gestoreConfigurazione.ContatoriChanged += OnContatoreDelTurnoChanged;
+            _strategia.AzioneDaCompiereChanged += OnAzioneDaCompiereChanged;
+            _strategia.ObiettivoTurnoRaggiuntoEvent += OnObiettivoTurnoRaggiuntoEvent;
+
+            _gestoreTurni.TurnoChanged += OnTurnoChanged;
         }
-
-        private void OnOrarioChanged(object sender, string ora)
-        {
-            Orario = ora;
-        }
-
-
 
         #endregion
 
         #region GESTORI EVENTI
         private void _timeShowMessage_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
-            AzioneDaCompiere_string = "";
             _timeShowMessage.Stop();
         }
         private void OnStringaRicevutaEvent(object sender, string stringaRicevuta)
         {
-            AzioneDaCompiere_string = "";
             _timeShowMessage.Stop();
             try
             {
@@ -196,18 +204,11 @@ namespace FusoEuro5Japan_Client
 
 
                 _strategia.EseguiSuMotore(MotoreLetto);
-                //if (MotoreLetto.IsTargetCandidate)
-                //{
-                //    //AzioneDaCompiere_string = _gestoreAzioniDaCompiere.GetAzioniDaCompiere(MotoreLetto);
-                //}
-                //else
-                //{
-                //    AzioneDaCompiere_string = "Nessuna azione da eseguire.";
-                //}
+                
             }
             catch (Exception ex)
             {
-                AzioneDaCompiere_string = ex.Message;
+                Errore_string = ex.Message;
             }
 
         }
@@ -220,13 +221,14 @@ namespace FusoEuro5Japan_Client
         {
             _loginP.ShowView();
         }
-        private void OnContatoreDelTurnoChanged(object sender, int contatoreTurno)
+        private void OnContatoreDelTurnoChanged(object sender, EventArgs e)
         {
-            Notify(nameof(Produzione_string));
+            Notify(nameof(ProduzioneTurno));
+            Notify(nameof(ProduzioneGiornaliera));
         }
-        private void OnCambioStrategiaChanged(object sender, StrategiaEnum strategia)
+        private void OnCambioStrategiaChanged(object sender, EventArgs e)
         {
-            switch (strategia)
+            switch (_gestoreConfigurazione.StrategiaAdottata)
             {
                 case StrategiaEnum.Ogni_N_pezzi:
                     _strategia = new Strategia_Ogni_N_Pezzi(_dataSource, _gestoreConfigurazione);
@@ -242,6 +244,19 @@ namespace FusoEuro5Japan_Client
             }
             Notify(nameof(Strategia_string));
         }
+        private void OnTurnoChanged(object sender, EventArgs e)
+        {
+            Notify(nameof(Strategia_string));
+        }
+        private void OnAzioneDaCompiereChanged(object sender, string e)
+        {
+            Notify(nameof(AzioneDaCompiere_string));
+        }
+        private void OnObiettivoTurnoRaggiuntoEvent(object sender, EventArgs e)
+        {
+            BackColor_ProdTurno = Color.Green;
+        }
+
 
         #endregion
 

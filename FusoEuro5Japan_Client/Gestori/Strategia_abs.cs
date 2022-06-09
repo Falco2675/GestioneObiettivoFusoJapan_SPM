@@ -22,16 +22,15 @@ namespace FusoEuro5Japan_Client
             get { return _azioneDaCompiere; }
             set
             {
-                if (_azioneDaCompiere != value)
-                {
-                    _azioneDaCompiere = value;
-                    AzioneDaCompiereChanged?.Invoke(this, _azioneDaCompiere);
-                }
+
+                _azioneDaCompiere = value;
+                AzioneDaCompiereChanged?.Invoke(this, _azioneDaCompiere);
             }
         }
 
 
         public event EventHandler<string> AzioneDaCompiereChanged;
+        public abstract event EventHandler ObiettivoTurnoRaggiuntoEvent;
 
         #region CTOR
         public Strategia_abs

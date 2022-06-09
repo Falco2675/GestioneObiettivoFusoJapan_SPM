@@ -26,11 +26,6 @@ namespace FusoEuro5Japan_Client
             get { return txtDisegnoFPT.Text; }
             set { txtDisegnoFPT.Text = value; }
         }
-        public string DisegnoTMC
-        {
-            get { return txtDisegnoTMC.Text; }
-            set { txtDisegnoTMC.Text = value; }
-        }
 
         #endregion
 
@@ -87,9 +82,7 @@ namespace FusoEuro5Japan_Client
         private void BindingData()
         {
             txtDisegnoFPT.DataBindings.Add("Text", _bs, "DisegnoFPT");
-            txtDisegnoTMC.DataBindings.Add("Text", _bs, "DisegnoTMC");
             lblMessaggio.DataBindings.Add("Text", _bs, "Messaggio");
-            chkRicambi.DataBindings.Add("Checked", _bs, "IsPerRicambi");
             btnAggiungi.DataBindings.Add("Enabled", _bs, "AbilitaPulsanteAggiungi", false, DataSourceUpdateMode.Never);
             dgvDisegniInseriti.DataBindings.Add("DataSource", _bs, "ElencoDisegniInseritiOrdinati");
         }
@@ -107,24 +100,9 @@ namespace FusoEuro5Japan_Client
                 },
                 new DataGridViewTextBoxColumn
                 {
-                    HeaderText = "DisegnoFPT",
-                    DataPropertyName = "DisegnoFPT",
+                    HeaderText = "Disegno",
+                    DataPropertyName = "Disegno",
                     Width=100,
-                    //AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells,
-                },
-                new DataGridViewTextBoxColumn
-                {
-                    HeaderText = "DisegnoTMC",
-                    DataPropertyName = "DisegnoTMC",
-                    Width=100,
-                    //AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells,
-                },
-                new DataGridViewTextBoxColumn
-                {
-                    HeaderText = "Ricambi",
-                    DataPropertyName = "IsPerRicambi_string",
-                    Width=70,
-                    DefaultCellStyle= new DataGridViewCellStyle { Alignment= DataGridViewContentAlignment.MiddleCenter}
                     //AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells,
                 }
                 );

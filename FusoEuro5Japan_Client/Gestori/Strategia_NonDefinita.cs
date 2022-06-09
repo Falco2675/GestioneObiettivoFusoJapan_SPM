@@ -15,6 +15,8 @@ namespace FusoEuro5Japan_Client
         public override string Strategia_String => "N.D.";
         public override string Produzione_String => "";
 
+        public override event EventHandler ObiettivoTurnoRaggiuntoEvent;
+
         internal override void EseguiSuMotoreCandidato(Motore motoreLetto)
         {
             

@@ -2,6 +2,6 @@
 {
     public interface IGestoreAzioniDaCompiere
     {
-        string GetAzioniDaCompiere(Motore motoreLetto);
+        //string GetAzioniDaCompiere(Motore motoreLetto);
     }
 }
