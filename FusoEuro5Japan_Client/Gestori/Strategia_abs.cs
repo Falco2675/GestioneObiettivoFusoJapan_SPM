@@ -16,6 +16,7 @@ namespace FusoEuro5Japan_Client
 
         public abstract string Strategia_String { get; }
         public abstract string Produzione_String { get; }
+        public abstract string NomeStrategia { get; }
 
         public string AzioneDaCompiere
         {

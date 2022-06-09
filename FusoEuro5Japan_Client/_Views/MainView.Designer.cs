@@ -67,19 +67,15 @@
             this.tlpGrigliaProduzione = new System.Windows.Forms.TableLayoutPanel();
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.lblDataProduzione = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.pnlStrategia = new System.Windows.Forms.Panel();
-            this.tlpProduzioneTurno = new System.Windows.Forms.TableLayoutPanel();
-            this.lblProduzione = new System.Windows.Forms.Label();
-            this.lblStrategia = new System.Windows.Forms.Label();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.lblProduzioneGiornaliera = new System.Windows.Forms.Label();
-            this.lblDataProduzione = new System.Windows.Forms.Label();
-            this.tlpObiettiviProduzione = new System.Windows.Forms.TableLayoutPanel();
+            this.pnlGrigliaProduzione = new System.Windows.Forms.Panel();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
             this.tlpPrincipale.SuspendLayout();
             this.pnlHeader.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
@@ -103,11 +99,7 @@
             this.pnlCopyright_Versione.SuspendLayout();
             this.pnlCopyright.SuspendLayout();
             this.tlpGrigliaProduzione.SuspendLayout();
-            this.panel1.SuspendLayout();
-            this.pnlStrategia.SuspendLayout();
-            this.tlpProduzioneTurno.SuspendLayout();
-            this.tableLayoutPanel1.SuspendLayout();
-            this.tlpObiettiviProduzione.SuspendLayout();
+            this.pnlGrigliaProduzione.SuspendLayout();
             this.SuspendLayout();
             // 
             // tlpPrincipale
@@ -280,8 +272,8 @@
             this.tlpBody.ColumnCount = 2;
             this.tlpBody.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 56F));
             this.tlpBody.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 44F));
+            this.tlpBody.Controls.Add(this.pnlGrigliaProduzione, 1, 0);
             this.tlpBody.Controls.Add(this.tlpDatiMotore, 0, 0);
-            this.tlpBody.Controls.Add(this.tlpObiettiviProduzione, 1, 0);
             this.tlpBody.Controls.Add(this.pnlContenitoreAzione_errori, 0, 1);
             this.tlpBody.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlpBody.Location = new System.Drawing.Point(0, 0);
@@ -423,7 +415,6 @@
             // pnlAzione
             // 
             this.pnlAzione.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
-            this.pnlAzione.Controls.Add(this.panel1);
             this.pnlAzione.Controls.Add(this.lblAzione);
             this.pnlAzione.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlAzione.Font = new System.Drawing.Font("Microsoft Sans Serif", 50F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -549,6 +540,7 @@
             // 
             // tlpGrigliaProduzione
             // 
+            this.tlpGrigliaProduzione.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
             this.tlpGrigliaProduzione.ColumnCount = 4;
             this.tlpGrigliaProduzione.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tlpGrigliaProduzione.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
@@ -557,9 +549,13 @@
             this.tlpGrigliaProduzione.Controls.Add(this.label9, 3, 2);
             this.tlpGrigliaProduzione.Controls.Add(this.label7, 2, 2);
             this.tlpGrigliaProduzione.Controls.Add(this.label5, 1, 2);
-            this.tlpGrigliaProduzione.Controls.Add(this.label2, 0, 1);
+            this.tlpGrigliaProduzione.Controls.Add(this.lblDataProduzione, 0, 1);
             this.tlpGrigliaProduzione.Controls.Add(this.label1, 0, 0);
             this.tlpGrigliaProduzione.Controls.Add(this.label3, 0, 2);
+            this.tlpGrigliaProduzione.Controls.Add(this.label2, 0, 3);
+            this.tlpGrigliaProduzione.Controls.Add(this.label10, 1, 3);
+            this.tlpGrigliaProduzione.Controls.Add(this.label11, 2, 3);
+            this.tlpGrigliaProduzione.Controls.Add(this.label12, 3, 3);
             this.tlpGrigliaProduzione.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlpGrigliaProduzione.Location = new System.Drawing.Point(0, 0);
             this.tlpGrigliaProduzione.Name = "tlpGrigliaProduzione";
@@ -568,7 +564,7 @@
             this.tlpGrigliaProduzione.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tlpGrigliaProduzione.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tlpGrigliaProduzione.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpGrigliaProduzione.Size = new System.Drawing.Size(381, 204);
+            this.tlpGrigliaProduzione.Size = new System.Drawing.Size(410, 194);
             this.tlpGrigliaProduzione.TabIndex = 0;
             // 
             // label3
@@ -576,9 +572,9 @@
             this.label3.AutoSize = true;
             this.label3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(3, 80);
+            this.label3.Location = new System.Drawing.Point(4, 83);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(89, 30);
+            this.label3.Size = new System.Drawing.Size(95, 30);
             this.label3.TabIndex = 2;
             this.label3.Text = "1° Turno";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -589,33 +585,33 @@
             this.label1.AutoSize = true;
             this.tlpGrigliaProduzione.SetColumnSpan(this.label1, 5);
             this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(3, 0);
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(4, 1);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(375, 40);
+            this.label1.Size = new System.Drawing.Size(402, 40);
             this.label1.TabIndex = 0;
-            this.label1.Text = "label1";
+            this.label1.Text = "Strategia: Produzione Giornaliera";
             // 
-            // label2
+            // lblDataProduzione
             // 
-            this.label2.AutoSize = true;
-            this.tlpGrigliaProduzione.SetColumnSpan(this.label2, 5);
-            this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(3, 40);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(375, 40);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "label2";
+            this.lblDataProduzione.AutoSize = true;
+            this.tlpGrigliaProduzione.SetColumnSpan(this.lblDataProduzione, 5);
+            this.lblDataProduzione.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblDataProduzione.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDataProduzione.Location = new System.Drawing.Point(4, 42);
+            this.lblDataProduzione.Name = "lblDataProduzione";
+            this.lblDataProduzione.Size = new System.Drawing.Size(402, 40);
+            this.lblDataProduzione.TabIndex = 1;
+            this.lblDataProduzione.Text = "DATA: 09/06/2022";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(98, 80);
+            this.label5.Location = new System.Drawing.Point(106, 83);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(89, 30);
+            this.label5.Size = new System.Drawing.Size(95, 30);
             this.label5.TabIndex = 3;
             this.label5.Text = "2° Turno";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -626,9 +622,9 @@
             this.label7.AutoSize = true;
             this.label7.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(193, 80);
+            this.label7.Location = new System.Drawing.Point(208, 83);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(89, 30);
+            this.label7.Size = new System.Drawing.Size(95, 30);
             this.label7.TabIndex = 4;
             this.label7.Text = "3° Turno";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -638,123 +634,69 @@
             this.label9.AutoSize = true;
             this.label9.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(288, 80);
+            this.label9.Location = new System.Drawing.Point(310, 83);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(90, 30);
+            this.label9.Size = new System.Drawing.Size(96, 30);
             this.label9.TabIndex = 5;
             this.label9.Text = "TOTALE";
             this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // panel1
+            // pnlGrigliaProduzione
             // 
-            this.panel1.Controls.Add(this.tlpGrigliaProduzione);
-            this.panel1.Location = new System.Drawing.Point(457, 3);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(381, 204);
-            this.panel1.TabIndex = 1;
+            this.pnlGrigliaProduzione.Controls.Add(this.tlpGrigliaProduzione);
+            this.pnlGrigliaProduzione.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlGrigliaProduzione.Location = new System.Drawing.Point(534, 4);
+            this.pnlGrigliaProduzione.Name = "pnlGrigliaProduzione";
+            this.pnlGrigliaProduzione.Size = new System.Drawing.Size(410, 194);
+            this.pnlGrigliaProduzione.TabIndex = 1;
             // 
-            // pnlStrategia
+            // label2
             // 
-            this.pnlStrategia.Controls.Add(this.tlpProduzioneTurno);
-            this.pnlStrategia.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlStrategia.Location = new System.Drawing.Point(3, 3);
-            this.pnlStrategia.Name = "pnlStrategia";
-            this.pnlStrategia.Size = new System.Drawing.Size(199, 188);
-            this.pnlStrategia.TabIndex = 4;
+            this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.label2.Location = new System.Drawing.Point(4, 114);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(95, 79);
+            this.label2.TabIndex = 6;
+            this.label2.Text = "label2";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // tlpProduzioneTurno
+            // label10
             // 
-            this.tlpProduzioneTurno.ColumnCount = 1;
-            this.tlpProduzioneTurno.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tlpProduzioneTurno.Controls.Add(this.lblStrategia, 0, 0);
-            this.tlpProduzioneTurno.Controls.Add(this.lblProduzione, 0, 1);
-            this.tlpProduzioneTurno.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tlpProduzioneTurno.Location = new System.Drawing.Point(0, 0);
-            this.tlpProduzioneTurno.Margin = new System.Windows.Forms.Padding(0);
-            this.tlpProduzioneTurno.Name = "tlpProduzioneTurno";
-            this.tlpProduzioneTurno.RowCount = 2;
-            this.tlpProduzioneTurno.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 43.08511F));
-            this.tlpProduzioneTurno.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 56.91489F));
-            this.tlpProduzioneTurno.Size = new System.Drawing.Size(199, 188);
-            this.tlpProduzioneTurno.TabIndex = 0;
+            this.label10.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.label10.Location = new System.Drawing.Point(106, 114);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(95, 79);
+            this.label10.TabIndex = 6;
+            this.label10.Text = "label2";
+            this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // lblProduzione
+            // label11
             // 
-            this.lblProduzione.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblProduzione.Font = new System.Drawing.Font("Microsoft Sans Serif", 50F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblProduzione.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            this.lblProduzione.Location = new System.Drawing.Point(3, 81);
-            this.lblProduzione.Name = "lblProduzione";
-            this.lblProduzione.Size = new System.Drawing.Size(193, 107);
-            this.lblProduzione.TabIndex = 1;
-            this.lblProduzione.Text = "2/10";
-            this.lblProduzione.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label11.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.label11.Location = new System.Drawing.Point(208, 114);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(95, 79);
+            this.label11.TabIndex = 6;
+            this.label11.Text = "label2";
+            this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // lblStrategia
+            // label12
             // 
-            this.lblStrategia.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblStrategia.Font = new System.Drawing.Font("Microsoft Sans Serif", 25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblStrategia.ForeColor = System.Drawing.Color.Green;
-            this.lblStrategia.Location = new System.Drawing.Point(3, 0);
-            this.lblStrategia.Name = "lblStrategia";
-            this.lblStrategia.Size = new System.Drawing.Size(193, 81);
-            this.lblStrategia.TabIndex = 0;
-            this.lblStrategia.Text = "Produzione\r\n1° Turno";
-            this.lblStrategia.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // tableLayoutPanel1
-            // 
-            this.tableLayoutPanel1.ColumnCount = 1;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Controls.Add(this.lblDataProduzione, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.lblProduzioneGiornaliera, 0, 1);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(205, 0);
-            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 2;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 43.08511F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 56.91489F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(205, 194);
-            this.tableLayoutPanel1.TabIndex = 5;
-            // 
-            // lblProduzioneGiornaliera
-            // 
-            this.lblProduzioneGiornaliera.Font = new System.Drawing.Font("Microsoft Sans Serif", 60F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblProduzioneGiornaliera.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            this.lblProduzioneGiornaliera.Location = new System.Drawing.Point(3, 83);
-            this.lblProduzioneGiornaliera.Name = "lblProduzioneGiornaliera";
-            this.lblProduzioneGiornaliera.Size = new System.Drawing.Size(199, 111);
-            this.lblProduzioneGiornaliera.TabIndex = 1;
-            this.lblProduzioneGiornaliera.Text = "20";
-            this.lblProduzioneGiornaliera.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblDataProduzione
-            // 
-            this.lblDataProduzione.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblDataProduzione.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDataProduzione.ForeColor = System.Drawing.Color.Green;
-            this.lblDataProduzione.Location = new System.Drawing.Point(3, 0);
-            this.lblDataProduzione.Name = "lblDataProduzione";
-            this.lblDataProduzione.Size = new System.Drawing.Size(199, 83);
-            this.lblDataProduzione.TabIndex = 0;
-            this.lblDataProduzione.Text = "PRODUZIONE DEL\r\n08/06/2022";
-            this.lblDataProduzione.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // tlpObiettiviProduzione
-            // 
-            this.tlpObiettiviProduzione.ColumnCount = 2;
-            this.tlpObiettiviProduzione.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tlpObiettiviProduzione.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tlpObiettiviProduzione.Controls.Add(this.tableLayoutPanel1, 1, 0);
-            this.tlpObiettiviProduzione.Controls.Add(this.pnlStrategia, 0, 0);
-            this.tlpObiettiviProduzione.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tlpObiettiviProduzione.Location = new System.Drawing.Point(534, 4);
-            this.tlpObiettiviProduzione.Name = "tlpObiettiviProduzione";
-            this.tlpObiettiviProduzione.RowCount = 1;
-            this.tlpObiettiviProduzione.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpObiettiviProduzione.Size = new System.Drawing.Size(410, 194);
-            this.tlpObiettiviProduzione.TabIndex = 3;
+            this.label12.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.label12.Location = new System.Drawing.Point(310, 114);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(96, 79);
+            this.label12.TabIndex = 6;
+            this.label12.Text = "label2";
+            this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // MainView
             // 
@@ -796,11 +738,7 @@
             this.pnlCopyright.ResumeLayout(false);
             this.tlpGrigliaProduzione.ResumeLayout(false);
             this.tlpGrigliaProduzione.PerformLayout();
-            this.panel1.ResumeLayout(false);
-            this.pnlStrategia.ResumeLayout(false);
-            this.tlpProduzioneTurno.ResumeLayout(false);
-            this.tableLayoutPanel1.ResumeLayout(false);
-            this.tlpObiettiviProduzione.ResumeLayout(false);
+            this.pnlGrigliaProduzione.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -843,22 +781,18 @@
         private System.Windows.Forms.Panel pnlCopyright;
         private System.Windows.Forms.Label lblCopyright;
         private System.Windows.Forms.TextBox txtDato;
-        private System.Windows.Forms.TableLayoutPanel tlpObiettiviProduzione;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.Label lblDataProduzione;
-        private System.Windows.Forms.Label lblProduzioneGiornaliera;
-        private System.Windows.Forms.Panel pnlStrategia;
-        private System.Windows.Forms.TableLayoutPanel tlpProduzioneTurno;
-        private System.Windows.Forms.Label lblStrategia;
-        private System.Windows.Forms.Label lblProduzione;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel pnlGrigliaProduzione;
         private System.Windows.Forms.TableLayoutPanel tlpGrigliaProduzione;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lblDataProduzione;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label12;
     }
 }
 

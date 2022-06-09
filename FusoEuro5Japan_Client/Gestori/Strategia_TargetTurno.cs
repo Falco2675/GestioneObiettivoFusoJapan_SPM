@@ -13,6 +13,8 @@ namespace FusoEuro5Japan_Client
             
         public override string Produzione_String => $"{_gestoreConfigurazione.Configurazione.Contatore_del_turno}/{_gestoreConfigurazione.Configurazione.N_pezzi_definito}";
 
+        public override string NomeStrategia => "Produzione turno";
+
         #region CTOR
         public Strategia_TargetTurno
            (
