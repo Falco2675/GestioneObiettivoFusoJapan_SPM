@@ -336,5 +336,10 @@ namespace FusoEuro5Japan_Client
                 throw new Exception("Errore DB!");
             }
         }
+
+        public void AggiornaContatori(Config config)
+        {
+            
+        }
     }
 }

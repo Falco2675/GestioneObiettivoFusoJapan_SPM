@@ -87,13 +87,18 @@ namespace FusoEuro5Japan_Client
 
         public string Prod_1T => _gestoreStrategiaDiProduzione.GetProduzioneTurno_string(_gestoreContatoreObiettivi.Prod_1T, _gestoreContatoreObiettivi.Obiettivo_1T);
         public Color ForeColor_Prod_1T => _gestoreContatoreObiettivi.IsTarget_1T_Raggiunto ? GREEN_COLOR : RED_COLOR;
+        public Color BackColor_Prod_1T => _gestoreTurni.Turno_enum==TurnoEnum.PrimoTurno ? Color.FromArgb(255, 255, 192) : SystemColors.Control;
+
         public string Prod_2T => _gestoreStrategiaDiProduzione.GetProduzioneTurno_string(_gestoreContatoreObiettivi.Prod_2T, _gestoreContatoreObiettivi.Obiettivo_2T);
         public Color ForeColor_Prod_2T => _gestoreContatoreObiettivi.IsTarget_2T_Raggiunto ? GREEN_COLOR : RED_COLOR;
+        public Color BackColor_Prod_2T => _gestoreTurni.Turno_enum == TurnoEnum.SecondoTurno ? Color.FromArgb(255, 255, 192) : SystemColors.Control;
+
         public string Prod_3T => _gestoreStrategiaDiProduzione.GetProduzioneTurno_string(_gestoreContatoreObiettivi.Prod_3T, _gestoreContatoreObiettivi.Obiettivo_3T);
         public Color ForeColor_Prod_3T => _gestoreContatoreObiettivi.IsTarget_3T_Raggiunto ? GREEN_COLOR : RED_COLOR;
+        public Color BackColor_Prod_3T => _gestoreTurni.Turno_enum == TurnoEnum.TerzoTurno ? Color.FromArgb(255, 255, 192) : SystemColors.Control;
 
         public string ProduzioneGiornaliera => _gestoreContatoreObiettivi.Contatore_del_giorno.ToString();
-        public Color ForeColor_Prod_All_Turni => _gestoreContatoreObiettivi.IsTarget_All_Turni_Raggiunto ? GREEN_COLOR : RED_COLOR;
+        public Color ForeColor_Prod_All_Turni => _gestoreContatoreObiettivi.IsTarget_GiornalieroRaggiunto ? GREEN_COLOR : RED_COLOR;
 
         public string AzioneDaCompiere_string => _gestoreStrategiaDiProduzione.AzioneDaCompiere;
 
@@ -103,10 +108,10 @@ namespace FusoEuro5Japan_Client
             set { _errore_string = value; Notify(); }
         }
         
-        public Color IsAliveColor => IsAliveDataSource ? Color.Green : Color.Red;
+        public Color IsAliveColor => string.IsNullOrEmpty(_gestoreConfigurazione.ExceptionDbConfigurazione) ? Color.Green : Color.Red;
         public string Versione => $"v. {Assembly.GetExecutingAssembly().GetName().Version.ToString()}";
         // Fine Binding con la View
-
+        
         #endregion
 
         #region CTOR
@@ -178,9 +183,11 @@ namespace FusoEuro5Japan_Client
             _gestoreContatoreObiettivi.Target_Prod_1T_RaggiuntoChanged += OnTarget_Prod_1T_RaggiuntoChanged;
             _gestoreContatoreObiettivi.Target_Prod_2T_RaggiuntoChanged += OnTarget_Prod_2T_RaggiuntoChanged;
             _gestoreContatoreObiettivi.Target_Prod_3T_RaggiuntoChanged += OnTarget_Prod_3T_RaggiuntoChanged;
+
+            _gestoreConfigurazione.ExceptionDBConfigurazioneEvent += OnExceptionDBConfigurazioneEvent;
+            _gestoreConfigurazione.ConfigurazioneAggiornataEvent += OnConfigurazioneAggiornataEvent;
+
         }
-
-
 
         #endregion
 
@@ -194,19 +201,31 @@ namespace FusoEuro5Japan_Client
             _timeShowMessage.Stop();
             try
             {
+                Reset();
                 _gestoreConvalidaDatoRicevuto.ConvalidaDato(stringaRicevuta);
                 _tipoDatoRicevuto = _gestoreConvalidaDatoRicevuto.GetTipoDatoRicevuto(stringaRicevuta);
                 MotoreLetto = _dataSource.GetMotore(stringaRicevuta, _tipoDatoRicevuto);
-                if (string.IsNullOrEmpty(MotoreLetto.Matricola))
+                if (MotoreLetto.Matricola=="--")
                     throw new Exception("Dato non conforme! \nLEGGERE MATRICOLA MOTORE o COD. BASAMENTO.");
 
-                //if(!MotoreLetto.IsTargetCandidate)
+
+                if (!MotoreLetto.IsTargetCandidate )
+                {
+                    _gestoreStrategiaDiProduzione.EseguiNessunaAzione();
+                    return;
+                }
 
                 _gestoreConfigurazione.AggiornaConfigurazione();
-                
-                //_gestoreStrategiaDiProduzione.EseguiSuMotore(MotoreLetto, _gestoreTurni.Turno_enum);
-                if(_gestoreStrategiaDiProduzione.IsMotoreTarget)
 
+                if (_gestoreStrategiaDiProduzione.IsMotoreTarget)
+                {
+                    _gestoreContatoreObiettivi.AggiungiAllaProduzione();
+                    _gestoreConfigurazione.ScriviConfigurazione();
+                }
+                else
+                {
+                    _gestoreStrategiaDiProduzione.EseguiNessunaAzione();
+                }
                 
             }
             catch (Exception ex)
@@ -252,6 +271,8 @@ namespace FusoEuro5Japan_Client
         private void OnProd_2TChanged(object sender, EventArgs e)
         {
             Notify(nameof(Prod_2T));
+            Notify(nameof(ForeColor_Prod_2T));
+            Notify(nameof(BackColor_Prod_2T));
         }
         private void OnProd_1TChanged(object sender, EventArgs e)
         {
@@ -285,6 +306,29 @@ namespace FusoEuro5Japan_Client
         private void OnStrategiaDiProduzioneChanged(object sender, EventArgs e)
         {
             Notify(nameof(Strategia_string));
+        }
+
+        private void OnConfigurazioneAggiornataEvent(object sender, EventArgs e)
+        {
+            //NotifyAll();
+        }
+
+        
+
+        private void OnExceptionDBConfigurazioneEvent(object sender, EventArgs e)
+        {
+            Errore_string = _gestoreConfigurazione.ExceptionDbConfigurazione;
+        }
+
+        #endregion
+
+        #region METODI PUBBLICI
+        public void Reset()
+        {
+            MotoreLetto = new FusoEuro5Japan_Client.Motore();
+            _gestoreStrategiaDiProduzione.ResettaAzione();
+            Errore_string = "";
+
         }
 
         #endregion
@@ -348,6 +392,7 @@ namespace FusoEuro5Japan_Client
             _timeShowMessage.Stop();
             _timeShowMessage.Start();
         }
+
 
 
 

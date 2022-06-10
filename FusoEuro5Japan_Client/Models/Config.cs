@@ -12,6 +12,7 @@ namespace FusoEuro5Japan_Client
         public int Obiettivo_1T { get; set; }
         public int Obiettivo_2T { get; set; }
         public int Obiettivo_3T { get; set; }
+        public int Obiettivo_Giornaliero { get; set; }
 
         public int Contatore_di_comodo { get; set; }
 

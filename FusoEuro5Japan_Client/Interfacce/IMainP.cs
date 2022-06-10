@@ -7,6 +7,8 @@ namespace FusoEuro5Japan_Client
     {
         IMainV GetView { get; }
         SynchronizationContext SynchronizeContext { get; set; }
+
+        void Reset();
         //string Orario { get; }
     }
 }

@@ -91,6 +91,11 @@ namespace FusoEuro5Japan_Client
             Turno_enum = TurnoEnum.TerzoTurno;
         }
 
+        public bool IsTurno(TurnoEnum primoTurno)
+        {
+            throw new NotImplementedException();
+        }
+
         #endregion
 
     }

@@ -67,8 +67,10 @@
             this.pnlContenitoreAzione_errori = new System.Windows.Forms.Panel();
             this.pnlAzione = new System.Windows.Forms.Panel();
             this.lblAzione = new System.Windows.Forms.Label();
-            this.pnlErrori = new System.Windows.Forms.Panel();
-            this.lblErrori = new System.Windows.Forms.Label();
+            this.pnlBarraSotto = new System.Windows.Forms.Panel();
+            this.tlpBarraSotto = new System.Windows.Forms.TableLayoutPanel();
+            this.lblErroriWarning = new System.Windows.Forms.Label();
+            this.btnReset = new System.Windows.Forms.Button();
             this.tlpFooter = new System.Windows.Forms.TableLayoutPanel();
             this.lblConnessioneDS = new System.Windows.Forms.Label();
             this.pnlCopyright_Versione = new System.Windows.Forms.Panel();
@@ -96,7 +98,8 @@
             this.pnlCodBasamento.SuspendLayout();
             this.pnlContenitoreAzione_errori.SuspendLayout();
             this.pnlAzione.SuspendLayout();
-            this.pnlErrori.SuspendLayout();
+            this.pnlBarraSotto.SuspendLayout();
+            this.tlpBarraSotto.SuspendLayout();
             this.tlpFooter.SuspendLayout();
             this.pnlCopyright_Versione.SuspendLayout();
             this.pnlCopyright.SuspendLayout();
@@ -359,7 +362,6 @@
             this.label5.TabIndex = 3;
             this.label5.Text = "2° Turno";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.label5.Click += new System.EventHandler(this.label5_Click);
             // 
             // lblDataProduzione
             // 
@@ -397,10 +399,10 @@
             this.label3.TabIndex = 2;
             this.label3.Text = "1° Turno";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // lblProd_1T
             // 
+            this.lblProd_1T.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.lblProd_1T.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblProd_1T.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblProd_1T.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
@@ -566,11 +568,12 @@
             // 
             this.tlpBody.SetColumnSpan(this.pnlContenitoreAzione_errori, 2);
             this.pnlContenitoreAzione_errori.Controls.Add(this.pnlAzione);
-            this.pnlContenitoreAzione_errori.Controls.Add(this.pnlErrori);
+            this.pnlContenitoreAzione_errori.Controls.Add(this.pnlBarraSotto);
             this.pnlContenitoreAzione_errori.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlContenitoreAzione_errori.Location = new System.Drawing.Point(4, 205);
+            this.pnlContenitoreAzione_errori.Location = new System.Drawing.Point(1, 202);
+            this.pnlContenitoreAzione_errori.Margin = new System.Windows.Forms.Padding(0);
             this.pnlContenitoreAzione_errori.Name = "pnlContenitoreAzione_errori";
-            this.pnlContenitoreAzione_errori.Size = new System.Drawing.Size(940, 290);
+            this.pnlContenitoreAzione_errori.Size = new System.Drawing.Size(946, 296);
             this.pnlContenitoreAzione_errori.TabIndex = 1;
             // 
             // pnlAzione
@@ -582,39 +585,70 @@
             this.pnlAzione.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.pnlAzione.Location = new System.Drawing.Point(0, 0);
             this.pnlAzione.Name = "pnlAzione";
-            this.pnlAzione.Size = new System.Drawing.Size(940, 229);
+            this.pnlAzione.Size = new System.Drawing.Size(946, 235);
             this.pnlAzione.TabIndex = 1;
             // 
             // lblAzione
             // 
+            this.lblAzione.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblAzione.Location = new System.Drawing.Point(0, 0);
             this.lblAzione.Name = "lblAzione";
-            this.lblAzione.Size = new System.Drawing.Size(359, 229);
+            this.lblAzione.Size = new System.Drawing.Size(946, 235);
             this.lblAzione.TabIndex = 0;
             this.lblAzione.Text = "Azione";
             this.lblAzione.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // pnlErrori
+            // pnlBarraSotto
             // 
-            this.pnlErrori.BackColor = System.Drawing.Color.Red;
-            this.pnlErrori.Controls.Add(this.lblErrori);
-            this.pnlErrori.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlErrori.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.pnlErrori.ForeColor = System.Drawing.Color.White;
-            this.pnlErrori.Location = new System.Drawing.Point(0, 229);
-            this.pnlErrori.Name = "pnlErrori";
-            this.pnlErrori.Size = new System.Drawing.Size(940, 61);
-            this.pnlErrori.TabIndex = 0;
+            this.pnlBarraSotto.Controls.Add(this.tlpBarraSotto);
+            this.pnlBarraSotto.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.pnlBarraSotto.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.pnlBarraSotto.ForeColor = System.Drawing.Color.White;
+            this.pnlBarraSotto.Location = new System.Drawing.Point(0, 235);
+            this.pnlBarraSotto.Margin = new System.Windows.Forms.Padding(0);
+            this.pnlBarraSotto.Name = "pnlBarraSotto";
+            this.pnlBarraSotto.Size = new System.Drawing.Size(946, 61);
+            this.pnlBarraSotto.TabIndex = 0;
             // 
-            // lblErrori
+            // tlpBarraSotto
             // 
-            this.lblErrori.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblErrori.Location = new System.Drawing.Point(0, 0);
-            this.lblErrori.Name = "lblErrori";
-            this.lblErrori.Size = new System.Drawing.Size(940, 61);
-            this.lblErrori.TabIndex = 0;
-            this.lblErrori.Text = "Errori";
-            this.lblErrori.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.tlpBarraSotto.ColumnCount = 2;
+            this.tlpBarraSotto.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 70F));
+            this.tlpBarraSotto.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
+            this.tlpBarraSotto.Controls.Add(this.lblErroriWarning, 0, 0);
+            this.tlpBarraSotto.Controls.Add(this.btnReset, 1, 0);
+            this.tlpBarraSotto.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tlpBarraSotto.Location = new System.Drawing.Point(0, 0);
+            this.tlpBarraSotto.Name = "tlpBarraSotto";
+            this.tlpBarraSotto.RowCount = 1;
+            this.tlpBarraSotto.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlpBarraSotto.Size = new System.Drawing.Size(946, 61);
+            this.tlpBarraSotto.TabIndex = 0;
+            // 
+            // lblErroriWarning
+            // 
+            this.lblErroriWarning.BackColor = System.Drawing.Color.Red;
+            this.lblErroriWarning.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblErroriWarning.Location = new System.Drawing.Point(0, 0);
+            this.lblErroriWarning.Margin = new System.Windows.Forms.Padding(0);
+            this.lblErroriWarning.Name = "lblErroriWarning";
+            this.lblErroriWarning.Size = new System.Drawing.Size(662, 61);
+            this.lblErroriWarning.TabIndex = 0;
+            this.lblErroriWarning.Text = "Errori";
+            this.lblErroriWarning.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // btnReset
+            // 
+            this.btnReset.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.btnReset.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnReset.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnReset.Location = new System.Drawing.Point(665, 3);
+            this.btnReset.Name = "btnReset";
+            this.btnReset.Size = new System.Drawing.Size(278, 55);
+            this.btnReset.TabIndex = 1;
+            this.btnReset.Text = "RESET";
+            this.btnReset.UseVisualStyleBackColor = false;
+            this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
             // 
             // tlpFooter
             // 
@@ -735,7 +769,8 @@
             this.pnlCodBasamento.PerformLayout();
             this.pnlContenitoreAzione_errori.ResumeLayout(false);
             this.pnlAzione.ResumeLayout(false);
-            this.pnlErrori.ResumeLayout(false);
+            this.pnlBarraSotto.ResumeLayout(false);
+            this.tlpBarraSotto.ResumeLayout(false);
             this.tlpFooter.ResumeLayout(false);
             this.pnlCopyright_Versione.ResumeLayout(false);
             this.pnlCopyright_Versione.PerformLayout();
@@ -771,8 +806,8 @@
         private System.Windows.Forms.Panel pnlDisegno;
         private System.Windows.Forms.Label lblDisegno;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Panel pnlErrori;
-        private System.Windows.Forms.Label lblErrori;
+        private System.Windows.Forms.Panel pnlBarraSotto;
+        private System.Windows.Forms.Label lblErroriWarning;
         private System.Windows.Forms.Panel pnlAzione;
         private System.Windows.Forms.Label lblAzione;
         private System.Windows.Forms.TableLayoutPanel tlpFooter;
@@ -794,6 +829,8 @@
         private System.Windows.Forms.Label lblProd_2T;
         private System.Windows.Forms.Label lblProd_3T;
         private System.Windows.Forms.Label lbl_ProdGiornaliera;
+        private System.Windows.Forms.TableLayoutPanel tlpBarraSotto;
+        private System.Windows.Forms.Button btnReset;
     }
 }
 

@@ -18,7 +18,9 @@ namespace FusoEuro5Japan_Client
 
         string GetProduzioneTurno_string(int prod, int targetProd);
         void SetConfigurazione(IGestoreConfigurazione config);
-        void EseguiSuMotore(Motore motoreLetto, TurnoEnum turno);
+        //void EseguiSuMotore(Motore motoreLetto, TurnoEnum turno);
         bool IsMotoreTarget();
+        void ResettaAzione();
+        void EseguiNessunaAzione();
     }
 }

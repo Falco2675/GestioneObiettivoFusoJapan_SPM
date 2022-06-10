@@ -77,7 +77,7 @@
     <Compile Include="Interfacce\IGestoreTurni.cs" />
     <Compile Include="Gestori\Strategia_abs.cs" />
     <Compile Include="Gestori\Strategia_NonDefinita.cs" />
-    <Compile Include="Gestori\Strategia_TargetTurno.cs" />
+    <Compile Include="Gestori\Strategia_ProduzioneTurno.cs" />
     <Compile Include="Gestori\Strategia_Ogni_N_Pezzi.cs" />
     <Compile Include="Interfacce\IGestoreAzioniDaCompiere.cs" />
     <Compile Include="Helpers\Enums.cs" />

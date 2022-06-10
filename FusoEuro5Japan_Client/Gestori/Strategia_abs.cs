@@ -8,7 +8,6 @@ namespace FusoEuro5Japan_Client
 {
     public abstract class Strategia_abs : IStrategia
     {
-        protected readonly IDataSource _dataSource;
         protected IGestoreConfigurazione _configurazione;
         protected string NESSUNA_AZIONE = "Nessuna azione.";
         protected string AZIONE_DA_SVOLGERE = "EFFETTUARE PROVA A CALDO.";
@@ -16,8 +15,6 @@ namespace FusoEuro5Japan_Client
 
         public abstract StrategiaEnum TipoStrategia { get; }
         public abstract string NomeStrategia { get; }
-        //public abstract string ProduzioneTurno_String { get; }
-        //public abstract string NomeStrategia { get; }
 
         public string AzioneDaCompiere
         {
@@ -35,15 +32,9 @@ namespace FusoEuro5Japan_Client
         public abstract event EventHandler ObiettivoTurnoRaggiuntoEvent;
 
         #region CTOR
-        public Strategia_abs
-            (
-                IDataSource dataSource
-            )
+        public Strategia_abs()
         {
-            _dataSource = dataSource;
         }
-
-
         #endregion
 
         public abstract string GetProduzioneTurno_string(int prod, int targetProd);
@@ -52,16 +43,16 @@ namespace FusoEuro5Japan_Client
             _configurazione = config;
         }
 
-        public void EseguiSuMotore(Motore motoreLetto, TurnoEnum turno)
-        {
-            if (motoreLetto.IsTargetCandidate)
-                EseguiSuMotoreCandidato(motoreLetto, turno);
-            else
-                AzioneDaCompiere = "Nessuna azione da eseguire.";
-
-        }
-        internal abstract void EseguiSuMotoreCandidato(Motore motoreLetto, TurnoEnum turno);
-
         public abstract bool IsMotoreTarget();
+
+        public void ResettaAzione()
+        {
+            AzioneDaCompiere = "";
+        }
+
+        public void EseguiNessunaAzione()
+        {
+            AzioneDaCompiere = NESSUNA_AZIONE;
+        }
     }
 }

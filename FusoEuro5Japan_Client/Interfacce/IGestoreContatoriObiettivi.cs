@@ -8,6 +8,9 @@ namespace FusoEuro5Japan_Client
         int Obiettivo_1T { get; set; }
         int Obiettivo_2T { get; set; }
         int Obiettivo_3T { get; set; }
+        int Obiettivo_Giornaliero { get; set; }
+
+        bool IsObiettivoTurnoRaggiunto { get; }
 
         int Prod_1T { get; set; }
         int Prod_2T { get; set; }
@@ -20,7 +23,7 @@ namespace FusoEuro5Japan_Client
         bool IsTarget_2T_Raggiunto { get; }
         bool IsTarget_3T_Raggiunto { get; }
 
-        bool IsTarget_All_Turni_Raggiunto { get; }
+        bool IsTarget_GiornalieroRaggiunto { get; }
 
 
         #region EVENTI
@@ -38,7 +41,10 @@ namespace FusoEuro5Japan_Client
 
         event EventHandler Target_Prod_1T_RaggiuntoChanged;
         event EventHandler Target_Prod_2T_RaggiuntoChanged;
-        event EventHandler Target_Prod_3T_RaggiuntoChanged; 
+        event EventHandler Target_Prod_3T_RaggiuntoChanged;
+
+        void AggiungiAllaProduzione();
+        void AggiornaObiettivi();
         #endregion
 
     }

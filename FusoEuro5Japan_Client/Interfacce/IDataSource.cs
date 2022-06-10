@@ -11,6 +11,6 @@ namespace FusoEuro5Japan_Client
         void SetContatoreDiComodo(int ogni_N_Pezzi);
         void AggiornaTabellaConfig(Config config);
         void ResettaTurno(int contat_di_comodo);
-        void AggiornaContatori(int contTurno, int ContGiorno);
+        void AggiornaContatori(Config config);
     }
 }

@@ -9,7 +9,6 @@ namespace FusoEuro5Japan_Client
     public class GestoreStrategiaDiProduzione : IGestoreStrategiaDiProduzione
     {
         private IStrategia _strategia;
-        private readonly IDataSource _dataSource;
 
         private StrategiaEnum _strategiaEnum;
         private readonly IGestoreTurni _gestoreTurni;
@@ -17,20 +16,20 @@ namespace FusoEuro5Japan_Client
         public StrategiaEnum StrategiaEnum
         {
             get { return _strategiaEnum; }
-            set
+            private set
             {
                 if (_strategiaEnum == value) return;
                 _strategiaEnum = value;
                 switch (StrategiaEnum)
                 {
                     case StrategiaEnum.Ogni_N_pezzi:
-                        Strategia = new Strategia_Ogni_N_Pezzi(_dataSource);
+                        Strategia = new Strategia_Ogni_N_Pezzi();
                         break;
                     case StrategiaEnum.ProduzioneTurni:
-                        Strategia = new Strategia_TargetTurno(_dataSource);
+                        Strategia = new Strategia_ProduzioneTurno();
                         break;
                     case StrategiaEnum.Non_Definita:
-                        Strategia = new Strategia_NonDefinita(_dataSource);
+                        Strategia = new Strategia_NonDefinita();
                         break;
                     default:
                         break;
@@ -66,11 +65,9 @@ namespace FusoEuro5Japan_Client
         #region CTOR
         public GestoreStrategiaDiProduzione
             (
-                IDataSource dataSource,
                 IGestoreTurni gestoreTurni
             )
         {
-            _dataSource = dataSource;
             _gestoreTurni = gestoreTurni;
             StrategiaEnum = StrategiaEnum.Non_Definita;
             
@@ -102,9 +99,19 @@ namespace FusoEuro5Japan_Client
             return Strategia.GetProduzioneTurno_string(prod_1T, obiettivo_1T);
         }
 
-        public void EseguiSuMotore(Motore motoreLetto, TurnoEnum turno_enum)
+        //public void EseguiSuMotore(Motore motoreLetto, TurnoEnum turno_enum)
+        //{
+        //    Strategia.EseguiSuMotore(motoreLetto, turno_enum);
+        //}
+
+        public void ResettaAzione()
         {
-            Strategia.EseguiSuMotore(motoreLetto, turno_enum);
+            Strategia.ResettaAzione();
+        }
+
+        public void EseguiNessunaAzione()
+        {
+            Strategia.EseguiNessunaAzione();
         }
 
 

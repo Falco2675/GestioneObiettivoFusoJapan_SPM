@@ -90,10 +90,18 @@ namespace FusoEuro5Japan_Client
 
             lblProd_1T.DataBindings.Add("Text", _presenter, "Prod_1T");
             lblProd_1T.DataBindings.Add("ForeColor", _presenter, "ForeColor_Prod_1T");
+            lblProd_1T.DataBindings.Add("BackColor", _presenter, "BackColor_Prod_1T");
+            //lblProd_1T.DataBindings.Add("Font", _presenter, "Font_Prod_1T");
+
             lblProd_2T.DataBindings.Add("Text", _presenter, "Prod_2T");
             lblProd_2T.DataBindings.Add("ForeColor", _presenter, "ForeColor_Prod_2T");
+            lblProd_2T.DataBindings.Add("BackColor", _presenter, "BackColor_Prod_2T");
+            //lblProd_2T.DataBindings.Add("Font", _presenter, "Font_Prod_2T");
+
             lblProd_3T.DataBindings.Add("Text", _presenter, "Prod_3T");
             lblProd_3T.DataBindings.Add("ForeColor", _presenter, "ForeColor_Prod_3T");
+            lblProd_3T.DataBindings.Add("BackColor", _presenter, "BackColor_Prod_3T");
+            //lblProd_3T.DataBindings.Add("Font", _presenter, "Font_Prod_3T");
 
             lbl_ProdGiornaliera.DataBindings.Add("Text", _presenter, "ProduzioneGiornaliera");
             lbl_ProdGiornaliera.DataBindings.Add("ForeColor", _presenter, "ForeColor_Prod_All_Turni");
@@ -101,7 +109,7 @@ namespace FusoEuro5Japan_Client
             lblDataProduzione.DataBindings.Add("Text", _presenter, "TitoloProduzioneGiornaliera");
 
             lblAzione.DataBindings.Add("Text", _presenter, "AzioneDaCompiere_string");
-            lblErrori.DataBindings.Add("Text", _presenter, "Errore_string");
+            lblErroriWarning.DataBindings.Add("Text", _presenter, "Errore_string");
             lblConnessioneDS.DataBindings.Add("BackColor", _presenter, "IsAliveColor");
             lblVersion.DataBindings.Add("Text", _presenter, "Versione");
 
@@ -109,14 +117,10 @@ namespace FusoEuro5Japan_Client
         }
         #endregion
 
-        private void label3_Click(object sender, EventArgs e)
+
+        private void btnReset_Click(object sender, EventArgs e)
         {
-
-        }
-
-        private void label5_Click(object sender, EventArgs e)
-        {
-
+            _presenter.Reset();
         }
     }
 }

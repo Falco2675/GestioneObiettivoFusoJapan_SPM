@@ -6,6 +6,7 @@ namespace FusoEuro5Japan_Client
     {
         string NomeStrategia { get; }
         IStrategia Strategia { get; }
+        StrategiaEnum StrategiaEnum { get; }
         string AzioneDaCompiere { get; }
         bool IsMotoreTarget { get; }
 
@@ -15,6 +16,8 @@ namespace FusoEuro5Japan_Client
 
         void SetStrategia(IGestoreConfigurazione config);
         string GetProduzioneTurno_string(int prod_1T, int obiettivo_1T);
-        void EseguiSuMotore(Motore motoreLetto, TurnoEnum turno_enum);
+        //void EseguiSuMotore(Motore motoreLetto, TurnoEnum turno_enum);
+        void ResettaAzione();
+        void EseguiNessunaAzione();
     }
 }

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Drawing;
+
 namespace FusoEuro5Japan_Client
 {
     public interface IGestoreTurni
@@ -9,5 +11,7 @@ namespace FusoEuro5Japan_Client
         void ControllaTurno();
 
         event EventHandler TurnoChanged;
+
+        bool IsTurno(TurnoEnum primoTurno);
     }
 }
