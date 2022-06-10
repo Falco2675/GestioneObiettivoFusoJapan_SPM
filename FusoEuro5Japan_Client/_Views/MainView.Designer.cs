@@ -48,12 +48,12 @@
             this.label7 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.lblDataProduzione = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblStrategia = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
+            this.lblProd_1T = new System.Windows.Forms.Label();
+            this.lblProd_2T = new System.Windows.Forms.Label();
+            this.lblProd_3T = new System.Windows.Forms.Label();
+            this.lbl_ProdGiornaliera = new System.Windows.Forms.Label();
             this.tlpDatiMotore = new System.Windows.Forms.TableLayoutPanel();
             this.pnlMatricola = new System.Windows.Forms.Panel();
             this.lblMatricola = new System.Windows.Forms.Label();
@@ -307,12 +307,12 @@
             this.tlpGrigliaProduzione.Controls.Add(this.label7, 2, 2);
             this.tlpGrigliaProduzione.Controls.Add(this.label5, 1, 2);
             this.tlpGrigliaProduzione.Controls.Add(this.lblDataProduzione, 0, 1);
-            this.tlpGrigliaProduzione.Controls.Add(this.label1, 0, 0);
+            this.tlpGrigliaProduzione.Controls.Add(this.lblStrategia, 0, 0);
             this.tlpGrigliaProduzione.Controls.Add(this.label3, 0, 2);
-            this.tlpGrigliaProduzione.Controls.Add(this.label2, 0, 3);
-            this.tlpGrigliaProduzione.Controls.Add(this.label10, 1, 3);
-            this.tlpGrigliaProduzione.Controls.Add(this.label11, 2, 3);
-            this.tlpGrigliaProduzione.Controls.Add(this.label12, 3, 3);
+            this.tlpGrigliaProduzione.Controls.Add(this.lblProd_1T, 0, 3);
+            this.tlpGrigliaProduzione.Controls.Add(this.lblProd_2T, 1, 3);
+            this.tlpGrigliaProduzione.Controls.Add(this.lblProd_3T, 2, 3);
+            this.tlpGrigliaProduzione.Controls.Add(this.lbl_ProdGiornaliera, 3, 3);
             this.tlpGrigliaProduzione.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlpGrigliaProduzione.Location = new System.Drawing.Point(0, 0);
             this.tlpGrigliaProduzione.Name = "tlpGrigliaProduzione";
@@ -374,17 +374,17 @@
             this.lblDataProduzione.Text = "09/06/2022";
             this.lblDataProduzione.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label1
+            // lblStrategia
             // 
-            this.label1.AutoSize = true;
-            this.tlpGrigliaProduzione.SetColumnSpan(this.label1, 5);
-            this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(4, 1);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(402, 40);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Strategia: Produzione Turni";
+            this.lblStrategia.AutoSize = true;
+            this.tlpGrigliaProduzione.SetColumnSpan(this.lblStrategia, 5);
+            this.lblStrategia.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblStrategia.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblStrategia.Location = new System.Drawing.Point(4, 1);
+            this.lblStrategia.Name = "lblStrategia";
+            this.lblStrategia.Size = new System.Drawing.Size(402, 40);
+            this.lblStrategia.TabIndex = 0;
+            this.lblStrategia.Text = "Strategia: Produzione Turni";
             // 
             // label3
             // 
@@ -399,53 +399,53 @@
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
-            // label2
+            // lblProd_1T
             // 
-            this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.label2.Location = new System.Drawing.Point(4, 114);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(95, 79);
-            this.label2.TabIndex = 6;
-            this.label2.Text = "0";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblProd_1T.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblProd_1T.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblProd_1T.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.lblProd_1T.Location = new System.Drawing.Point(4, 114);
+            this.lblProd_1T.Name = "lblProd_1T";
+            this.lblProd_1T.Size = new System.Drawing.Size(95, 79);
+            this.lblProd_1T.TabIndex = 6;
+            this.lblProd_1T.Text = "0";
+            this.lblProd_1T.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label10
+            // lblProd_2T
             // 
-            this.label10.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.label10.Location = new System.Drawing.Point(106, 114);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(95, 79);
-            this.label10.TabIndex = 6;
-            this.label10.Text = "0";
-            this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblProd_2T.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblProd_2T.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblProd_2T.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.lblProd_2T.Location = new System.Drawing.Point(106, 114);
+            this.lblProd_2T.Name = "lblProd_2T";
+            this.lblProd_2T.Size = new System.Drawing.Size(95, 79);
+            this.lblProd_2T.TabIndex = 6;
+            this.lblProd_2T.Text = "0";
+            this.lblProd_2T.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label11
+            // lblProd_3T
             // 
-            this.label11.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.label11.Location = new System.Drawing.Point(208, 114);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(95, 79);
-            this.label11.TabIndex = 6;
-            this.label11.Text = "0";
-            this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblProd_3T.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblProd_3T.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblProd_3T.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.lblProd_3T.Location = new System.Drawing.Point(208, 114);
+            this.lblProd_3T.Name = "lblProd_3T";
+            this.lblProd_3T.Size = new System.Drawing.Size(95, 79);
+            this.lblProd_3T.TabIndex = 6;
+            this.lblProd_3T.Text = "0";
+            this.lblProd_3T.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label12
+            // lbl_ProdGiornaliera
             // 
-            this.label12.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.label12.Location = new System.Drawing.Point(310, 114);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(96, 79);
-            this.label12.TabIndex = 6;
-            this.label12.Text = "0";
-            this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbl_ProdGiornaliera.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lbl_ProdGiornaliera.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_ProdGiornaliera.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.lbl_ProdGiornaliera.Location = new System.Drawing.Point(310, 114);
+            this.lbl_ProdGiornaliera.Name = "lbl_ProdGiornaliera";
+            this.lbl_ProdGiornaliera.Size = new System.Drawing.Size(96, 79);
+            this.lbl_ProdGiornaliera.TabIndex = 6;
+            this.lbl_ProdGiornaliera.Text = "0";
+            this.lbl_ProdGiornaliera.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // tlpDatiMotore
             // 
@@ -788,12 +788,12 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label lblDataProduzione;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblStrategia;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label lblProd_1T;
+        private System.Windows.Forms.Label lblProd_2T;
+        private System.Windows.Forms.Label lblProd_3T;
+        private System.Windows.Forms.Label lbl_ProdGiornaliera;
     }
 }
 

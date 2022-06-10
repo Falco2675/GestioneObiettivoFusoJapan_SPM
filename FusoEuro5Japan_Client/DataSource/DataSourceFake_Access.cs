@@ -69,7 +69,6 @@ namespace FusoEuro5Japan_Client
 
             }
         }
-
         public void InserisciDisegni(string disegnoMotore)
         {
             try
@@ -100,7 +99,6 @@ namespace FusoEuro5Japan_Client
                 throw new Exception();
             }
         }
-
         public bool IsConnessioneDS_Ok()
         {
 
@@ -143,10 +141,19 @@ namespace FusoEuro5Japan_Client
                             {
                                 tabella.Load(dr);
                                 config.Ogni_N_Pezzi = tabella.Rows[0].Field<int>("OGNI_N_PEZZI");
-                                config.N_pezzi_definito = tabella.Rows[0].Field<int>("N_PEZZI_A_TURNO");
                                 config.Contatore_di_comodo = tabella.Rows[0].Field<int>("CONTATORE_DI_COMODO");
-                                config.Contatore_del_turno = tabella.Rows[0].Field<int>("CONTATORE_TURNO");
+
+                                config.Obiettivo_1T = tabella.Rows[0].Field<int>("OBIETTIVO_1T");
+                                config.Obiettivo_2T = tabella.Rows[0].Field<int>("OBIETTIVO_2T");
+                                config.Obiettivo_3T = tabella.Rows[0].Field<int>("OBIETTIVO_3T");
+
+                                config.Prod_1T = tabella.Rows[0].Field<int>("PROD_1T");
+                                config.Prod_2T = tabella.Rows[0].Field<int>("PROD_2T");
+                                config.Prod_3T = tabella.Rows[0].Field<int>("PROD_3T");
+                                
                                 config.Contatore_del_giorno = tabella.Rows[0].Field<int>("CONTATORE_GIORNO");
+
+                                config.Prod_Ieri = tabella.Rows[0].Field<string>("PROD_IERI");
 
                             }
                         }
@@ -226,7 +233,7 @@ namespace FusoEuro5Japan_Client
             }
         }
 
-        public void SettaPerMotoreTarget(int cont_di_comodo, int cont_turno, int cont_giorno)
+        public void AggiornaTabellaConfig(Config config)
         {
             try
             {
@@ -235,16 +242,32 @@ namespace FusoEuro5Japan_Client
 
                     string query = @"UPDATE OBIETTIVO_JAPAN_SPM_CONFIG
                                     SET 
-                                    (CONTATORE_DI_COMODO = [cont_di_Comodo],
-                                        CONTATORE_TURNO = [contTurno],
-                                        CONTATORE_GIORNO = [contGiorno]) ";
+                                        Ogni_N_pezzi = [ogni_N_Pezzo],
+                                        CONTATORE_DI_COMODO = [cont_di_Comodo],
+                                        CONTATORE_GIORNO = [contGiorno], 
+                                        OBIETTIVO_1T = [obiettivo_1T],
+                                        OBIETTIVO_2T = [obiettivo_2T],
+                                        OBIETTIVO_3T = [obiettivo_3T],
+                                        PROD_1T = [prod_1T],
+                                        PROD_2T = [prod_2T],
+                                        PROD_3T = [prod_3T],
+                                        PROD_IERI = [prod_ieri]
+                                        ";
+
 
                     conn.Open();
                     using (OleDbCommand cmd = new OleDbCommand(query, conn))
                     {
-                        cmd.Parameters.Add("@cont_di_Comodo", OleDbType.Integer).Value = cont_di_comodo;
-                        cmd.Parameters.Add("@contTurno", OleDbType.Integer).Value = cont_turno;
-                        cmd.Parameters.Add("@contGiorno", OleDbType.Integer).Value = cont_giorno;
+                        cmd.Parameters.Add("@ogni_N_Pezzo", OleDbType.Integer).Value = config.Ogni_N_Pezzi;
+                        cmd.Parameters.Add("@cont_di_Comodo", OleDbType.Integer).Value = config.Contatore_di_comodo;
+                        cmd.Parameters.Add("@contGiorno", OleDbType.Integer).Value = config.Contatore_del_giorno;
+                        cmd.Parameters.Add("@obiettivo_1T", OleDbType.Integer).Value = config.Obiettivo_1T;
+                        cmd.Parameters.Add("@obiettivo_2T", OleDbType.Integer).Value = config.Obiettivo_2T;
+                        cmd.Parameters.Add("@obiettivo_3T", OleDbType.Integer).Value = config.Obiettivo_3T;
+                        cmd.Parameters.Add("@prod_1T", OleDbType.Integer).Value = config.Prod_1T;
+                        cmd.Parameters.Add("@prod_2T", OleDbType.Integer).Value = config.Prod_2T;
+                        cmd.Parameters.Add("@prod_3T", OleDbType.Integer).Value = config.Prod_3T;
+                        cmd.Parameters.Add("@prod_ieri", OleDbType.VarChar).Value = config.Prod_Ieri;
 
                         cmd.ExecuteNonQuery();
                     }

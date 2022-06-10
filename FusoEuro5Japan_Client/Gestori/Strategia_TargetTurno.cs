@@ -10,18 +10,16 @@ namespace FusoEuro5Japan_Client
     {
 
         public override StrategiaEnum TipoStrategia => StrategiaEnum.ProduzioneTurni;
-        public override string Strategia_String => "Produzione";
+        public override string NomeStrategia => "Produzione Turno";
             
-        public override string Produzione_String => $"{_gestoreConfigurazione.Configurazione.Contatore_del_turno}/{_gestoreConfigurazione.Configurazione.N_pezzi_definito}";
+        //public override string ProduzioneTurno_String => $"{_configurazione.Configurazione.Contatore_del_turno}/{_configurazione.Configurazione.N_pezzi_definito}";
 
-        public override string NomeStrategia => "Produzione turno";
 
         #region CTOR
         public Strategia_TargetTurno
            (
-               IDataSource dataSource,
-               IGestoreConfigurazione gestoreConfigurazione
-           ) : base(dataSource, gestoreConfigurazione)
+               IDataSource dataSource
+           ) : base(dataSource)
         {
             SottoscriviEventi();
         }
@@ -36,16 +34,38 @@ namespace FusoEuro5Japan_Client
         }
         #endregion
 
-
-
-        internal override void EseguiSuMotoreCandidato(Motore motoreLetto)
+        public override string GetProduzioneTurno_string(int prod, int targetProd)
         {
-            var config = _dataSource.GetConfigurazione();
-            var contTurno = config.Contatore_del_turno;
-            var contGiorno = config.Contatore_del_giorno;
-            var obiettivoTurno = config.N_pezzi_definito;
+            return $"{prod}/{targetProd}";
+        }
 
-            if (contTurno > obiettivoTurno)
+        internal override void EseguiSuMotoreCandidato(Motore motoreLetto, TurnoEnum turno)
+        {
+            int prodT = 0;
+            int obiettivoTurno = 0;
+            switch (turno)
+            {
+                case TurnoEnum.PrimoTurno:
+                    prodT = _configurazione.Configurazione.Prod_1T;
+                    obiettivoTurno = _configurazione.Configurazione.Obiettivo_1T;
+                    break;
+                case TurnoEnum.SecondoTurno:
+                    prodT = _configurazione.Configurazione.Prod_2T;
+                    obiettivoTurno = _configurazione.Configurazione.Obiettivo_2T;
+                    break;
+                case TurnoEnum.TerzoTurno:
+                    prodT = _configurazione.Configurazione.Prod_3T;
+                    obiettivoTurno = _configurazione.Configurazione.Obiettivo_3T;
+                    break;
+                default:
+                    break;
+            }
+
+            //var config = _dataSource.GetConfigurazione();
+            var contGiorno = _configurazione.Configurazione.Contatore_del_giorno;
+            //var obiettivoTurno = config.N_pezzi_definito;
+
+            if (prodT > obiettivoTurno)
             {
                 //Si è raggiunto l'obiettivo del turno
                 //_dataSource.SettaPerMotoreTarget(contTurno - 1, config.Contatore_del_turno + 1, config.Contatore_del_giorno + 1);
@@ -54,17 +74,34 @@ namespace FusoEuro5Japan_Client
                 return;
             }
             
-            if (contTurno <= obiettivoTurno)
+            if (prodT <= obiettivoTurno)
             {
-                if(contTurno == obiettivoTurno)
+                if(prodT == obiettivoTurno)
                 {
                     ObiettivoTurnoRaggiuntoEvent?.Invoke(this, null);
                 }
 
-                _dataSource.AggiornaContatori(contTurno + 1, contGiorno + 1);  // Aggiorno i contatori
+                _dataSource.AggiornaContatori(prodT + 1, contGiorno + 1);  // Aggiorno i contatori
                 AzioneDaCompiere = AZIONE_DA_SVOLGERE;
                 return;
             }
+        }
+
+        public override bool IsMotoreTarget()
+        {
+            switch (_configurazione.TurnoCorrente)
+            {
+                case TurnoEnum.PrimoTurno:
+                    return _configurazione.Configurazione.Prod_1T <= _configurazione.Configurazione.Obiettivo_1T;
+
+                case TurnoEnum.SecondoTurno:
+                    return _configurazione.Configurazione.Prod_2T <= _configurazione.Configurazione.Obiettivo_2T;
+
+                case TurnoEnum.TerzoTurno:
+                    return _configurazione.Configurazione.Prod_3T <= _configurazione.Configurazione.Obiettivo_3T;
+            }
+
+            return false;
         }
     }
 }

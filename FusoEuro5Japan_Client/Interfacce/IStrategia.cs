@@ -9,13 +9,16 @@ namespace FusoEuro5Japan_Client
     public interface IStrategia
     {
         StrategiaEnum TipoStrategia { get; }
-        string Strategia_String { get; }
-        string Produzione_String { get; }
+        string NomeStrategia { get; }
+        //string ProduzioneTurno_String { get; }
         string AzioneDaCompiere { get; }
 
         event EventHandler<string> AzioneDaCompiereChanged;
         event EventHandler ObiettivoTurnoRaggiuntoEvent;
 
-        void EseguiSuMotore(Motore motoreLetto);
+        string GetProduzioneTurno_string(int prod, int targetProd);
+        void SetConfigurazione(IGestoreConfigurazione config);
+        void EseguiSuMotore(Motore motoreLetto, TurnoEnum turno);
+        bool IsMotoreTarget();
     }
 }

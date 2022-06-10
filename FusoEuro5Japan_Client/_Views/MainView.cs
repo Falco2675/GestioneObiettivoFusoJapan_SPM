@@ -87,16 +87,25 @@ namespace FusoEuro5Japan_Client
             lblCodBasamento.DataBindings.Add("Text", _presenter, "MotoreLetto.CodBasamento");
 
             lblStrategia.DataBindings.Add("Text", _presenter, "Strategia_string");
-            lblProduzione.DataBindings.Add("Text", _presenter, "ProduzioneTurno");
+
+            lblProd_1T.DataBindings.Add("Text", _presenter, "Prod_1T");
+            lblProd_1T.DataBindings.Add("ForeColor", _presenter, "ForeColor_Prod_1T");
+            lblProd_2T.DataBindings.Add("Text", _presenter, "Prod_2T");
+            lblProd_2T.DataBindings.Add("ForeColor", _presenter, "ForeColor_Prod_2T");
+            lblProd_3T.DataBindings.Add("Text", _presenter, "Prod_3T");
+            lblProd_3T.DataBindings.Add("ForeColor", _presenter, "ForeColor_Prod_3T");
+
+            lbl_ProdGiornaliera.DataBindings.Add("Text", _presenter, "ProduzioneGiornaliera");
+            lbl_ProdGiornaliera.DataBindings.Add("ForeColor", _presenter, "ForeColor_Prod_All_Turni");
+
             lblDataProduzione.DataBindings.Add("Text", _presenter, "TitoloProduzioneGiornaliera");
-            lblProduzioneGiornaliera.DataBindings.Add("Text", _presenter, "ProduzioneGiornaliera");
 
             lblAzione.DataBindings.Add("Text", _presenter, "AzioneDaCompiere_string");
             lblErrori.DataBindings.Add("Text", _presenter, "Errore_string");
             lblConnessioneDS.DataBindings.Add("BackColor", _presenter, "IsAliveColor");
             lblVersion.DataBindings.Add("Text", _presenter, "Versione");
 
-            tlpProduzioneTurno.DataBindings.Add("BackColor", _presenter, "BackColor_ProdTurno");
+            //tlpProduzioneTurno.DataBindings.Add("BackColor", _presenter, "BackColor_ProdTurno");
         }
         #endregion
 

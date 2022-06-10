@@ -23,16 +23,14 @@ namespace FusoEuro5Japan_Client
         #region PROPRIETA'
 
         private TurnoEnum _turno;
-        private readonly IGestoreConfigurazione _gestoreConfigurazione;
 
-        public TurnoEnum Turno
+        public TurnoEnum Turno_enum
         {
             get { return _turno; }
             private set
             {
                 if (_turno == value) return;
                 _turno = value;
-                _gestoreConfigurazione.ResettaTurno();
                 TurnoChanged?.Invoke(this, null);
             }
         }
@@ -43,7 +41,7 @@ namespace FusoEuro5Japan_Client
             {
                 string _turno="";
 
-                switch (Turno)
+                switch (Turno_enum)
                 {
                     case TurnoEnum.PrimoTurno:
                         _turno = "1° Turno";
@@ -60,6 +58,7 @@ namespace FusoEuro5Japan_Client
             }
         }
 
+        
         #endregion
 
 
@@ -69,13 +68,8 @@ namespace FusoEuro5Japan_Client
 
 
         #region CTOR
-        public GestoreTurni
-            (
-                IGestoreConfigurazione gestoreConfigurazione
-            )
+        public GestoreTurni ()
         {
-            _gestoreConfigurazione = gestoreConfigurazione;
-
         }
         #endregion
 
@@ -86,15 +80,15 @@ namespace FusoEuro5Japan_Client
 
             if(orario.TimeOfDay>=INIZIOPRIMOTURNO && orario.TimeOfDay <= FINEPRIMOTURNO)
             {
-                Turno = TurnoEnum.PrimoTurno;
+                Turno_enum = TurnoEnum.PrimoTurno;
                 return;
             }
             if (orario.TimeOfDay >= INIZIOSECONDOTURNO && orario.TimeOfDay <= FINESECONDOTURNO)
             {
-                Turno = TurnoEnum.SecondoTurno;
+                Turno_enum = TurnoEnum.SecondoTurno;
                 return;
             }
-            Turno = TurnoEnum.TerzoTurno;
+            Turno_enum = TurnoEnum.TerzoTurno;
         }
 
         #endregion

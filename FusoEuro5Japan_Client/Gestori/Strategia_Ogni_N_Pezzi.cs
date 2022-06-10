@@ -11,10 +11,10 @@ namespace FusoEuro5Japan_Client
 
         #region PROPRIETA'
         public override StrategiaEnum TipoStrategia => StrategiaEnum.Ogni_N_pezzi;
-        public override string Strategia_String => $"1 Ogni {_gestoreConfigurazione.Configurazione.Ogni_N_Pezzi} motori";
-        public override string Produzione_String => $"{_gestoreConfigurazione.Configurazione.Contatore_del_turno}";
+        public override string NomeStrategia => $"1 Ogni {_configurazione.Configurazione.Ogni_N_Pezzi.ToString()} motori";
+        //public override string ProduzioneTurno_String => $"{_configurazione.Configurazione.Contatore_del_turno}";
 
-        public override string NomeStrategia => $"1 Ogni {_gestoreConfigurazione.Configurazione.Ogni_N_Pezzi} motori";
+        //public override string NomeStrategia => $"1 Ogni {_gestoreConfigurazione.Configurazione.Ogni_N_Pezzi} motori";
 
         #endregion
 
@@ -23,22 +23,41 @@ namespace FusoEuro5Japan_Client
         #region CTOR
         public Strategia_Ogni_N_Pezzi
            (
-               IDataSource dataSource,
-               IGestoreConfigurazione gestoreConfigurazione
-           ) : base(dataSource, gestoreConfigurazione)
+               IDataSource dataSource
+           ) : base(dataSource)
         {
 
         }
         #endregion
 
-        internal override void EseguiSuMotoreCandidato(Motore motoreLetto)
+        public override string GetProduzioneTurno_string(int prod, int targetProd)
         {
-            var config = _dataSource.GetConfigurazione();
+            return $"{prod.ToString()}";
+        }
+        internal override void EseguiSuMotoreCandidato(Motore motoreLetto, TurnoEnum turno)
+        {
+            var config = _configurazione.Configurazione;
+
             var cont_di_Comodo = config.Contatore_di_comodo;
             if (cont_di_Comodo == config.Ogni_N_Pezzi)  
             {
                 //Questo è un motore obiettivo, che dovrà quindi andare alle Prove a Caldo.
-                _dataSource.SettaPerMotoreTarget(cont_di_Comodo - 1, config.Contatore_del_turno + 1, config.Contatore_del_giorno + 1);
+                _dataSource.AggiornaTabellaConfig(config);
+                //switch (turno)
+                //{
+                    
+                //    case TurnoEnum.PrimoTurno:
+                //        _dataSource.AggiornaTabellaConfig(cont_di_Comodo - 1, config.Prod_1T + 1, config.Contatore_del_giorno + 1);
+                //        break;
+                //    case TurnoEnum.SecondoTurno:
+                //        _dataSource.AggiornaTabellaConfig(cont_di_Comodo - 1, config.Prod_2T + 1, config.Contatore_del_giorno + 1);
+                //        break;
+                //    case TurnoEnum.TerzoTurno:
+                //        _dataSource.AggiornaTabellaConfig(cont_di_Comodo - 1, config.Prod_3T + 1, config.Contatore_del_giorno + 1);
+                //        break;
+                //    default:
+                //        break;
+                //}
                 AzioneDaCompiere = AZIONE_DA_SVOLGERE;
                 return;
             }
@@ -55,6 +74,17 @@ namespace FusoEuro5Japan_Client
                 return;
             }
 
+        }
+
+        public override bool IsMotoreTarget()
+        {
+            if(_configurazione.Configurazione.Contatore_di_comodo == _configurazione.Configurazione.Ogni_N_Pezzi)
+            {
+                _configurazione.Configurazione.Contatore_di_comodo -= 1;
+                return true;
+
+            }
+            return false;
         }
 
     }

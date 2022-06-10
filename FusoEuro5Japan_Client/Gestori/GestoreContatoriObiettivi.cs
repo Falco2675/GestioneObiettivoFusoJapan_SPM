@@ -17,7 +17,7 @@ namespace FusoEuro5Japan_Client
         private int _prod_1T;
         private int _prod_2T;
         private int _prod_3T;
-        private int _prod_All_Turni;
+        private int _contatore_del_giorno;
         private string _prod_Ieri;
 
         private bool _isTarget_1T_Raggiunto;
@@ -77,11 +77,13 @@ namespace FusoEuro5Japan_Client
             set
             {
                 if (_prod_1T == value) return;
+                if (IsTarget_All_Turni_Raggiunto || IsTarget_1T_Raggiunto) return;
                 _prod_1T = value;
                 Prod_1TChanged?.Invoke(this, null);
                 ControllaTargetGiorno();
                 if(_gestoreStrategiaDiProduzione.Strategia.TipoStrategia == StrategiaEnum.ProduzioneTurni)
                     IsTarget_1T_Raggiunto = _prod_1T >= Obiettivo_1T;
+
 
             }
         }
@@ -91,6 +93,7 @@ namespace FusoEuro5Japan_Client
             set
             {
                 if (_prod_2T == value) return;
+                if (IsTarget_All_Turni_Raggiunto || IsTarget_2T_Raggiunto) return;
                 _prod_2T = value;
                 Prod_2TChanged?.Invoke(this, null);
                 ControllaTargetGiorno();
@@ -104,6 +107,7 @@ namespace FusoEuro5Japan_Client
             set
             {
                 if (_prod_3T == value) return;
+                if (IsTarget_All_Turni_Raggiunto || IsTarget_1T_Raggiunto) return;
                 _prod_3T = value;
                 Prod_3TChanged?.Invoke(this, null);
                 ControllaTargetGiorno();
@@ -153,13 +157,13 @@ namespace FusoEuro5Japan_Client
             }
         }
 
-        public int Prod_All_Turni
+        public int Contatore_del_giorno
         {
-            get { return _prod_All_Turni; }
+            get { return _contatore_del_giorno; }
             set
             {
-                if (_prod_All_Turni == value) return;
-                _prod_All_Turni = value;
+                if (_contatore_del_giorno == value) return;
+                _contatore_del_giorno = value;
                 ProduzioneGiornalieraChanged?.Invoke(this, null);
             }
         }
@@ -176,7 +180,7 @@ namespace FusoEuro5Japan_Client
 
         #endregion
 
-        #region Eventi
+        #region EVENTI
         public event EventHandler Prod_1TChanged;
         public event EventHandler Prod_2TChanged;
         public event EventHandler Prod_3TChanged;
@@ -195,13 +199,15 @@ namespace FusoEuro5Japan_Client
         public event EventHandler ProduzioniIeriChanged;
         #endregion
 
+        #region CTOR
         public GestoreContatoriObiettivi
             (
                 IGestoreStrategiaDiProduzione gestoreStrategiaDiProduzione
             )
         {
             _gestoreStrategiaDiProduzione = gestoreStrategiaDiProduzione;
-        }
+        } 
+        #endregion
 
 
         #region METODI PRIVATI
@@ -209,8 +215,7 @@ namespace FusoEuro5Japan_Client
         {
             if (_gestoreStrategiaDiProduzione.Strategia.TipoStrategia == StrategiaEnum.Non_Definita) return;
 
-            if (Obiettivo_All_Turni == Prod_1T + Prod_2T + Prod_3T)
-                TargetProduzGiornalieraRaggiuntoChanged?.Invoke(this, null);
+            IsTarget_All_Turni_Raggiunto = Obiettivo_All_Turni == Prod_1T + Prod_2T + Prod_3T;
         }
 
         #endregion
