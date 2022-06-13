@@ -69,56 +69,6 @@ namespace FusoEuro5Japan_Client
 
             }
         }
-        public void InserisciDisegni(string disegnoMotore)
-        {
-            try
-            {
-                using (OleDbConnection conn = new OleDbConnection(connString))
-                {
-
-                    string query = @"insert into OBIETTIVO_JAPAN_SPM_DISEGNI (disegno) 
-                                    values
-                                    ([disegno])";
-
-                    conn.Open();
-                    using (OleDbCommand cmd = new OleDbCommand(query, conn))
-                    {
-                        cmd.Parameters.Add("@disegno", OleDbType.Char, 15).Value = disegnoMotore.Trim();
-
-                        cmd.ExecuteNonQuery();
-
-                    }
-                }
-            }
-            catch (Exception e)
-            {
-                if (e.Message.Contains("ORA-00001"))
-                {
-                    throw new Exception("Disegno già registrato.");
-                }
-                throw new Exception();
-            }
-        }
-        public bool IsConnessioneDS_Ok()
-        {
-
-            bool output = false;
-            try
-            {
-                using (OleDbConnection conn = new OleDbConnection(connString))
-                {
-                    conn.Open();
-                    output = true;
-                }
-            }
-            catch (Exception)
-            {
-
-                output = false;
-            }
-
-            return output;
-        }
         public Config GetConfigurazione()
         {
             Config config = new FusoEuro5Japan_Client.Config();
@@ -146,6 +96,7 @@ namespace FusoEuro5Japan_Client
                                 config.Obiettivo_1T = tabella.Rows[0].Field<int>("OBIETTIVO_1T");
                                 config.Obiettivo_2T = tabella.Rows[0].Field<int>("OBIETTIVO_2T");
                                 config.Obiettivo_3T = tabella.Rows[0].Field<int>("OBIETTIVO_3T");
+                                config.Obiettivo_Giornaliero = tabella.Rows[0].Field<int>("OBIETTIVO_GIORNALIERO");
 
                                 config.Prod_1T = tabella.Rows[0].Field<int>("PROD_1T");
                                 config.Prod_2T = tabella.Rows[0].Field<int>("PROD_2T");
@@ -288,9 +239,10 @@ namespace FusoEuro5Japan_Client
 
                     string query = @"UPDATE OBIETTIVO_JAPAN_SPM_CONFIG
                                     SET 
-                                    (CONTATORE_DI_COMODO = [cont_di_Comodo],
+                                        CONTATORE_DI_COMODO = [cont_di_Comodo],
                                         CONTATORE_TURNO = 0,
-                                        CONTATORE_GIORNO = 0) ";
+                                        CONTATORE_GIORNO = 0
+                                    ";
 
                     conn.Open();
                     using (OleDbCommand cmd = new OleDbCommand(query, conn))
@@ -307,7 +259,7 @@ namespace FusoEuro5Japan_Client
             }
         }
 
-        public void AggiornaContatori(int contTurno, int ContGiorno)
+        public void AggiornaContatori(Config config)
         {
             try
             {
@@ -316,15 +268,19 @@ namespace FusoEuro5Japan_Client
 
                     string query = @"UPDATE OBIETTIVO_JAPAN_SPM_CONFIG
                                     SET 
-                                        CONTATORE_TURNO = [contTurno],
+                                        PROD_1T = [prod_1T],
+                                        PROD_2T = [prod_2T],
+                                        PROD_3T = [prod_3T],
                                         CONTATORE_GIORNO = [contGiorno]
                                      ";
 
                     conn.Open();
                     using (OleDbCommand cmd = new OleDbCommand(query, conn))
                     {
-                        cmd.Parameters.Add("@contTurno", OleDbType.Integer).Value = contTurno;
-                        cmd.Parameters.Add("@contGiorno", OleDbType.Integer).Value = ContGiorno;
+                        cmd.Parameters.Add("@prod_1T", OleDbType.Integer).Value = config.Prod_1T;
+                        cmd.Parameters.Add("@prod_2T", OleDbType.Integer).Value = config.Prod_2T;
+                        cmd.Parameters.Add("@prod_3T", OleDbType.Integer).Value = config.Prod_3T;
+                        cmd.Parameters.Add("@contGiorno", OleDbType.Integer).Value = config.Contatore_del_giorno;
 
                         cmd.ExecuteNonQuery();
 
@@ -337,9 +293,119 @@ namespace FusoEuro5Japan_Client
             }
         }
 
-        public void AggiornaContatori(Config config)
+        public void SetConfig_ProduzioneFissa(int prod_1T, int prod_2T, int prod_3T)
         {
-            
+            try
+            {
+                using (OleDbConnection conn = new OleDbConnection(connString))
+                {
+
+                    string query = @"UPDATE OBIETTIVO_JAPAN_SPM_CONFIG
+                                    SET 
+                                        OBIETTIVO_1T = :prod_1T,
+                                        OBIETTIVO_2T = :prod_2T,
+                                        OBIETTIVO_3T = :prod_3T,
+                                        Ogni_N_pezzi = 0,
+                                        Contatore_di_comodo = 0
+                                     ";
+
+                    conn.Open();
+                    using (OleDbCommand cmd = new OleDbCommand(query, conn))
+                    {
+                        cmd.Parameters.Add("@prod_1T", OleDbType.Integer).Value = prod_1T;
+                        cmd.Parameters.Add("@prod_2T", OleDbType.Integer).Value = prod_2T;
+                        cmd.Parameters.Add("@prod_3T", OleDbType.Integer).Value = prod_3T;
+
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Errore DB!");
+            }
         }
+        public void SetConfig_1_Ogni_N_Pezzi(int N_Pezzi)
+        {
+            try
+            {
+                using (OleDbConnection conn = new OleDbConnection(connString))
+                {
+
+                    string query = @"UPDATE OBIETTIVO_JAPAN_SPM_CONFIG
+                                    SET 
+                                        OBIETTIVO_1T = 0,
+                                        OBIETTIVO_2T = 0,
+                                        OBIETTIVO_3T = 0,
+                                        Ogni_N_pezzi = :n_pezzi,
+                                        Contatore_di_comodo = :n_pezzi
+                                     ";
+
+                    conn.Open();
+                    using (OleDbCommand cmd = new OleDbCommand(query, conn))
+                    {
+                        cmd.Parameters.Add("@n_pezzi", OleDbType.Integer).Value = N_Pezzi;
+
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Errore DB!");
+            }
+        }
+        public void InserisciDisegni(string disegnoMotore)
+        {
+            try
+            {
+                using (OleDbConnection conn = new OleDbConnection(connString))
+                {
+
+                    string query = @"insert into OBIETTIVO_JAPAN_SPM_DISEGNI (disegno) 
+                                    values
+                                    ([disegno])";
+
+                    conn.Open();
+                    using (OleDbCommand cmd = new OleDbCommand(query, conn))
+                    {
+                        cmd.Parameters.Add("@disegno", OleDbType.Char, 15).Value = disegnoMotore.Trim();
+
+                        cmd.ExecuteNonQuery();
+
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                if (e.Message.Contains("ORA-00001"))
+                {
+                    throw new Exception("Disegno già registrato.");
+                }
+                throw new Exception();
+            }
+        }
+        public bool IsConnessioneDS_Ok()
+        {
+
+            bool output = false;
+            try
+            {
+                using (OleDbConnection conn = new OleDbConnection(connString))
+                {
+                    conn.Open();
+                    output = true;
+                }
+            }
+            catch (Exception)
+            {
+
+                output = false;
+            }
+
+            return output;
+        }
+
+
     }
 }

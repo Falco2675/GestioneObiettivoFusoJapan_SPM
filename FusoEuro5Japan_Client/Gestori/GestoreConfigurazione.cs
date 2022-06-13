@@ -18,7 +18,9 @@ namespace FusoEuro5Japan_Client
         #region PROPRIETA'
         public string ExceptionDbConfigurazione { get; private set; }
         public int IdApp => 2;
-        public StrategiaEnum StrategiaAdottata { get; private set; }
+        public StrategiaEnum StrategiaAdottata => _gestoreStrategiaDiProduzione.StrategiaEnum;
+
+
         public TurnoEnum TurnoCorrente => _gestoreTurni.Turno_enum;
         public bool IsObiettivoTurnoRaggiunto => _gestoreContatoriObiettivi.IsObiettivoTurnoRaggiunto;
 
@@ -136,9 +138,6 @@ namespace FusoEuro5Japan_Client
             _dataSource.AggiornaContatori(_configurazione);
         }
 
-
-
-
-        #endregion
+       #endregion
     }
 }

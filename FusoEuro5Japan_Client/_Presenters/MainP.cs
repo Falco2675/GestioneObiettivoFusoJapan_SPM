@@ -48,6 +48,7 @@ namespace FusoEuro5Japan_Client
         private TipoDatoRicevuto _tipoDatoRicevuto;
 
         private System.Timers.Timer _timeShowMessage;
+        private readonly IInserimentoDisegniP _inserimentoDisegni;
 
         //private readonly IValidatoreDisegni _validatoreDisegni;
 
@@ -123,7 +124,7 @@ namespace FusoEuro5Japan_Client
                IGestoreConvalidaDatoRicevuto gestoreConvalidaDatoRicevuto,
                IGestoreContatoriObiettivi gestoreContatoreObiettivi,
                IGestoreStrategiaDiProduzione gestoreStrategiaDiProduzione,
-               //IGestoreAzioniDaCompiere gestoreAzioniDaCompiere,
+               IInserimentoDisegniP inserimentoDisegni,
                ILoginP loginP,
                IGestoreTurni gestoreTurni
             )
@@ -136,7 +137,7 @@ namespace FusoEuro5Japan_Client
             _gestoreStrategiaDiProduzione = gestoreStrategiaDiProduzione;
             _loginP = loginP;
             _gestoreTurni = gestoreTurni;
-            //_strategia = new Strategia_NonDefinita(_dataSource, _gestoreConfigurazione);
+            _inserimentoDisegni = inserimentoDisegni;
             MotoreLetto = new Motore();
 
             _view.SetPresenter(this);
@@ -241,7 +242,8 @@ namespace FusoEuro5Japan_Client
         }
         private void OnAvviaStrumentiEvent(object sender, EventArgs e)
         {
-            _loginP.ShowView();
+            //_loginP.ShowView();
+            _inserimentoDisegni.ShowView();
         }
         private void OnTurnoChanged(object sender, EventArgs e)
         {

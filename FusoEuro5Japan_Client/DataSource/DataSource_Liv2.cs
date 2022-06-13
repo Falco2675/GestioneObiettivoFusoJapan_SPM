@@ -69,56 +69,6 @@ namespace FusoEuro5Japan_Client
 
             }
         }
-        public void InserisciDisegni(string disegnoMotore)
-        {
-            try
-            {
-                using (OdbcConnection conn = new OdbcConnection(connString))
-                {
-
-                    string query = @"insert into OBIETTIVO_JAPAN_SPM_DISEGNI (disegno) 
-                                    values
-                                    (:disegno)";
-
-                    conn.Open();
-                    using (OdbcCommand cmd = new OdbcCommand(query, conn))
-                    {
-                        cmd.Parameters.Add("@disegno", OdbcType.Char, 15).Value = disegnoMotore.Trim();
-
-                        cmd.ExecuteNonQuery();
-
-                    }
-                }
-            }
-            catch (Exception e)
-            {
-                if (e.Message.Contains("ORA-00001"))
-                {
-                    throw new Exception("Disegno già registrato.");
-                }
-                throw new Exception();
-            }
-        }
-        public bool IsConnessioneDS_Ok()
-        {
-
-            bool output = false;
-            try
-            {
-                using (OdbcConnection conn = new OdbcConnection(connString))
-                {
-                    conn.Open();
-                    output = true;
-                }
-            }
-            catch (Exception)
-            {
-
-                output = false;
-            }
-
-            return output;
-        }
         public Config GetConfigurazione()
         {
             Config config = new FusoEuro5Japan_Client.Config();
@@ -251,15 +201,15 @@ namespace FusoEuro5Japan_Client
                                         OBIETTIVO_2T = [obiettivo_2T]
                                         OBIETTIVO_3T = [obiettivo_3T]
                                         PROD_1T = [prod_1T]
-                                        PROD_1T = [prod_2T]
-                                        PROD_1T = [prod_3T]
+                                        PROD_2T = [prod_2T]
+                                        PROD_3T = [prod_3T]
                                         PROD_IERI = [prod_ieri],
 ";
 
                     conn.Open();
                     using (OdbcCommand cmd = new OdbcCommand(query, conn))
                     {
-                        cmd.Parameters.Add("@cont_di_Comodo", OdbcType.Int).Value = config.Ogni_N_Pezzi;
+                        cmd.Parameters.Add("@ogni_N_Pezzo", OdbcType.Int).Value = config.Ogni_N_Pezzi;
                         cmd.Parameters.Add("@cont_di_Comodo", OdbcType.Int).Value = config.Contatore_di_comodo;
                         cmd.Parameters.Add("@contGiorno", OdbcType.Int).Value = config.Contatore_del_giorno;
                         cmd.Parameters.Add("@obiettivo_1T", OdbcType.Int).Value = config.Obiettivo_1T;
@@ -289,9 +239,10 @@ namespace FusoEuro5Japan_Client
 
                     string query = @"UPDATE OBIETTIVO_JAPAN_SPM_CONFIG
                                     SET 
-                                    (CONTATORE_DI_COMODO = :cont_di_Comodo,
+                                        CONTATORE_DI_COMODO = :cont_di_Comodo,
                                         CONTATORE_TURNO = 0,
-                                        CONTATORE_GIORNO = 0) ";
+                                        CONTATORE_GIORNO = 0
+                                    ";
 
                     conn.Open();
                     using (OdbcCommand cmd = new OdbcCommand(query, conn))
@@ -340,6 +291,120 @@ namespace FusoEuro5Japan_Client
                 throw new Exception("Errore DB!");
             }
         }
+
+        public void SetConfig_ProduzioneFissa(int prod_1T, int prod_2T, int prod_3T)
+        {
+            try
+            {
+                using (OdbcConnection conn = new OdbcConnection(connString))
+                {
+
+                    string query = @"UPDATE OBIETTIVO_JAPAN_SPM_CONFIG
+                                    SET 
+                                        OBIETTIVO_1T = :prod_1T,
+                                        OBIETTIVO_2T = :prod_2T,
+                                        OBIETTIVO_3T = :prod_3T,
+                                        Ogni_N_pezzi = 0,
+                                        Contatore_di_comodo = 0
+                                     ";
+
+                    conn.Open();
+                    using (OdbcCommand cmd = new OdbcCommand(query, conn))
+                    {
+                        cmd.Parameters.Add("@prod_1T", OdbcType.Int).Value = prod_1T;
+                        cmd.Parameters.Add("@prod_2T", OdbcType.Int).Value = prod_2T;
+                        cmd.Parameters.Add("@prod_3T", OdbcType.Int).Value = prod_3T;
+
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Errore DB!");
+            }
+        }
+        public void SetConfig_1_Ogni_N_Pezzi(int N_Pezzi)
+        {
+            try
+            {
+                using (OdbcConnection conn = new OdbcConnection(connString))
+                {
+
+                    string query = @"UPDATE OBIETTIVO_JAPAN_SPM_CONFIG
+                                    SET 
+                                        OBIETTIVO_1T = 0,
+                                        OBIETTIVO_2T = 0,
+                                        OBIETTIVO_3T = 0,
+                                        Ogni_N_pezzi = :n_pezzi,
+                                        Contatore_di_comodo = :n_pezzi
+                                     ";
+
+                    conn.Open();
+                    using (OdbcCommand cmd = new OdbcCommand(query, conn))
+                    {
+                        cmd.Parameters.Add("@n_pezzi", OdbcType.Int).Value = N_Pezzi;
+
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Errore DB!");
+            }
+        }
+        public void InserisciDisegni(string disegnoMotore)
+        {
+            try
+            {
+                using (OdbcConnection conn = new OdbcConnection(connString))
+                {
+
+                    string query = @"insert into OBIETTIVO_JAPAN_SPM_DISEGNI (disegno) 
+                                    values
+                                    (:disegno)";
+
+                    conn.Open();
+                    using (OdbcCommand cmd = new OdbcCommand(query, conn))
+                    {
+                        cmd.Parameters.Add("@disegno", OdbcType.Char, 15).Value = disegnoMotore.Trim();
+
+                        cmd.ExecuteNonQuery();
+
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                if (e.Message.Contains("ORA-00001"))
+                {
+                    throw new Exception("Disegno già registrato.");
+                }
+                throw new Exception();
+            }
+        }
+        public bool IsConnessioneDS_Ok()
+        {
+
+            bool output = false;
+            try
+            {
+                using (OdbcConnection conn = new OdbcConnection(connString))
+                {
+                    conn.Open();
+                    output = true;
+                }
+            }
+            catch (Exception)
+            {
+
+                output = false;
+            }
+
+            return output;
+        }
+
 
         //public void ScriviConfig(Config _configurazione)
         //{

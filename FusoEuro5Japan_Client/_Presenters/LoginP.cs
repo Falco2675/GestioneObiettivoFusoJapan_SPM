@@ -104,6 +104,7 @@ namespace FusoEuro5Japan_Client
         #region METODI PRIVATI
         private async void EseguiLogin()
         {
+
             _isLoginInCorso = true;
             Messaggio = "";
 
