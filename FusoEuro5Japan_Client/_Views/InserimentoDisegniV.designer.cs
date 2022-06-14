@@ -43,27 +43,27 @@
             this.lblMessaggio = new System.Windows.Forms.Label();
             this.dgvDisegniInseriti = new System.Windows.Forms.DataGridView();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.chkProdFissa = new System.Windows.Forms.CheckBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.label5 = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.pnlProdFissa = new System.Windows.Forms.Panel();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.num_Prod1Turno = new System.Windows.Forms.NumericUpDown();
+            this.label4 = new System.Windows.Forms.Label();
+            this.num_Prod3Turno = new System.Windows.Forms.NumericUpDown();
+            this.num_Prod2Turno = new System.Windows.Forms.NumericUpDown();
+            this.chkProdFissa = new System.Windows.Forms.CheckBox();
             this.panel5 = new System.Windows.Forms.Panel();
-            this.chkFrequenza = new System.Windows.Forms.CheckBox();
+            this.pnlFrequenza = new System.Windows.Forms.Panel();
             this.label8 = new System.Windows.Forms.Label();
             this.numFrequenza = new System.Windows.Forms.NumericUpDown();
+            this.chkFrequenza = new System.Windows.Forms.CheckBox();
             this.panel6 = new System.Windows.Forms.Panel();
-            this.btnSalvaStrateg = new System.Windows.Forms.Button();
             this.lblMessaggioStrategia = new System.Windows.Forms.Label();
-            this.num_Prod2Turno = new System.Windows.Forms.NumericUpDown();
-            this.num_Prod3Turno = new System.Windows.Forms.NumericUpDown();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.num_Prod1Turno = new System.Windows.Forms.NumericUpDown();
-            this.pnlProdFissa = new System.Windows.Forms.Panel();
-            this.pnlFrequenza = new System.Windows.Forms.Panel();
+            this.btnSalvaStrateg = new System.Windows.Forms.Button();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -72,14 +72,14 @@
             this.panel3.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             this.panel4.SuspendLayout();
+            this.pnlProdFissa.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.num_Prod1Turno)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.num_Prod3Turno)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.num_Prod2Turno)).BeginInit();
             this.panel5.SuspendLayout();
+            this.pnlFrequenza.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numFrequenza)).BeginInit();
             this.panel6.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.num_Prod2Turno)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.num_Prod3Turno)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.num_Prod1Turno)).BeginInit();
-            this.pnlProdFissa.SuspendLayout();
-            this.pnlFrequenza.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -183,6 +183,7 @@
             // 
             // btnAggiungiDis
             // 
+            this.btnAggiungiDis.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             this.btnAggiungiDis.FlatAppearance.BorderSize = 2;
             this.btnAggiungiDis.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAggiungiDis.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -191,7 +192,7 @@
             this.btnAggiungiDis.Size = new System.Drawing.Size(95, 38);
             this.btnAggiungiDis.TabIndex = 3;
             this.btnAggiungiDis.Text = "Aggiungi";
-            this.btnAggiungiDis.UseVisualStyleBackColor = true;
+            this.btnAggiungiDis.UseVisualStyleBackColor = false;
             this.btnAggiungiDis.Click += new System.EventHandler(this.btnAggiungi_Click);
             // 
             // txtDisegnoFPT
@@ -253,25 +254,6 @@
             this.panel3.Size = new System.Drawing.Size(485, 244);
             this.panel3.TabIndex = 6;
             // 
-            // chkProdFissa
-            // 
-            this.chkProdFissa.AutoSize = true;
-            this.chkProdFissa.Location = new System.Drawing.Point(4, 3);
-            this.chkProdFissa.Name = "chkProdFissa";
-            this.chkProdFissa.Size = new System.Drawing.Size(109, 21);
-            this.chkProdFissa.TabIndex = 0;
-            this.chkProdFissa.Text = "Produz. fissa";
-            this.chkProdFissa.UseVisualStyleBackColor = true;
-            this.chkProdFissa.CheckedChanged += new System.EventHandler(this.chkProdFissa_CheckedChanged);
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(290, 315);
-            this.textBox2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(148, 23);
-            this.textBox2.TabIndex = 0;
-            // 
             // tableLayoutPanel3
             // 
             this.tableLayoutPanel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
@@ -315,6 +297,102 @@
             this.panel4.Size = new System.Drawing.Size(235, 154);
             this.panel4.TabIndex = 1;
             // 
+            // pnlProdFissa
+            // 
+            this.pnlProdFissa.Controls.Add(this.label7);
+            this.pnlProdFissa.Controls.Add(this.label6);
+            this.pnlProdFissa.Controls.Add(this.num_Prod1Turno);
+            this.pnlProdFissa.Controls.Add(this.label4);
+            this.pnlProdFissa.Controls.Add(this.num_Prod3Turno);
+            this.pnlProdFissa.Controls.Add(this.num_Prod2Turno);
+            this.pnlProdFissa.Location = new System.Drawing.Point(25, 27);
+            this.pnlProdFissa.Name = "pnlProdFissa";
+            this.pnlProdFissa.Size = new System.Drawing.Size(165, 126);
+            this.pnlProdFissa.TabIndex = 3;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(5, 94);
+            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(83, 25);
+            this.label7.TabIndex = 2;
+            this.label7.Text = "3°Turno";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(5, 50);
+            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(83, 25);
+            this.label6.TabIndex = 2;
+            this.label6.Text = "2°Turno";
+            // 
+            // num_Prod1Turno
+            // 
+            this.num_Prod1Turno.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.num_Prod1Turno.Location = new System.Drawing.Point(93, 4);
+            this.num_Prod1Turno.Maximum = new decimal(new int[] {
+            200,
+            0,
+            0,
+            0});
+            this.num_Prod1Turno.Name = "num_Prod1Turno";
+            this.num_Prod1Turno.Size = new System.Drawing.Size(61, 30);
+            this.num_Prod1Turno.TabIndex = 1;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(5, 6);
+            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(83, 25);
+            this.label4.TabIndex = 2;
+            this.label4.Text = "1°Turno";
+            // 
+            // num_Prod3Turno
+            // 
+            this.num_Prod3Turno.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.num_Prod3Turno.Location = new System.Drawing.Point(93, 89);
+            this.num_Prod3Turno.Maximum = new decimal(new int[] {
+            200,
+            0,
+            0,
+            0});
+            this.num_Prod3Turno.Name = "num_Prod3Turno";
+            this.num_Prod3Turno.Size = new System.Drawing.Size(61, 30);
+            this.num_Prod3Turno.TabIndex = 1;
+            // 
+            // num_Prod2Turno
+            // 
+            this.num_Prod2Turno.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.num_Prod2Turno.Location = new System.Drawing.Point(93, 48);
+            this.num_Prod2Turno.Maximum = new decimal(new int[] {
+            200,
+            0,
+            0,
+            0});
+            this.num_Prod2Turno.Name = "num_Prod2Turno";
+            this.num_Prod2Turno.Size = new System.Drawing.Size(61, 30);
+            this.num_Prod2Turno.TabIndex = 1;
+            // 
+            // chkProdFissa
+            // 
+            this.chkProdFissa.AutoSize = true;
+            this.chkProdFissa.Location = new System.Drawing.Point(4, 3);
+            this.chkProdFissa.Name = "chkProdFissa";
+            this.chkProdFissa.Size = new System.Drawing.Size(109, 21);
+            this.chkProdFissa.TabIndex = 0;
+            this.chkProdFissa.Text = "Produz. fissa";
+            this.chkProdFissa.UseVisualStyleBackColor = true;
+            this.chkProdFissa.CheckedChanged += new System.EventHandler(this.chkProdFissa_CheckedChanged);
+            // 
             // panel5
             // 
             this.panel5.Controls.Add(this.pnlFrequenza);
@@ -325,16 +403,14 @@
             this.panel5.Size = new System.Drawing.Size(235, 154);
             this.panel5.TabIndex = 1;
             // 
-            // chkFrequenza
+            // pnlFrequenza
             // 
-            this.chkFrequenza.AutoSize = true;
-            this.chkFrequenza.Location = new System.Drawing.Point(5, 3);
-            this.chkFrequenza.Name = "chkFrequenza";
-            this.chkFrequenza.Size = new System.Drawing.Size(95, 21);
-            this.chkFrequenza.TabIndex = 0;
-            this.chkFrequenza.Text = "Frequenza";
-            this.chkFrequenza.UseVisualStyleBackColor = true;
-            this.chkFrequenza.CheckedChanged += new System.EventHandler(this.chkFrequenza_CheckedChanged);
+            this.pnlFrequenza.Controls.Add(this.label8);
+            this.pnlFrequenza.Controls.Add(this.numFrequenza);
+            this.pnlFrequenza.Location = new System.Drawing.Point(13, 31);
+            this.pnlFrequenza.Name = "pnlFrequenza";
+            this.pnlFrequenza.Size = new System.Drawing.Size(206, 90);
+            this.pnlFrequenza.TabIndex = 2;
             // 
             // label8
             // 
@@ -360,6 +436,17 @@
             this.numFrequenza.Size = new System.Drawing.Size(61, 38);
             this.numFrequenza.TabIndex = 1;
             // 
+            // chkFrequenza
+            // 
+            this.chkFrequenza.AutoSize = true;
+            this.chkFrequenza.Location = new System.Drawing.Point(5, 3);
+            this.chkFrequenza.Name = "chkFrequenza";
+            this.chkFrequenza.Size = new System.Drawing.Size(95, 21);
+            this.chkFrequenza.TabIndex = 0;
+            this.chkFrequenza.Text = "Frequenza";
+            this.chkFrequenza.UseVisualStyleBackColor = true;
+            this.chkFrequenza.CheckedChanged += new System.EventHandler(this.chkFrequenza_CheckedChanged);
+            // 
             // panel6
             // 
             this.tableLayoutPanel3.SetColumnSpan(this.panel6, 2);
@@ -370,6 +457,16 @@
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(477, 44);
             this.panel6.TabIndex = 2;
+            // 
+            // lblMessaggioStrategia
+            // 
+            this.lblMessaggioStrategia.AutoSize = true;
+            this.lblMessaggioStrategia.ForeColor = System.Drawing.Color.Red;
+            this.lblMessaggioStrategia.Location = new System.Drawing.Point(17, 14);
+            this.lblMessaggioStrategia.Name = "lblMessaggioStrategia";
+            this.lblMessaggioStrategia.Size = new System.Drawing.Size(139, 17);
+            this.lblMessaggioStrategia.TabIndex = 1;
+            this.lblMessaggioStrategia.Text = "messaggio strategia ";
             // 
             // btnSalvaStrateg
             // 
@@ -387,109 +484,13 @@
             this.btnSalvaStrateg.UseVisualStyleBackColor = false;
             this.btnSalvaStrateg.Click += new System.EventHandler(this.btnSalvaStrateg_Click);
             // 
-            // lblMessaggioStrategia
+            // textBox2
             // 
-            this.lblMessaggioStrategia.AutoSize = true;
-            this.lblMessaggioStrategia.ForeColor = System.Drawing.Color.Red;
-            this.lblMessaggioStrategia.Location = new System.Drawing.Point(17, 14);
-            this.lblMessaggioStrategia.Name = "lblMessaggioStrategia";
-            this.lblMessaggioStrategia.Size = new System.Drawing.Size(139, 17);
-            this.lblMessaggioStrategia.TabIndex = 1;
-            this.lblMessaggioStrategia.Text = "messaggio strategia ";
-            // 
-            // num_Prod2Turno
-            // 
-            this.num_Prod2Turno.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.num_Prod2Turno.Location = new System.Drawing.Point(93, 48);
-            this.num_Prod2Turno.Maximum = new decimal(new int[] {
-            200,
-            0,
-            0,
-            0});
-            this.num_Prod2Turno.Name = "num_Prod2Turno";
-            this.num_Prod2Turno.Size = new System.Drawing.Size(61, 30);
-            this.num_Prod2Turno.TabIndex = 1;
-            // 
-            // num_Prod3Turno
-            // 
-            this.num_Prod3Turno.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.num_Prod3Turno.Location = new System.Drawing.Point(93, 89);
-            this.num_Prod3Turno.Maximum = new decimal(new int[] {
-            200,
-            0,
-            0,
-            0});
-            this.num_Prod3Turno.Name = "num_Prod3Turno";
-            this.num_Prod3Turno.Size = new System.Drawing.Size(61, 30);
-            this.num_Prod3Turno.TabIndex = 1;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(5, 6);
-            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(83, 25);
-            this.label4.TabIndex = 2;
-            this.label4.Text = "1°Turno";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(5, 50);
-            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(83, 25);
-            this.label6.TabIndex = 2;
-            this.label6.Text = "2°Turno";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(5, 94);
-            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(83, 25);
-            this.label7.TabIndex = 2;
-            this.label7.Text = "3°Turno";
-            // 
-            // num_Prod1Turno
-            // 
-            this.num_Prod1Turno.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.num_Prod1Turno.Location = new System.Drawing.Point(93, 4);
-            this.num_Prod1Turno.Maximum = new decimal(new int[] {
-            200,
-            0,
-            0,
-            0});
-            this.num_Prod1Turno.Name = "num_Prod1Turno";
-            this.num_Prod1Turno.Size = new System.Drawing.Size(61, 30);
-            this.num_Prod1Turno.TabIndex = 1;
-            // 
-            // pnlProdFissa
-            // 
-            this.pnlProdFissa.Controls.Add(this.label7);
-            this.pnlProdFissa.Controls.Add(this.label6);
-            this.pnlProdFissa.Controls.Add(this.num_Prod1Turno);
-            this.pnlProdFissa.Controls.Add(this.label4);
-            this.pnlProdFissa.Controls.Add(this.num_Prod3Turno);
-            this.pnlProdFissa.Controls.Add(this.num_Prod2Turno);
-            this.pnlProdFissa.Location = new System.Drawing.Point(25, 27);
-            this.pnlProdFissa.Name = "pnlProdFissa";
-            this.pnlProdFissa.Size = new System.Drawing.Size(165, 126);
-            this.pnlProdFissa.TabIndex = 3;
-            // 
-            // pnlFrequenza
-            // 
-            this.pnlFrequenza.Controls.Add(this.label8);
-            this.pnlFrequenza.Controls.Add(this.numFrequenza);
-            this.pnlFrequenza.Location = new System.Drawing.Point(13, 31);
-            this.pnlFrequenza.Name = "pnlFrequenza";
-            this.pnlFrequenza.Size = new System.Drawing.Size(206, 90);
-            this.pnlFrequenza.TabIndex = 2;
+            this.textBox2.Location = new System.Drawing.Point(290, 315);
+            this.textBox2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(148, 23);
+            this.textBox2.TabIndex = 0;
             // 
             // InserimentoDisegniV
             // 
@@ -516,18 +517,18 @@
             this.tableLayoutPanel3.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
+            this.pnlProdFissa.ResumeLayout(false);
+            this.pnlProdFissa.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.num_Prod1Turno)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.num_Prod3Turno)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.num_Prod2Turno)).EndInit();
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
+            this.pnlFrequenza.ResumeLayout(false);
+            this.pnlFrequenza.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numFrequenza)).EndInit();
             this.panel6.ResumeLayout(false);
             this.panel6.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.num_Prod2Turno)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.num_Prod3Turno)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.num_Prod1Turno)).EndInit();
-            this.pnlProdFissa.ResumeLayout(false);
-            this.pnlProdFissa.PerformLayout();
-            this.pnlFrequenza.ResumeLayout(false);
-            this.pnlFrequenza.PerformLayout();
             this.ResumeLayout(false);
 
         }

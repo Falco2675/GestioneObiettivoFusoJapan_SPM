@@ -28,6 +28,8 @@ namespace FusoEuro5Japan_Client
         }
 
 
+        public bool Azione_Bool => AzioneDaCompiere == AZIONE_DA_SVOLGERE;
+
         public event EventHandler<string> AzioneDaCompiereChanged;
         public abstract event EventHandler ObiettivoTurnoRaggiuntoEvent;
 

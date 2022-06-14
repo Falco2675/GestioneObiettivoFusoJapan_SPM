@@ -15,5 +15,6 @@ namespace FusoEuro5Japan_Client
         void AggiornaTabellaConfig(Config config);
         void ResettaTurno(int contat_di_comodo);
         void AggiornaContatori(Config config);
+        void ResettaProduzioneDelGiorno(string prodDiIeri);
     }
 }

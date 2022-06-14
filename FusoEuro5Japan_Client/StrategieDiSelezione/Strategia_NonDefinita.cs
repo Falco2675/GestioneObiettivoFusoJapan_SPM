@@ -20,6 +20,8 @@ namespace FusoEuro5Japan_Client
         }
         public override StrategiaEnum TipoStrategia => StrategiaEnum.Non_Definita;
 
+        //public override bool Azione_Bool { get; protected set; }
+
         public override event EventHandler ObiettivoTurnoRaggiuntoEvent;
 
         public override bool IsMotoreTarget()

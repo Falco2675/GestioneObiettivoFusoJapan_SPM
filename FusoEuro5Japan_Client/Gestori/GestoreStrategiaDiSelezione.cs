@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FusoEuro5Japan_Client
 {
-    public class GestoreStrategiaDiProduzione : IGestoreStrategiaDiProduzione
+    public class GestoreStrategiaDiSelezione : IGestoreStrategiaDiSelezione
     {
         private IStrategia _strategia;
 
@@ -57,13 +57,15 @@ namespace FusoEuro5Japan_Client
         public string NomeStrategia => _strategia.NomeStrategia;
 
         public string AzioneDaCompiere => Strategia.AzioneDaCompiere;
+        public bool Azione_Bool => Strategia.Azione_Bool;
+        //public bool Azione_bool => Strategia.Azione_Bool;
 
         public event EventHandler StrategiaDiProduzioneChanged;
         public event EventHandler<string> AzioneDaCompiereChanged;
         //public event EventHandler ObiettivoTurnoRaggiuntoEvent;
 
         #region CTOR
-        public GestoreStrategiaDiProduzione
+        public GestoreStrategiaDiSelezione
             (
                 IGestoreTurni gestoreTurni
             )

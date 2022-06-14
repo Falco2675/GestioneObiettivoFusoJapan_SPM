@@ -24,7 +24,7 @@ namespace FusoEuro5Japan_Client
 
         private string _messaggio;
         private readonly IGestoreDisegni _gestoreDisegni;
-        private readonly IGestoreConvalidaDatoRicevuto _validatoreDisegni;
+        private readonly IGestoreConvalidaDatoRicevuto _gestoreConvalidaDato;
         private readonly IDataSource _dataSource;
         //private StrategiaEnum _strategia;
 
@@ -83,10 +83,10 @@ namespace FusoEuro5Japan_Client
         public bool IsStartegiaFrequenza => _strategia == StrategiaEnum.Ogni_N_pezzi;
 
 
-        private List<string> _elencoDisegniInseriti;
+        private BindingList<string> _elencoDisegniInseriti = new BindingList<string>();
         private readonly IGestoreConfigurazione _gestoreConfigurazione;
 
-        public List<string> ElencoDisegniInseriti
+        public BindingList<string> ElencoDisegniInseriti
         {
             get { return _elencoDisegniInseriti; }
             set { _elencoDisegniInseriti = value; Notify(); }
@@ -102,13 +102,15 @@ namespace FusoEuro5Japan_Client
             (
                 IInserimentoDisegniV view,
                 IDataSource dataSource,
-                IGestoreConfigurazione gestoreConfigurazione
+                IGestoreConfigurazione gestoreConfigurazione,
+                IGestoreConvalidaDatoRicevuto gestoreConvalidaDato
             )
         {
 
             _view = view;
             _dataSource = dataSource;
             _gestoreConfigurazione = gestoreConfigurazione;
+            _gestoreConvalidaDato = gestoreConvalidaDato;
 
             SynchronizeContext = _view.SynchronizeContext;
             _bs.DataSource = this;
@@ -188,9 +190,11 @@ namespace FusoEuro5Japan_Client
         {
             try
             {
+                Messaggio = "";
                 ConvalidaDisegni();
                 AggiungiDisegniSuDB();
-                ResettaCampi();
+                Messaggio = "Disegno inserito correttamente.";
+                //ResettaCampi();
 
             }
             catch (Exception ex)
@@ -201,7 +205,7 @@ namespace FusoEuro5Japan_Client
 
         private void ConvalidaDisegni()
         {
-            _validatoreDisegni.ConvalidaDato(Disegno.Trim());
+            _gestoreConvalidaDato.ConvalidaDisegno(Disegno.Trim());
         }
         private void AggiungiDisegniSuDB()
         {

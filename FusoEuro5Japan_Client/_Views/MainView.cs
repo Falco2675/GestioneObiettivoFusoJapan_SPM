@@ -104,23 +104,27 @@ namespace FusoEuro5Japan_Client
             //lblProd_3T.DataBindings.Add("Font", _presenter, "Font_Prod_3T");
 
             lbl_ProdGiornaliera.DataBindings.Add("Text", _presenter, "ProduzioneGiornaliera");
-            lbl_ProdGiornaliera.DataBindings.Add("ForeColor", _presenter, "ForeColor_Prod_All_Turni");
+            lbl_ProdGiornaliera.DataBindings.Add("ForeColor", _presenter, "ForeColor_ProduzioneGiorn");
 
             lblDataProduzione.DataBindings.Add("Text", _presenter, "TitoloProduzioneGiornaliera");
 
             lblAzione.DataBindings.Add("Text", _presenter, "AzioneDaCompiere_string");
+            lblAzione.DataBindings.Add("ForeColor", _presenter, "ForeColor_Azione");
+            pnlAzione.DataBindings.Add("BackColor", _presenter, "BackColor_Azione");
+
+
             lblErroriWarning.DataBindings.Add("Text", _presenter, "Errore_string");
             lblConnessioneDS.DataBindings.Add("BackColor", _presenter, "IsAliveColor");
             lblVersion.DataBindings.Add("Text", _presenter, "Versione");
 
             //tlpProduzioneTurno.DataBindings.Add("BackColor", _presenter, "BackColor_ProdTurno");
         }
-        #endregion
-
-
         private void btnReset_Click(object sender, EventArgs e)
         {
             _presenter.Reset();
         }
+        #endregion
+
+
     }
 }

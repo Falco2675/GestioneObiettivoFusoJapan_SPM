@@ -2,8 +2,9 @@
 {
     public interface IGestoreConvalidaDatoRicevuto
     {
-        void ConvalidaDato(string datoRicevuto);
+        void ConvalidaMatricola_CodBasamento(string datoRicevuto);
         TipoDatoRicevuto GetTipoDatoRicevuto( string datoRicevuto);
+        void ConvalidaDisegno(string v);
         //void ConvalidaMatricola(string matricola);
     }
 }

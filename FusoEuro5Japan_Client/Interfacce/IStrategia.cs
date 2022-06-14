@@ -12,6 +12,7 @@ namespace FusoEuro5Japan_Client
         string NomeStrategia { get; }
         //string ProduzioneTurno_String { get; }
         string AzioneDaCompiere { get; }
+        bool Azione_Bool { get; }
 
         event EventHandler<string> AzioneDaCompiereChanged;
         event EventHandler ObiettivoTurnoRaggiuntoEvent;

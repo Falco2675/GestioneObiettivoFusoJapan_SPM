@@ -120,7 +120,7 @@ namespace FusoEuro5Japan_Client
         #region METODI PRIVATI
         private void BindingData()
         {
-            txtDisegnoFPT.DataBindings.Add("Text", _bs, "Disegno");
+            txtDisegnoFPT.DataBindings.Add("Text", _bs, "Disegno", false, DataSourceUpdateMode.OnPropertyChanged);
             lblMessaggio.DataBindings.Add("Text", _bs, "Messaggio");
             btnAggiungiDis.DataBindings.Add("Enabled", _bs, "AbilitaPulsanteAggiungi", false, DataSourceUpdateMode.Never);
             dgvDisegniInseriti.DataBindings.Add("DataSource", _bs, "ElencoDisegniInseriti");

@@ -406,6 +406,9 @@ namespace FusoEuro5Japan_Client
             return output;
         }
 
-
+        public void ResettaProduzioneDelGiorno(string prodDiIeri)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

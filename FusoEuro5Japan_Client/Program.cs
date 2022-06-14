@@ -32,9 +32,8 @@ namespace FusoEuro5Japan_Client
             _container
                 .RegisterType<IMainV, MainView>(new ContainerControlledLifetimeManager())
                 .RegisterType<IMainP, MainP>(new ContainerControlledLifetimeManager())
-                //.RegisterType<IDataSource, DataSource_Liv2>(new ContainerControlledLifetimeManager())
-                .RegisterType<IDataSource, DataSourceFake_Access>(new ContainerControlledLifetimeManager())
-                //.RegisterType<IDataSource_ServicePMS, DataSource_ServicePMS>(new ContainerControlledLifetimeManager())
+                .RegisterType<IDataSource, DataSource_Liv2>(new ContainerControlledLifetimeManager())
+                //.RegisterType<IDataSource, DataSourceFake_Access>(new ContainerControlledLifetimeManager())
                 .RegisterType<IGestoreConfigurazione, GestoreConfigurazione>(new ContainerControlledLifetimeManager())
                 .RegisterType<ILoginP, LoginP>(new ContainerControlledLifetimeManager())
                 .RegisterType<ILoginV, LoginV>(new ContainerControlledLifetimeManager())
@@ -44,7 +43,7 @@ namespace FusoEuro5Japan_Client
                 .RegisterType<IGestoreTurni, GestoreTurni>(new ContainerControlledLifetimeManager())
                 .RegisterType<IGestoreConvalidaDatoRicevuto, GestoreConvalidaDatoRicevuto>(new ContainerControlledLifetimeManager())
                 .RegisterType<IGestoreContatoriObiettivi, GestoreContatoriObiettivi>(new ContainerControlledLifetimeManager())
-                .RegisterType<IGestoreStrategiaDiProduzione, GestoreStrategiaDiProduzione>(new ContainerControlledLifetimeManager())
+                .RegisterType<IGestoreStrategiaDiSelezione, GestoreStrategiaDiSelezione>(new ContainerControlledLifetimeManager())
                 ;
         }
 

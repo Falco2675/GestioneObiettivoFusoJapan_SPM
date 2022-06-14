@@ -271,7 +271,8 @@ namespace FusoEuro5Japan_Client
                                         PROD_1T = :prod_1T,
                                         PROD_2T = :prod_2T,
                                         PROD_3T = :prod_3T,
-                                        CONTATORE_GIORNO = :contGiorno
+                                        CONTATORE_GIORNO = :contGiorno,
+                                        CONTATORE_DI_COMODO = :contDiComodo
                                      ";
 
                     conn.Open();
@@ -281,6 +282,7 @@ namespace FusoEuro5Japan_Client
                         cmd.Parameters.Add("@prod_2T", OdbcType.Int).Value = config.Prod_2T;
                         cmd.Parameters.Add("@prod_3T", OdbcType.Int).Value = config.Prod_3T;
                         cmd.Parameters.Add("@contGiorno", OdbcType.Int).Value = config.Contatore_del_giorno;
+                        cmd.Parameters.Add("@contDiComodo", OdbcType.Int).Value = config.Contatore_di_comodo;
 
                         cmd.ExecuteNonQuery();
                     }
@@ -405,10 +407,37 @@ namespace FusoEuro5Japan_Client
             return output;
         }
 
+        public void ResettaProduzioneDelGiorno(string ProdDiIeri)
+        {
+            try
+            {
+                using (OdbcConnection conn = new OdbcConnection(connString))
+                {
 
-        //public void ScriviConfig(Config _configurazione)
-        //{
-        //    throw new NotImplementedException();
-        //}
+                    string query = @"UPDATE OBIETTIVO_JAPAN_SPM_CONFIG
+                                    SET 
+                                        PROD_1T = 0,
+                                        PROD_2T = 0,
+                                        PROD_3T = 0,
+                                        CONTATORE_GIORNO = 0,
+                                        PROD_IERI = :prodIeri
+                                     ";
+
+                    conn.Open();
+                    using (OdbcCommand cmd = new OdbcCommand(query, conn))
+                    {
+                        cmd.Parameters.Add("@prodIeri", OdbcType.Text).Value = ProdDiIeri;
+
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Errore DB!");
+            }
+        }
+
+
     }
 }

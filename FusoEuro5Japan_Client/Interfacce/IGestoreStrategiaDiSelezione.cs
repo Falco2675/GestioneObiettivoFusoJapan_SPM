@@ -2,12 +2,13 @@
 
 namespace FusoEuro5Japan_Client
 {
-    public interface IGestoreStrategiaDiProduzione
+    public interface IGestoreStrategiaDiSelezione
     {
         string NomeStrategia { get; }
         IStrategia Strategia { get; }
         StrategiaEnum StrategiaEnum { get; }
         string AzioneDaCompiere { get; }
+        bool Azione_Bool { get; }
         bool IsMotoreTarget { get; }
 
         event EventHandler StrategiaDiProduzioneChanged;

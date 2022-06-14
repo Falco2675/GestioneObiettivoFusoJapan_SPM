@@ -13,6 +13,8 @@ namespace FusoEuro5Japan_Client
         public override StrategiaEnum TipoStrategia => StrategiaEnum.Ogni_N_pezzi;
         public override string NomeStrategia => $"1 Ogni {_configurazione.Configurazione.Ogni_N_Pezzi.ToString()} motori";
 
+        //public override bool Azione_Bool { get; protected set; }
+
         #endregion
 
         public override event EventHandler ObiettivoTurnoRaggiuntoEvent;
@@ -57,15 +59,17 @@ namespace FusoEuro5Japan_Client
 
         public override bool IsMotoreTarget()
         {
-            if(_configurazione.Configurazione.Contatore_di_comodo == _configurazione.Configurazione.Ogni_N_Pezzi)
-            {
-                AzioneDaCompiere = AZIONE_DA_SVOLGERE;
-                _configurazione.Configurazione.Contatore_di_comodo -= 1;
-                return true;
 
-            }
-            AzioneDaCompiere = NESSUNA_AZIONE;
-            return false;
+            bool isTarget = _configurazione.Configurazione.Contatore_di_comodo == _configurazione.Configurazione.Ogni_N_Pezzi;
+
+            AzioneDaCompiere = isTarget
+                ? AZIONE_DA_SVOLGERE
+                : NESSUNA_AZIONE;
+
+            _configurazione.AggiornaContatoreDiComodo();
+
+            return isTarget;
+
         }
 
     }

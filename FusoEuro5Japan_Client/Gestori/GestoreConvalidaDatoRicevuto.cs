@@ -12,8 +12,13 @@ namespace FusoEuro5Japan_Client
         {
         }
 
+        public void ConvalidaDisegno(string disegno)
+        {
+            if (!disegno.All(Char.IsNumber) || !(disegno.Length > 8 && disegno.Length < 11))
+                throw new Exception($"Dato non conforme! \nInserire disegno motore.");
+        }
 
-        public void ConvalidaDato(string stringaRicevuta)
+        public void ConvalidaMatricola_CodBasamento(string stringaRicevuta)
         {
             if (!stringaRicevuta.All(Char.IsNumber) && !(stringaRicevuta.Length == 7 || stringaRicevuta.Length == 15))
                 throw new Exception($"Dato non conforme! \nLEGGERE MATRICOLA MOTORE o COD. BASAMENTO.");

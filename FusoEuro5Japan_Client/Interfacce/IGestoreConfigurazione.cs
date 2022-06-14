@@ -19,5 +19,7 @@ namespace FusoEuro5Japan_Client
         void AggiornaConfigurazione();
         void ResettaTurno();
         void ScriviConfigurazione();
+        void EseguiSuTargetCandidato();
+        void AggiornaContatoreDiComodo();
     }
 }

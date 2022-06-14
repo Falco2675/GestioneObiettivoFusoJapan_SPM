@@ -16,7 +16,7 @@ namespace FusoEuro5Japan_Client
         int Prod_2T { get; set; }
         int Prod_3T { get; set; }
 
-        int Contatore_del_giorno { get; set; }
+        int Contatore_del_giorno { get; }
         string Prod_Ieri { get; set; }
 
         bool IsTarget_1T_Raggiunto { get; }

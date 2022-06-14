@@ -13,8 +13,8 @@ namespace FusoEuro5Japan_Client
     public class MainP : BaseP, IMainP
     {
         #region CAMPI PRIVATI
-        private readonly Color GREEN_COLOR = Color.FromArgb(192, 0, 0);
-        private readonly Color RED_COLOR = Color.Green;
+        private readonly Color GREEN_COLOR = Color.Green;
+        private readonly Color RED_COLOR = Color.FromArgb(192, 0, 0);
 
         private readonly IMainV _view;
         private readonly IDataSource _dataSource;
@@ -22,7 +22,7 @@ namespace FusoEuro5Japan_Client
         private readonly IGestoreAzioniDaCompiere _gestoreAzioniDaCompiere;
         private readonly IGestoreTurni _gestoreTurni;
         private readonly IGestoreContatoriObiettivi _gestoreContatoreObiettivi;
-        private readonly IGestoreStrategiaDiProduzione _gestoreStrategiaDiProduzione;
+        private readonly IGestoreStrategiaDiSelezione _gestoreStrategiaDiProduzione;
         private readonly ILoginP _loginP;
         private readonly IGestoreConvalidaDatoRicevuto _gestoreConvalidaDatoRicevuto;
 
@@ -99,9 +99,12 @@ namespace FusoEuro5Japan_Client
         public Color BackColor_Prod_3T => _gestoreTurni.Turno_enum == TurnoEnum.TerzoTurno ? Color.FromArgb(255, 255, 192) : SystemColors.Control;
 
         public string ProduzioneGiornaliera => _gestoreContatoreObiettivi.Contatore_del_giorno.ToString();
-        public Color ForeColor_Prod_All_Turni => _gestoreContatoreObiettivi.IsTarget_GiornalieroRaggiunto ? GREEN_COLOR : RED_COLOR;
+        public Color ForeColor_ProduzioneGiorn => _gestoreContatoreObiettivi.IsTarget_GiornalieroRaggiunto ? GREEN_COLOR : RED_COLOR;
 
         public string AzioneDaCompiere_string => _gestoreStrategiaDiProduzione.AzioneDaCompiere;
+        public Color BackColor_Azione => _gestoreStrategiaDiProduzione.Azione_Bool ? GREEN_COLOR : Color.FromArgb(255, 224, 192);
+        public Color ForeColor_Azione => _gestoreStrategiaDiProduzione.Azione_Bool ? Color.Yellow : Color.FromArgb(128, 64, 0);
+        //public string AzioneDaCompiere_string { get; set; }
 
         public string Errore_string
         {
@@ -123,7 +126,7 @@ namespace FusoEuro5Japan_Client
                IGestoreConfigurazione gestoreConfigurazione,
                IGestoreConvalidaDatoRicevuto gestoreConvalidaDatoRicevuto,
                IGestoreContatoriObiettivi gestoreContatoreObiettivi,
-               IGestoreStrategiaDiProduzione gestoreStrategiaDiProduzione,
+               IGestoreStrategiaDiSelezione gestoreStrategiaDiProduzione,
                IInserimentoDisegniP inserimentoDisegni,
                ILoginP loginP,
                IGestoreTurni gestoreTurni
@@ -203,30 +206,35 @@ namespace FusoEuro5Japan_Client
             try
             {
                 Reset();
-                _gestoreConvalidaDatoRicevuto.ConvalidaDato(stringaRicevuta);
+                _gestoreConvalidaDatoRicevuto.ConvalidaMatricola_CodBasamento(stringaRicevuta);
                 _tipoDatoRicevuto = _gestoreConvalidaDatoRicevuto.GetTipoDatoRicevuto(stringaRicevuta);
                 MotoreLetto = _dataSource.GetMotore(stringaRicevuta, _tipoDatoRicevuto);
                 if (MotoreLetto.Matricola=="--")
                     throw new Exception("Dato non conforme! \nLEGGERE MATRICOLA MOTORE o COD. BASAMENTO.");
 
+                
 
                 if (!MotoreLetto.IsTargetCandidate )
                 {
                     _gestoreStrategiaDiProduzione.EseguiNessunaAzione();
+                    //AzioneDaCompiere_string = "NESSUNA AZIONE.";
                     return;
                 }
 
-                _gestoreConfigurazione.AggiornaConfigurazione();
+                _gestoreConfigurazione.EseguiSuTargetCandidato();
 
-                if (_gestoreStrategiaDiProduzione.IsMotoreTarget)
-                {
-                    _gestoreContatoreObiettivi.AggiungiAllaProduzione();
-                    _gestoreConfigurazione.ScriviConfigurazione();
-                }
-                else
-                {
-                    _gestoreStrategiaDiProduzione.EseguiNessunaAzione();
-                }
+
+                //_gestoreConfigurazione.AggiornaConfigurazione();
+
+                //if (_gestoreStrategiaDiProduzione.IsMotoreTarget)
+                //{
+                //    _gestoreContatoreObiettivi.AggiungiAllaProduzione();
+                //    _gestoreConfigurazione.ScriviConfigurazione();
+                //}
+                //else
+                //{
+                //    _gestoreStrategiaDiProduzione.EseguiNessunaAzione();
+                //}
                 
             }
             catch (Exception ex)
@@ -242,8 +250,8 @@ namespace FusoEuro5Japan_Client
         }
         private void OnAvviaStrumentiEvent(object sender, EventArgs e)
         {
-            //_loginP.ShowView();
-            _inserimentoDisegni.ShowView();
+            _loginP.ShowView();
+            //_inserimentoDisegni.ShowView();
         }
         private void OnTurnoChanged(object sender, EventArgs e)
         {
@@ -269,6 +277,9 @@ namespace FusoEuro5Japan_Client
         private void OnProd_3TChanged(object sender, EventArgs e)
         {
             Notify(nameof(Prod_3T));
+            Notify(nameof(ForeColor_Prod_3T));
+            Notify(nameof(ProduzioneGiornaliera));
+            Notify(nameof(ForeColor_ProduzioneGiorn));
         }
         private void OnProd_2TChanged(object sender, EventArgs e)
         {
@@ -279,6 +290,9 @@ namespace FusoEuro5Japan_Client
         private void OnProd_1TChanged(object sender, EventArgs e)
         {
             Notify(nameof(Prod_1T));
+            Notify(nameof(ForeColor_Prod_1T));
+            Notify(nameof(ProduzioneGiornaliera));
+            Notify(nameof(ForeColor_ProduzioneGiorn));
         }
         private void OnProduzioniIeriChanged(object sender, EventArgs e)
         {
@@ -290,7 +304,7 @@ namespace FusoEuro5Japan_Client
         }
         private void OnObiettivo_All_Turni_Changed(object sender, EventArgs e)
         {
-            Notify(nameof(ForeColor_Prod_All_Turni));
+            Notify(nameof(ForeColor_ProduzioneGiorn));
         }
         private void OnObiettivo_3T_Changed(object sender, EventArgs e)
         {

@@ -10,6 +10,10 @@ namespace FusoEuro5Japan_Client
     {
 
         #region CAMPI PRIVATI
+        private readonly IGestoreStrategiaDiSelezione _gestoreStrategiaDiProduzione;
+        private readonly IGestoreTurni _gestoreTurni;
+
+
         private int _obiettivo_1T;
         private int _obiettivo_2T;
         private int _obiettivo_3T;
@@ -25,8 +29,7 @@ namespace FusoEuro5Japan_Client
         private bool _isTarget_3T_Raggiunto;
         private bool _isTarget_All_Turni_raggiunto;
 
-        private readonly IGestoreStrategiaDiProduzione _gestoreStrategiaDiProduzione;
-        private readonly IGestoreTurni _gestoreTurni;
+
         #endregion
 
         #region PROPRIETA'
@@ -39,9 +42,10 @@ namespace FusoEuro5Japan_Client
                 if (IsTarget_GiornalieroRaggiunto || IsTarget_1T_Raggiunto) return;
                 _prod_1T = value;
                 Prod_1TChanged?.Invoke(this, null);
-                ControllaTargetGiorno();
-                if(_gestoreStrategiaDiProduzione.StrategiaEnum == StrategiaEnum.ProduzioneTurni)
-                    IsTarget_1T_Raggiunto = _prod_1T >= Obiettivo_1T;
+                //ControllaTargetGiorno();
+                AggiornaObiettivi();
+                //if(_gestoreStrategiaDiProduzione.StrategiaEnum == StrategiaEnum.ProduzioneTurni)
+                //    IsTarget_1T_Raggiunto = _prod_1T >= Obiettivo_1T;
 
 
             }
@@ -55,9 +59,10 @@ namespace FusoEuro5Japan_Client
                 if (IsTarget_GiornalieroRaggiunto || IsTarget_2T_Raggiunto) return;
                 _prod_2T = value;
                 Prod_2TChanged?.Invoke(this, null);
-                ControllaTargetGiorno();
-                if (_gestoreStrategiaDiProduzione.StrategiaEnum == StrategiaEnum.ProduzioneTurni)
-                    IsTarget_2T_Raggiunto = _prod_2T >= Obiettivo_2T;
+                //ControllaTargetGiorno();
+                AggiornaObiettivi();
+                //if (_gestoreStrategiaDiProduzione.StrategiaEnum == StrategiaEnum.ProduzioneTurni)
+                //    IsTarget_2T_Raggiunto = _prod_2T >= Obiettivo_2T;
             }
         }
         public int Prod_3T
@@ -69,9 +74,10 @@ namespace FusoEuro5Japan_Client
                 if (IsTarget_GiornalieroRaggiunto || IsTarget_1T_Raggiunto) return;
                 _prod_3T = value;
                 Prod_3TChanged?.Invoke(this, null);
-                ControllaTargetGiorno();
-                if (_gestoreStrategiaDiProduzione.Strategia.TipoStrategia == StrategiaEnum.ProduzioneTurni)
-                    IsTarget_3T_Raggiunto = _prod_3T >= Obiettivo_3T;
+                //ControllaTargetGiorno();
+                AggiornaObiettivi();
+                //if (_gestoreStrategiaDiProduzione.Strategia.TipoStrategia == StrategiaEnum.ProduzioneTurni)
+                //    IsTarget_3T_Raggiunto = _prod_3T >= Obiettivo_3T;
             }
         }
 
@@ -140,13 +146,6 @@ namespace FusoEuro5Japan_Client
                 return result;
             }
         }
-        public bool IsObiettivoGiornalieroRaggiunto
-        {
-            get
-            {
-                return Prod_1T + Prod_2T + Prod_3T >= Obiettivo_Giornaliero;
-            }
-        }
 
         public bool IsTarget_1T_Raggiunto
         {
@@ -190,16 +189,18 @@ namespace FusoEuro5Japan_Client
             }
         }
 
-        public int Contatore_del_giorno
-        {
-            get { return _contatore_del_giorno; }
-            set
-            {
-                if (_contatore_del_giorno == value) return;
-                _contatore_del_giorno = value;
-                ProduzioneGiornalieraChanged?.Invoke(this, null);
-            }
-        }
+        public int Contatore_del_giorno => Prod_1T + Prod_2T + Prod_3T;
+        //{
+        //    get { return _contatore_del_giorno; }
+        //    set
+        //    {
+        //        if (_contatore_del_giorno == value) return;
+        //        _contatore_del_giorno = value;
+        //        ProduzioneGiornalieraChanged?.Invoke(this, null);
+        //    }
+        //}
+
+
         public string Prod_Ieri
         {
             get { return _prod_Ieri; }
@@ -235,7 +236,7 @@ namespace FusoEuro5Japan_Client
         #region CTOR
         public GestoreContatoriObiettivi
             (
-                IGestoreStrategiaDiProduzione gestoreStrategiaDiProduzione,
+                IGestoreStrategiaDiSelezione gestoreStrategiaDiProduzione,
                 IGestoreTurni gestoreTurni
             )
         {
@@ -257,7 +258,7 @@ namespace FusoEuro5Japan_Client
                     Prod_2T += 1;
                     break;
                 case TurnoEnum.TerzoTurno:
-                    Prod_3T += 1;
+                    Prod_3T = Prod_3T + 1;
                     break;
                 default:
                     break;
@@ -267,19 +268,31 @@ namespace FusoEuro5Japan_Client
         #endregion
 
         #region METODI PRIVATI
-        private void ControllaTargetGiorno()
-        {
-            if (_gestoreStrategiaDiProduzione.StrategiaEnum == StrategiaEnum.Non_Definita) return;
-            Contatore_del_giorno = Prod_1T + Prod_2T + Prod_3T;
-            IsTarget_GiornalieroRaggiunto = Obiettivo_Giornaliero == Contatore_del_giorno;
-        }
+        //private void ControllaTargetGiorno()
+        //{
+        //    if (_gestoreStrategiaDiProduzione.StrategiaEnum == StrategiaEnum.Non_Definita) return;
+        //    Contatore_del_giorno = Prod_1T + Prod_2T + Prod_3T;
+
+        //    IsTarget_GiornalieroRaggiunto = Obiettivo_Giornaliero > 0
+        //        ? Obiettivo_Giornaliero == Contatore_del_giorno
+        //        : false;
+        //}
 
         public void AggiornaObiettivi()
         {
-            IsTarget_GiornalieroRaggiunto = Obiettivo_Giornaliero == Prod_1T + Prod_2T + Prod_3T ? true : false;
-            IsTarget_1T_Raggiunto = Prod_1T >= Obiettivo_1T ? true : false;
-            IsTarget_2T_Raggiunto = Prod_2T >= Obiettivo_2T ? true : false;
-            IsTarget_3T_Raggiunto = Prod_3T >= Obiettivo_3T ? true : false;
+            Obiettivo_Giornaliero = Obiettivo_1T + Obiettivo_2T + Obiettivo_3T;
+
+            if (Obiettivo_Giornaliero == 0)
+            {
+                IsTarget_GiornalieroRaggiunto = IsTarget_1T_Raggiunto = IsTarget_2T_Raggiunto = IsTarget_3T_Raggiunto = false;
+            }else
+            {
+                IsTarget_GiornalieroRaggiunto = IsTarget_1T_Raggiunto && IsTarget_2T_Raggiunto && IsTarget_3T_Raggiunto;
+                IsTarget_1T_Raggiunto = Prod_1T >= Obiettivo_1T;
+                IsTarget_2T_Raggiunto = Prod_2T >= Obiettivo_2T;
+                IsTarget_3T_Raggiunto = Prod_3T >= Obiettivo_1T;
+            }
+
         }
 
 
