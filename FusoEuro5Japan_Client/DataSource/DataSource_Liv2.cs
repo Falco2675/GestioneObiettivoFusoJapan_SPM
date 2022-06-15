@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.Odbc;
 using System.Data.SqlClient;
@@ -17,6 +18,45 @@ namespace FusoEuro5Japan_Client
         {
         }
         #endregion
+
+        public List<string> GetElencoDisegni()
+        {
+            string query =
+                  @"SELECT * from OBIETTIVO_JAPAN_SPM_DISEGNI
+                        ";
+                
+            System.Data.DataTable tabella = new System.Data.DataTable();
+            var disegni = new List<string>();
+            try
+            {
+
+                using (OdbcConnection conn = new OdbcConnection(connString))
+                {
+                    conn.Open();
+                    using (OdbcCommand cmd = new OdbcCommand(query, conn))
+                    {
+                        using (OdbcDataReader dr = cmd.ExecuteReader())
+                        {
+                            if (dr.HasRows)
+                            {
+                                tabella.Load(dr);
+                                disegni = tabella.AsEnumerable()
+                                    .Select(r => r.Field<string>("Disegno"))
+                                    .ToList();
+
+                            }
+                        }
+                    }
+                }
+                return disegni;
+
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Errore DB!");
+
+            }
+        }
 
         public Motore GetMotore(string datoRicevuto, TipoDatoRicevuto tipoDatoRicevuto)
         {
@@ -437,7 +477,6 @@ namespace FusoEuro5Japan_Client
                 throw new Exception("Errore DB!");
             }
         }
-
 
     }
 }

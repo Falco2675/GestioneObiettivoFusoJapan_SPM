@@ -1,6 +1,6 @@
 ﻿namespace FusoEuro5Japan_Client
 {
-    partial class InserimentoDisegniV
+    partial class StrumentiV
     {
         /// <summary>
         /// Required designer variable.

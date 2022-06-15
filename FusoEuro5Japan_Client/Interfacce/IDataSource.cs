@@ -1,4 +1,6 @@
 ﻿
+using System.Collections.Generic;
+
 namespace FusoEuro5Japan_Client
 {
     public interface IDataSource
@@ -16,5 +18,6 @@ namespace FusoEuro5Japan_Client
         void ResettaTurno(int contat_di_comodo);
         void AggiornaContatori(Config config);
         void ResettaProduzioneDelGiorno(string prodDiIeri);
+        List<string> GetElencoDisegni();
     }
 }

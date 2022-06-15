@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FusoEuro5Japan_Client
 {
-    public interface IInserimentoDisegniP
+    public interface IStrumentiP
     {
         void ShowView();
     }

@@ -48,7 +48,7 @@ namespace FusoEuro5Japan_Client
         private TipoDatoRicevuto _tipoDatoRicevuto;
 
         private System.Timers.Timer _timeShowMessage;
-        private readonly IInserimentoDisegniP _inserimentoDisegni;
+        private readonly IStrumentiP _inserimentoDisegni;
 
         //private readonly IValidatoreDisegni _validatoreDisegni;
 
@@ -127,7 +127,7 @@ namespace FusoEuro5Japan_Client
                IGestoreConvalidaDatoRicevuto gestoreConvalidaDatoRicevuto,
                IGestoreContatoriObiettivi gestoreContatoreObiettivi,
                IGestoreStrategiaDiSelezione gestoreStrategiaDiProduzione,
-               IInserimentoDisegniP inserimentoDisegni,
+               IStrumentiP inserimentoDisegni,
                ILoginP loginP,
                IGestoreTurni gestoreTurni
             )

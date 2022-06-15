@@ -86,7 +86,7 @@
     <Compile Include="Helpers\BaseP.cs" />
     <Compile Include="Interfacce\IDataSource.cs" />
     <Compile Include="Interfacce\IGestoreConfigurazione.cs" />
-    <Compile Include="Interfacce\IInserimentoDisegniV.cs" />
+    <Compile Include="Interfacce\IStrumentiV.cs" />
     <Compile Include="Interfacce\ILoginP.cs" />
     <Compile Include="Interfacce\ILoginV.cs" />
     <Compile Include="Interfacce\IMainP.cs" />
@@ -94,19 +94,25 @@
     <Compile Include="Interfacce\IGestoreConvalidaDatoRicevuto.cs" />
     <Compile Include="Interfacce\IStrategia.cs" />
     <Compile Include="Interfacce\IView.cs" />
-    <Compile Include="Interfacce\IInserimentoDisegniP.cs" />
+    <Compile Include="Interfacce\IStrumentiP.cs" />
     <Compile Include="Models\Config.cs" />
     <Compile Include="Gestori\GestoreContatoriObiettivi.cs" />
     <Compile Include="Interfacce\IGestoreContatoriObiettivi.cs" />
     <Compile Include="Models\Motore.cs" />
-    <Compile Include="_Presenters\InserimentoDisegniP.cs" />
+    <Compile Include="_Presenters\StrumentiP.cs" />
     <Compile Include="_Presenters\LoginP.cs" />
     <Compile Include="_Presenters\MainP.cs" />
-    <Compile Include="_Views\InserimentoDisegniV.cs">
+    <Compile Include="_Views\StrumentiV_new.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="_Views\InserimentoDisegniV.designer.cs">
-      <DependentUpon>InserimentoDisegniV.cs</DependentUpon>
+    <Compile Include="_Views\StrumentiV_new.designer.cs">
+      <DependentUpon>StrumentiV_new.cs</DependentUpon>
+    </Compile>
+    <Compile Include="_Views\StrumentiV.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="_Views\StrumentiV.designer.cs">
+      <DependentUpon>StrumentiV.cs</DependentUpon>
     </Compile>
     <Compile Include="_Views\LoginV.cs">
       <SubType>Form</SubType>
@@ -122,8 +128,11 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="_Views\InserimentoDisegniV.resx">
-      <DependentUpon>InserimentoDisegniV.cs</DependentUpon>
+    <EmbeddedResource Include="_Views\StrumentiV_new.resx">
+      <DependentUpon>StrumentiV_new.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="_Views\StrumentiV.resx">
+      <DependentUpon>StrumentiV.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="_Views\LoginV.resx">
       <DependentUpon>LoginV.cs</DependentUpon>

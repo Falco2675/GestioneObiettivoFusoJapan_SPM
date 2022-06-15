@@ -38,16 +38,10 @@ namespace FusoEuro5Japan_Client
             get { return _prod_1T; }
             set
             {
-                //if (_prod_1T == value) return;
                 if (IsTarget_GiornalieroRaggiunto || IsTarget_1T_Raggiunto) return;
                 _prod_1T = value;
                 Prod_1TChanged?.Invoke(this, null);
-                //ControllaTargetGiorno();
                 AggiornaObiettivi();
-                //if(_gestoreStrategiaDiProduzione.StrategiaEnum == StrategiaEnum.ProduzioneTurni)
-                //    IsTarget_1T_Raggiunto = _prod_1T >= Obiettivo_1T;
-
-
             }
         }
         public int Prod_2T
@@ -55,14 +49,10 @@ namespace FusoEuro5Japan_Client
             get { return _prod_2T; }
             set
             {
-                //if (_prod_2T == value) return;
                 if (IsTarget_GiornalieroRaggiunto || IsTarget_2T_Raggiunto) return;
                 _prod_2T = value;
                 Prod_2TChanged?.Invoke(this, null);
-                //ControllaTargetGiorno();
                 AggiornaObiettivi();
-                //if (_gestoreStrategiaDiProduzione.StrategiaEnum == StrategiaEnum.ProduzioneTurni)
-                //    IsTarget_2T_Raggiunto = _prod_2T >= Obiettivo_2T;
             }
         }
         public int Prod_3T
@@ -70,14 +60,10 @@ namespace FusoEuro5Japan_Client
             get { return _prod_3T; }
             set
             {
-                if (_prod_3T == value) return;
-                if (IsTarget_GiornalieroRaggiunto || IsTarget_1T_Raggiunto) return;
+                if (IsTarget_GiornalieroRaggiunto || IsTarget_3T_Raggiunto) return;
                 _prod_3T = value;
                 Prod_3TChanged?.Invoke(this, null);
-                //ControllaTargetGiorno();
                 AggiornaObiettivi();
-                //if (_gestoreStrategiaDiProduzione.Strategia.TipoStrategia == StrategiaEnum.ProduzioneTurni)
-                //    IsTarget_3T_Raggiunto = _prod_3T >= Obiettivo_3T;
             }
         }
 
@@ -290,7 +276,7 @@ namespace FusoEuro5Japan_Client
                 IsTarget_GiornalieroRaggiunto = IsTarget_1T_Raggiunto && IsTarget_2T_Raggiunto && IsTarget_3T_Raggiunto;
                 IsTarget_1T_Raggiunto = Prod_1T >= Obiettivo_1T;
                 IsTarget_2T_Raggiunto = Prod_2T >= Obiettivo_2T;
-                IsTarget_3T_Raggiunto = Prod_3T >= Obiettivo_1T;
+                IsTarget_3T_Raggiunto = Prod_3T >= Obiettivo_3T;
             }
 
         }

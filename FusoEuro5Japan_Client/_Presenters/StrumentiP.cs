@@ -9,11 +9,18 @@ using System.Windows.Forms;
 
 namespace FusoEuro5Japan_Client
 {
-    public class InserimentoDisegniP : BaseP, IInserimentoDisegniP
+    public class StrumentiP : BaseP, IStrumentiP
     {
         #region CAMPI PRIVATI
-        private readonly IInserimentoDisegniV _view;
+        private readonly IStrumentiV _view;
+        private readonly IGestoreConfigurazione _gestoreConfigurazione;
+        private readonly IGestoreDisegni _gestoreDisegni;
+        private readonly IGestoreConvalidaDatoRicevuto _gestoreConvalidaDato;
+        private readonly IDataSource _dataSource;
+
         private BindingSource _bs = new BindingSource();
+
+        private List<string> _elencoDisegniInseriti = new List<string>();
 
         private string _disegno;
         private int _obiettivo_1T;
@@ -23,9 +30,6 @@ namespace FusoEuro5Japan_Client
 
 
         private string _messaggio;
-        private readonly IGestoreDisegni _gestoreDisegni;
-        private readonly IGestoreConvalidaDatoRicevuto _gestoreConvalidaDato;
-        private readonly IDataSource _dataSource;
         //private StrategiaEnum _strategia;
 
 
@@ -83,14 +87,12 @@ namespace FusoEuro5Japan_Client
         public bool IsStartegiaFrequenza => _strategia == StrategiaEnum.Ogni_N_pezzi;
 
 
-        private BindingList<string> _elencoDisegniInseriti = new BindingList<string>();
-        private readonly IGestoreConfigurazione _gestoreConfigurazione;
 
-        public BindingList<string> ElencoDisegniInseriti
-        {
-            get { return _elencoDisegniInseriti; }
-            set { _elencoDisegniInseriti = value; Notify(); }
-        }
+        //public IEnumerable<string> ElencoDisegniInseriti
+        //{
+        //    get { return _elencoDisegniInseriti; }
+        //    set { _elencoDisegniInseriti = value; Notify(); }
+        //}
 
 
         public bool AbilitaPulsanteAggiungi => !(string.IsNullOrEmpty(Disegno));
@@ -98,9 +100,9 @@ namespace FusoEuro5Japan_Client
         #endregion
 
         #region CTOR
-        public InserimentoDisegniP
+        public StrumentiP
             (
-                IInserimentoDisegniV view,
+                IStrumentiV view,
                 IDataSource dataSource,
                 IGestoreConfigurazione gestoreConfigurazione,
                 IGestoreConvalidaDatoRicevuto gestoreConvalidaDato
@@ -129,6 +131,7 @@ namespace FusoEuro5Japan_Client
             _view.AggiungiDisegnoEvent += OnAggiungiDisegnoEvent;
             _view.SalvaStrategiaEvent += OnSalvaStrategiaEvent;
             _view.StrategiaChanged += OnStrategiaChanged;
+
         }
 
 
@@ -172,6 +175,10 @@ namespace FusoEuro5Japan_Client
         public void ShowView()
         {
             ResettaCampi();
+
+            _elencoDisegniInseriti = _dataSource.GetElencoDisegni();
+            _view.AggiornaElencoDisegni(_elencoDisegniInseriti);
+
             Obiettivo_1T = _gestoreConfigurazione.Configurazione.Obiettivo_1T;
             Obiettivo_2T = _gestoreConfigurazione.Configurazione.Obiettivo_2T;
             Obiettivo_3T = _gestoreConfigurazione.Configurazione.Obiettivo_3T;
@@ -194,7 +201,7 @@ namespace FusoEuro5Japan_Client
                 ConvalidaDisegni();
                 AggiungiDisegniSuDB();
                 Messaggio = "Disegno inserito correttamente.";
-                //ResettaCampi();
+                _view.AggiungiDisegnoAElenco(Disegno);
 
             }
             catch (Exception ex)
@@ -212,7 +219,7 @@ namespace FusoEuro5Japan_Client
             
             _dataSource.InserisciDisegni(Disegno);
 
-            ElencoDisegniInseriti.Add(Disegno);
+            _elencoDisegniInseriti.Add(Disegno);
 
         }
         private void ResettaCampi()
@@ -226,7 +233,7 @@ namespace FusoEuro5Japan_Client
 
             Messaggio = string.Empty;
             
-            Notify(nameof(ElencoDisegniInseriti));
+            //Notify(nameof(ElencoDisegniInseriti));
         }
 
         #endregion

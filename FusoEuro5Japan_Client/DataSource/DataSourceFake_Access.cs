@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.OleDb;
@@ -407,6 +408,11 @@ namespace FusoEuro5Japan_Client
         }
 
         public void ResettaProduzioneDelGiorno(string prodDiIeri)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<string> GetElencoDisegni()
         {
             throw new NotImplementedException();
         }

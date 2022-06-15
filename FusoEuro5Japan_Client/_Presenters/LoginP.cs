@@ -22,7 +22,7 @@ namespace FusoEuro5Japan_Client
         private string _password;
         private string _messaggio;
         private bool _isLoginInCorso = false;
-        private readonly IInserimentoDisegniP _inserimentoDisegniP;
+        private readonly IStrumentiP _inserimentoDisegniP;
         #endregion
 
         #region PROPRIETA'
@@ -54,7 +54,7 @@ namespace FusoEuro5Japan_Client
                 ILoginV view,    
                 ILogin_FPT loginFPT,
                 IGestoreConfigurazione gestoreConfigurazioni,
-                IInserimentoDisegniP inserimentoDisegniP
+                IStrumentiP inserimentoDisegniP
             )
         {
             _view = view;

@@ -1,10 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Windows.Forms;
 
 namespace FusoEuro5Japan_Client
 {
-    public interface IInserimentoDisegniV
+    public interface IStrumentiV
     {
         SynchronizationContext SynchronizeContext { get; }
 
@@ -16,6 +17,8 @@ namespace FusoEuro5Japan_Client
         event EventHandler SalvaStrategiaEvent;
 
         void SetBindingSource(BindingSource bs);
+        void AggiornaElencoDisegni(List<string> disegni);
         DialogResult ShowDialog();
+        void AggiungiDisegnoAElenco(string disegno);
     }
 }

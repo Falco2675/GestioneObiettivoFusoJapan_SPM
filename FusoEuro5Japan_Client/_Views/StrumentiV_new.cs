@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 namespace FusoEuro5Japan_Client
 {
-    public partial class InserimentoDisegniV : Form, IInserimentoDisegniV
+    public partial class StrumentiV_new : Form, IStrumentiV
     {
         #region CAMPI PRIVATI
         private IMainP _presenter;
@@ -48,11 +48,11 @@ namespace FusoEuro5Japan_Client
         #endregion
 
         #region CTOR
-        public InserimentoDisegniV()
+        public StrumentiV_new()
         {
             InitializeComponent();
             _bs = new BindingSource();
-            InizializzaDataGrid_DisegniInseriti();
+            //InizializzaDataGrid_DisegniInseriti();
             chkFrequenza.Checked = false;
             chkProdFissa.Checked = false;
         }
@@ -74,8 +74,9 @@ namespace FusoEuro5Japan_Client
         {
             txtDisegnoFPT.Focus();
             txtDisegnoFPT.Select();
-            //chkProdFissa.Checked = true;
+            //AggiornaElencoDisegni();
         }
+
 
         private void btnAggiungi_Click(object sender, EventArgs e) => AggiungiDisegno();
 
@@ -121,9 +122,9 @@ namespace FusoEuro5Japan_Client
         private void BindingData()
         {
             txtDisegnoFPT.DataBindings.Add("Text", _bs, "Disegno", false, DataSourceUpdateMode.OnPropertyChanged);
-            lblMessaggio.DataBindings.Add("Text", _bs, "Messaggio");
+            lblMessaggioDisegni.DataBindings.Add("Text", _bs, "Messaggio");
             btnAggiungiDis.DataBindings.Add("Enabled", _bs, "AbilitaPulsanteAggiungi", false, DataSourceUpdateMode.Never);
-            dgvDisegniInseriti.DataBindings.Add("DataSource", _bs, "ElencoDisegniInseriti");
+            //lBoxDisegniInseriti.DataBindings.Add("DataSource", _bs, "ElencoDisegniInseriti");
             num_Prod1Turno.DataBindings.Add("Text", _bs, "Obiettivo_1T");
             num_Prod2Turno.DataBindings.Add("Text", _bs, "Obiettivo_2T");
             num_Prod3Turno.DataBindings.Add("Text", _bs, "Obiettivo_3T");
@@ -131,28 +132,16 @@ namespace FusoEuro5Japan_Client
             chkProdFissa.DataBindings.Add("Checked", _bs, "IsStartegiaProduzione");
             chkFrequenza.DataBindings.Add("Checked", _bs, "IsStartegiaFrequenza");
         }
-        private void InizializzaDataGrid_DisegniInseriti()
+
+        public void AggiornaElencoDisegni(List<string> disegni)
         {
-            dgvDisegniInseriti.AutoGenerateColumns = false;
-            dgvDisegniInseriti.ColumnHeadersDefaultCellStyle.BackColor = System.Drawing.Color.FromArgb(128, 255, 255);
-            dgvDisegniInseriti.EnableHeadersVisualStyles = false;
-            dgvDisegniInseriti.Columns.AddRange(
-                new DataGridViewTextBoxColumn
-                {
-                    HeaderText = "DATA",
-                    DataPropertyName = "DataIns",
-                    AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill,
-                },
-                new DataGridViewTextBoxColumn
-                {
-                    HeaderText = "Disegno",
-                    DataPropertyName = "Disegno",
-                    Width=100,
-                    //AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells,
-                }
-                );
-            dgvDisegniInseriti.ClearSelection();
+            lBoxDisegniInseriti.Items.Clear();
+            foreach (var item in disegni)
+            {
+                lBoxDisegniInseriti.Items.Add(item);
+            }
         }
+
 
         private void AggiungiDisegno()
         {
@@ -166,6 +155,12 @@ namespace FusoEuro5Japan_Client
         private void ChiudiView()
         {
             this.Close();
+        }
+
+
+        public void AggiungiDisegnoAElenco(string disegno)
+        {
+            lBoxDisegniInseriti.Items.Insert(0, disegno);
         }
 
 
