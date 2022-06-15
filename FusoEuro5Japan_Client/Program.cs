@@ -1,5 +1,6 @@
 ﻿using LoginFPT.Gestori;
 using System;
+using System.Threading;
 using System.Windows.Forms;
 using Unity;
 using Unity.Lifetime;
@@ -15,14 +16,26 @@ namespace FusoEuro5Japan_Client
         [STAThread]
         static void Main()
         {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
+            bool instanceCountOne = false;
+            using (Mutex mtex = new Mutex(true, "IstanzaMutex", out instanceCountOne))
+            {
+                if (instanceCountOne)
+                {
+                    Application.EnableVisualStyles();
+                    Application.SetCompatibleTextRenderingDefault(false);
 
-            Bootstrap();
+                    Bootstrap();
 
-            var presenter = _container.Resolve<IMainP>();
+                    var presenter = _container.Resolve<IMainP>();
 
-            Application.Run((Form)presenter.GetView);
+                    Application.Run((Form)presenter.GetView);
+                    mtex.ReleaseMutex();
+                }
+                else
+                {
+                    MessageBox.Show("L'applicativo è gia in esecuzione.");
+                }
+            }
         }
 
         private static void Bootstrap()

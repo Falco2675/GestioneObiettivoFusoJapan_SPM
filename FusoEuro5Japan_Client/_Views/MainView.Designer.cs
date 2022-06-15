@@ -69,6 +69,7 @@
             this.lblAzione = new System.Windows.Forms.Label();
             this.pnlBarraSotto = new System.Windows.Forms.Panel();
             this.tlpBarraSotto = new System.Windows.Forms.TableLayoutPanel();
+            this.lblErroriWarning = new System.Windows.Forms.Label();
             this.btnReset = new System.Windows.Forms.Button();
             this.tlpFooter = new System.Windows.Forms.TableLayoutPanel();
             this.lblConnessioneDS = new System.Windows.Forms.Label();
@@ -77,7 +78,6 @@
             this.pnlCopyright = new System.Windows.Forms.Panel();
             this.lblCopyright = new System.Windows.Forms.Label();
             this.txtDato = new System.Windows.Forms.TextBox();
-            this.lblErroriWarning = new System.Windows.Forms.Label();
             this.tlpPrincipale.SuspendLayout();
             this.pnlHeader.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
@@ -211,6 +211,7 @@
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox2.TabIndex = 0;
             this.pictureBox2.TabStop = false;
+            this.pictureBox2.DoubleClick += new System.EventHandler(this.pictureBox2_DoubleClick);
             // 
             // tableLayoutPanel7
             // 
@@ -625,6 +626,18 @@
             this.tlpBarraSotto.Size = new System.Drawing.Size(946, 61);
             this.tlpBarraSotto.TabIndex = 0;
             // 
+            // lblErroriWarning
+            // 
+            this.lblErroriWarning.BackColor = System.Drawing.Color.Red;
+            this.lblErroriWarning.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblErroriWarning.Location = new System.Drawing.Point(0, 0);
+            this.lblErroriWarning.Margin = new System.Windows.Forms.Padding(0);
+            this.lblErroriWarning.Name = "lblErroriWarning";
+            this.lblErroriWarning.Size = new System.Drawing.Size(662, 61);
+            this.lblErroriWarning.TabIndex = 0;
+            this.lblErroriWarning.Text = "Errori";
+            this.lblErroriWarning.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // btnReset
             // 
             this.btnReset.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
@@ -720,18 +733,6 @@
             this.txtDato.TabIndex = 1;
             this.txtDato.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDato_KeyPress);
             this.txtDato.Leave += new System.EventHandler(this.txtDato_Leave);
-            // 
-            // lblErroriWarning
-            // 
-            this.lblErroriWarning.BackColor = System.Drawing.Color.Red;
-            this.lblErroriWarning.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblErroriWarning.Location = new System.Drawing.Point(0, 0);
-            this.lblErroriWarning.Margin = new System.Windows.Forms.Padding(0);
-            this.lblErroriWarning.Name = "lblErroriWarning";
-            this.lblErroriWarning.Size = new System.Drawing.Size(662, 61);
-            this.lblErroriWarning.TabIndex = 0;
-            this.lblErroriWarning.Text = "Errori";
-            this.lblErroriWarning.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // MainView
             // 

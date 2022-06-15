@@ -52,6 +52,10 @@ namespace FusoEuro5Japan_Client
         {
             AvviaStrumentiEvent?.Invoke(this, null);
         }
+        private void pictureBox2_DoubleClick(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
 
 
         #endregion
@@ -123,8 +127,8 @@ namespace FusoEuro5Japan_Client
         {
             _presenter.Reset();
         }
-        #endregion
 
+        #endregion
 
     }
 }
