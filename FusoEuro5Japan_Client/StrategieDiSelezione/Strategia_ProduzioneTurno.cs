@@ -12,30 +12,16 @@ namespace FusoEuro5Japan_Client
         public override StrategiaEnum TipoStrategia => StrategiaEnum.ProduzioneTurni;
         public override string NomeStrategia => "Produzione Turno";
             
-        //public override string ProduzioneTurno_String => $"{_configurazione.Configurazione.Contatore_del_turno}/{_configurazione.Configurazione.N_pezzi_definito}";
 
 
         #region CTOR
         public Strategia_ProduzioneTurno() 
         {
-            SottoscriviEventi();
         }
 
-        public override event EventHandler ObiettivoTurnoRaggiuntoEvent;
         #endregion
 
-        #region SOTTOSCRIZIONE EVENTI
-        public void SottoscriviEventi()
-        {
-            //_gestoreConfigurazione.ContatoriChanged += OnContatoriChanged;
-        }
-        #endregion
-
-        public override string GetProduzioneTurno_string(int prod, int targetProd)
-        {
-            return $"{prod}/{targetProd}";
-        }
-
+        public override string GetProduzioneTurno_string(int prod, int targetProd) => $"{prod}/{targetProd}";
 
         public override bool IsMotoreTarget()
         {

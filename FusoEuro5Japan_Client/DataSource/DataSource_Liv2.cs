@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Odbc;
-using System.Data.SqlClient;
 using System.Linq;
 
 namespace FusoEuro5Japan_Client
@@ -133,7 +132,6 @@ namespace FusoEuro5Japan_Client
                                 config.Ogni_N_Pezzi = Convert.ToInt16(tabella.Rows[0].Field<decimal>("OGNI_N_PEZZI"));
                                 config.Contatore_di_comodo = Convert.ToInt16(tabella.Rows[0].Field<decimal>("CONTATORE_DI_COMODO"));
 
-
                                 config.Obiettivo_1T = Convert.ToInt16(tabella.Rows[0].Field<decimal>("OBIETTIVO_1T"));
                                 config.Obiettivo_2T = Convert.ToInt16(tabella.Rows[0].Field<decimal>("OBIETTIVO_2T"));
                                 config.Obiettivo_3T = Convert.ToInt16(tabella.Rows[0].Field<decimal>("OBIETTIVO_3T"));
@@ -172,7 +170,6 @@ namespace FusoEuro5Japan_Client
 
                 using (OdbcConnection conn = new OdbcConnection(connString))
                 {
-
                     string query = @"SELECT CONTATORE_DI_COMODO from OBIETTIVO_JAPAN_SPM_CONFIG";
 
                     conn.Open();
@@ -198,7 +195,6 @@ namespace FusoEuro5Japan_Client
 
             }
         }
-
         public void SetContatoreDiComodo(int contdiComodo)
         {
             try
@@ -396,6 +392,7 @@ namespace FusoEuro5Japan_Client
                 throw new Exception("Errore DB!");
             }
         }
+
         public void InserisciDisegni(string disegnoMotore)
         {
             try

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace FusoEuro5Japan_Client
+﻿namespace FusoEuro5Japan_Client
 {
     public class Motore
     {
@@ -9,20 +7,15 @@ namespace FusoEuro5Japan_Client
         public string CodBasamento { get; set; }
         public bool IsTargetCandidate { get; set; }
 
+        #region CTOR
         public Motore()
         {
             Matricola = "--";
             Disegno = "--";
             CodBasamento = "--";
             IsTargetCandidate = false;
-        }
+        } 
+        #endregion
 
-
-        public void Set(Motore motoreFuso)
-        {
-            Matricola = motoreFuso.Matricola;
-            Disegno = motoreFuso.Disegno;
-            CodBasamento = motoreFuso.CodBasamento;
-        }
     }
 }

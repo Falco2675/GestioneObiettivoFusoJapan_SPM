@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Configuration;
 using System.Threading;
 
 namespace FusoEuro5Japan_Client
@@ -11,21 +10,17 @@ namespace FusoEuro5Japan_Client
         private readonly Timer _timerGetConfig;
         private readonly IDataSource _dataSource;
         private readonly IGestoreContatoriObiettivi _gestoreContatoriObiettivi;
-        private readonly IGestoreStrategiaDiSelezione _gestoreStrategiaDiProduzione;
+        private readonly IGestoreStrategiaDiSelezione _gestoreStrategiaDiSelezione;
         private readonly IGestoreTurni _gestoreTurni;
         #endregion
 
         #region PROPRIETA'
-        public string ExceptionDbConfigurazione { get; private set; }
         public int IdApp => 2;
         public TurnoEnum TurnoCorrente => _gestoreTurni.Turno_enum;
-        public StrategiaEnum StrategiaAdottata => _gestoreStrategiaDiProduzione.StrategiaEnum;
-
-
+        public StrategiaEnum StrategiaAdottata => _gestoreStrategiaDiSelezione.StrategiaEnum;
         public bool IsObiettivoTurnoRaggiunto => _gestoreContatoriObiettivi.IsObiettivoTurnoRaggiunto;
-
-        public string ContatoreTurno_string { get; private set; }
-        public string ContatoreGiorno_string { get; private set; }
+        //public string ContatoreTurno_string { get; private set; }
+        //public string ContatoreGiorno_string { get; private set; }
         public Config Configurazione
         {
             get { return _configurazione; }
@@ -35,12 +30,11 @@ namespace FusoEuro5Japan_Client
                 _configurazione = value;
             }
         }
+        public string ExceptionDbConfigurazione { get; private set; }
 
         #endregion
 
         #region EVENTI
-        //public event EventHandler StrategiaChanged;
-        //public event EventHandler ContatoriChanged;
         public event EventHandler ExceptionDBConfigurazioneEvent;
         public event EventHandler ConfigurazioneAggiornataEvent;
         #endregion
@@ -56,7 +50,7 @@ namespace FusoEuro5Japan_Client
         {
             _dataSource = dataSource;
             _gestoreContatoriObiettivi = gestoreContatoriObiettivi;
-            _gestoreStrategiaDiProduzione = gestoreStrategiaDiProduzione;
+            _gestoreStrategiaDiSelezione = gestoreStrategiaDiProduzione;
             _gestoreTurni = gestoreTurni;
             _configurazione = new Config();
 
@@ -71,7 +65,9 @@ namespace FusoEuro5Japan_Client
         {
             _gestoreTurni.TurnoChanged += OnTurnoChanged;
         }
+        #endregion
 
+        #region GESTIONE EVENTI
         private void OnTurnoChanged(object sender, EventArgs e)
         {
             if (_gestoreTurni.Turno_enum == TurnoEnum.PrimoTurno)
@@ -79,7 +75,7 @@ namespace FusoEuro5Japan_Client
                 string _produzioneDiIeri = $"{_configurazione.Prod_1T};{_configurazione.Prod_2T};{_configurazione.Prod_3T};{_configurazione.Contatore_del_giorno}";
                 _dataSource.ResettaProduzioneDelGiorno(_produzioneDiIeri);
             }
-        }
+        } 
         #endregion
 
         #region METODI PUBBLICI
@@ -97,7 +93,7 @@ namespace FusoEuro5Japan_Client
             }
             catch (System.Exception ex)
             {
-                ExceptionDbConfigurazione = "Errore DB. Configurazione!";
+                ExceptionDbConfigurazione = "Errore DB.";
                 ExceptionDBConfigurazioneEvent?.Invoke(this, null);
                 //throw new Exception("Errore DB. Configurazione!");
             }
@@ -112,40 +108,25 @@ namespace FusoEuro5Japan_Client
             AggiornaConfigurazione();
 
             _timerGetConfig?.Change(-1, -1);
-            if (_gestoreStrategiaDiProduzione.IsMotoreTarget)
+            if (_gestoreStrategiaDiSelezione.IsMotoreTarget)
             {
                 _gestoreContatoriObiettivi.AggiungiAllaProduzione();
             }
             else
             {
-                _gestoreStrategiaDiProduzione.EseguiNessunaAzione();
+                _gestoreStrategiaDiSelezione.EseguiNessunaAzione();
             }
             ScriviConfigurazione();
             _timerGetConfig.Change(5000, 5000);
         }
 
-        public void ScriviConfigurazione()
-        {
-            _configurazione.Prod_1T = _gestoreContatoriObiettivi.Prod_1T;
-            _configurazione.Prod_2T = _gestoreContatoriObiettivi.Prod_2T;
-            _configurazione.Prod_3T = _gestoreContatoriObiettivi.Prod_3T;
 
-            _configurazione.Contatore_del_giorno = _gestoreContatoriObiettivi.Contatore_del_giorno;
-
-            _dataSource.AggiornaContatori(_configurazione);
-        }
-
-        public void ResettaTurno()
-        {
-            _dataSource.ResettaTurno(_configurazione.Ogni_N_Pezzi);
-        }
         public void AggiornaContatoreDiComodo() => _configurazione.Contatore_di_comodo -= 1;
 
         #endregion
 
         #region METODI PRIVATI
-        private void SetStrategia(Config newConfig) => _gestoreStrategiaDiProduzione.SetStrategia(this);
-
+        private void SetStrategia(Config newConfig) => _gestoreStrategiaDiSelezione.SetStrategia(this);
         private void AggiornaContatori(Config config)
         {
             _gestoreContatoriObiettivi.Obiettivo_1T = config.Obiettivo_1T;
@@ -155,7 +136,6 @@ namespace FusoEuro5Japan_Client
             _gestoreContatoriObiettivi.Prod_2T = config.Prod_2T;
             _gestoreContatoriObiettivi.Prod_3T = config.Prod_3T;
             _gestoreContatoriObiettivi.Prod_Ieri = config.Prod_Ieri;
-            //_gestoreContatoriObiettivi.Contatore_del_giorno = config.Contatore_del_giorno;
 
             _gestoreContatoriObiettivi.Obiettivo_Giornaliero = 
                 config.Obiettivo_Giornaliero < config.Obiettivo_1T + config.Obiettivo_2T + config.Obiettivo_3T 
@@ -164,11 +144,17 @@ namespace FusoEuro5Japan_Client
 
             _gestoreContatoriObiettivi.AggiornaObiettivi();
 
-
-            //_gestoreContatoriObiettivi.IsTarget_All_Turni_Raggiunto = config.Contatore_del_giorno == config.Prod_1T + config.Prod_2T + config.Prod_3T ? true : false;
         }
+        private void ScriviConfigurazione()
+        {
+            _configurazione.Prod_1T = _gestoreContatoriObiettivi.Prod_1T;
+            _configurazione.Prod_2T = _gestoreContatoriObiettivi.Prod_2T;
+            _configurazione.Prod_3T = _gestoreContatoriObiettivi.Prod_3T;
 
+            _configurazione.Contatore_del_giorno = _gestoreContatoriObiettivi.Contatore_del_giorno;
 
+            _dataSource.AggiornaContatori(_configurazione);
+        }
         #endregion
     }
 }

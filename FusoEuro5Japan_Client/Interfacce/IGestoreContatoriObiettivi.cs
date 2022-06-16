@@ -37,7 +37,7 @@ namespace FusoEuro5Japan_Client
         event EventHandler Obiettivo_3T_Changed;
         event EventHandler Obiettivo_All_Turni_Changed;
 
-        event EventHandler ProduzioneGiornalieraChanged;
+        //event EventHandler ProduzioneGiornalieraChanged;
 
         event EventHandler Target_Prod_1T_RaggiuntoChanged;
         event EventHandler Target_Prod_2T_RaggiuntoChanged;

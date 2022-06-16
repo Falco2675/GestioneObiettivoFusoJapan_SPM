@@ -68,9 +68,7 @@
   <ItemGroup>
     <Compile Include="DataSource\DataSourceFake_Access.cs" />
     <Compile Include="DataSource\DataSource_Liv2.cs" />
-    <Compile Include="Gestori\GestoreAzioniDaCompiere.cs" />
     <Compile Include="Gestori\GestoreConfigurazione.cs" />
-    <Compile Include="Gestori\GestoreDisegni.cs" />
     <Compile Include="Gestori\GestoreStrategiaDiSelezione.cs" />
     <Compile Include="Gestori\GestoreTurni.cs" />
     <Compile Include="Interfacce\IGestoreStrategiaDiSelezione.cs" />
@@ -79,7 +77,6 @@
     <Compile Include="StrategieDiSelezione\Strategia_NonDefinita.cs" />
     <Compile Include="StrategieDiSelezione\Strategia_ProduzioneTurno.cs" />
     <Compile Include="StrategieDiSelezione\Strategia_Ogni_N_Pezzi.cs" />
-    <Compile Include="Interfacce\IGestoreAzioniDaCompiere.cs" />
     <Compile Include="Helpers\Enums.cs" />
     <Compile Include="Interfacce\IGestoreDisegni.cs" />
     <Compile Include="Gestori\GestoreConvalidaDatoRicevuto.cs" />
@@ -93,7 +90,6 @@
     <Compile Include="Interfacce\IMainV.cs" />
     <Compile Include="Interfacce\IGestoreConvalidaDatoRicevuto.cs" />
     <Compile Include="Interfacce\IStrategia.cs" />
-    <Compile Include="Interfacce\IView.cs" />
     <Compile Include="Interfacce\IStrumentiP.cs" />
     <Compile Include="Models\Config.cs" />
     <Compile Include="Gestori\GestoreContatoriObiettivi.cs" />
@@ -102,12 +98,6 @@
     <Compile Include="_Presenters\StrumentiP.cs" />
     <Compile Include="_Presenters\LoginP.cs" />
     <Compile Include="_Presenters\MainP.cs" />
-    <Compile Include="_Views\StrumentiV_new.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="_Views\StrumentiV_new.designer.cs">
-      <DependentUpon>StrumentiV_new.cs</DependentUpon>
-    </Compile>
     <Compile Include="_Views\StrumentiV.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -128,9 +118,6 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="_Views\StrumentiV_new.resx">
-      <DependentUpon>StrumentiV_new.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="_Views\StrumentiV.resx">
       <DependentUpon>StrumentiV.cs</DependentUpon>
     </EmbeddedResource>

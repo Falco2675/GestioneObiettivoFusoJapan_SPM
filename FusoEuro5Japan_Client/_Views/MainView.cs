@@ -1,12 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 
@@ -33,7 +26,6 @@ namespace FusoEuro5Japan_Client
         private void MainView_Load(object sender, EventArgs e)
         {
             txtDato.Focus();
-            ResettaCampi();
         }
         private void txtDato_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -43,7 +35,6 @@ namespace FusoEuro5Japan_Client
                 txtDato.Clear();
             }
         }
-
         private void txtDato_Leave(object sender, EventArgs e)
         {
             txtDato.Focus();
@@ -52,14 +43,15 @@ namespace FusoEuro5Japan_Client
         {
             AvviaStrumentiEvent?.Invoke(this, null);
         }
+        private void btnReset_Click(object sender, EventArgs e)
+        {
+            ResetEvent?.Invoke(this, null);
+        }
         private void pictureBox2_DoubleClick(object sender, EventArgs e)
         {
             Application.Exit();
         }
-
-
         #endregion
-
 
         #region METODI PUBBLICI
         public void SetPresenter(IMainP presenter)
@@ -67,17 +59,6 @@ namespace FusoEuro5Japan_Client
             _presenter = presenter;
             _presenter.SynchronizeContext = SynchronizationContext.Current;
             BindingData();
-        }
-
-
-        public void ResettaCampi()
-        {
-            lblMatricola.Text = "--";
-            lblDisegno.Text = "--";
-            lblCodBasamento.Text = "--";
-            txtDato.Clear();
-            txtDato.Focus();
-            ResetEvent?.Invoke(this, null);
         }
 
         #endregion
@@ -95,17 +76,14 @@ namespace FusoEuro5Japan_Client
             lblProd_1T.DataBindings.Add("Text", _presenter, "Prod_1T");
             lblProd_1T.DataBindings.Add("ForeColor", _presenter, "ForeColor_Prod_1T");
             lblProd_1T.DataBindings.Add("BackColor", _presenter, "BackColor_Prod_1T");
-            //lblProd_1T.DataBindings.Add("Font", _presenter, "Font_Prod_1T");
 
             lblProd_2T.DataBindings.Add("Text", _presenter, "Prod_2T");
             lblProd_2T.DataBindings.Add("ForeColor", _presenter, "ForeColor_Prod_2T");
             lblProd_2T.DataBindings.Add("BackColor", _presenter, "BackColor_Prod_2T");
-            //lblProd_2T.DataBindings.Add("Font", _presenter, "Font_Prod_2T");
 
             lblProd_3T.DataBindings.Add("Text", _presenter, "Prod_3T");
             lblProd_3T.DataBindings.Add("ForeColor", _presenter, "ForeColor_Prod_3T");
             lblProd_3T.DataBindings.Add("BackColor", _presenter, "BackColor_Prod_3T");
-            //lblProd_3T.DataBindings.Add("Font", _presenter, "Font_Prod_3T");
 
             lbl_ProdGiornaliera.DataBindings.Add("Text", _presenter, "ProduzioneGiornaliera");
             lbl_ProdGiornaliera.DataBindings.Add("ForeColor", _presenter, "ForeColor_ProduzioneGiorn");
@@ -121,11 +99,6 @@ namespace FusoEuro5Japan_Client
             lblConnessioneDS.DataBindings.Add("BackColor", _presenter, "IsAliveColor");
             lblVersion.DataBindings.Add("Text", _presenter, "Versione");
 
-            //tlpProduzioneTurno.DataBindings.Add("BackColor", _presenter, "BackColor_ProdTurno");
-        }
-        private void btnReset_Click(object sender, EventArgs e)
-        {
-            _presenter.Reset();
         }
 
         #endregion

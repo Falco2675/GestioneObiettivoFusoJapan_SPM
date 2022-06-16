@@ -1,12 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace FusoEuro5Japan_Client
@@ -14,30 +8,16 @@ namespace FusoEuro5Japan_Client
     public partial class StrumentiV : Form, IStrumentiV
     {
         #region CAMPI PRIVATI
-        private IMainP _presenter;
         private BindingSource _bs;
-        private StrategiaEnum _strategia;
         #endregion
 
         #region PROPRIETA' PUBBLICHE
         public SynchronizationContext SynchronizeContext => SynchronizationContext.Current;
-
         public string DisegnoFPT
         {
             get { return txtDisegnoFPT.Text; }
             set { txtDisegnoFPT.Text = value; }
         }
-
-        //public StrategiaEnum Strategia
-        //{
-        //    get { return _strategia; }
-        //    set
-        //    {
-        //        _strategia = value;
-        //        StrategiaChanged?.Invoke(this, null);
-        //    }
-        //}
-
 
         #endregion
 
@@ -52,21 +32,15 @@ namespace FusoEuro5Japan_Client
         {
             InitializeComponent();
             _bs = new BindingSource();
-            InizializzaDataGrid_DisegniInseriti();
             chkFrequenza.Checked = false;
             chkProdFissa.Checked = false;
         }
-
-
-
         #endregion
 
         #region SOTTOSCRIZIONE EVENTI
         public void SottoscriviEventi()
         {
         }
-
-
         #endregion
 
         #region GESTIONE EVENTI
@@ -74,19 +48,13 @@ namespace FusoEuro5Japan_Client
         {
             txtDisegnoFPT.Focus();
             txtDisegnoFPT.Select();
-            //chkProdFissa.Checked = true;
         }
-
         private void btnAggiungi_Click(object sender, EventArgs e) => AggiungiDisegno();
-
         private void lblClose_Click(object sender, EventArgs e) => ChiudiView();
-        private void btnChiudi_Click(object sender, EventArgs e) => ChiudiView();
         private void chkProdFissa_CheckedChanged(object sender, EventArgs e)
         {
             if (chkProdFissa.Checked)
             {
-                //Strategia = StrategiaEnum.ProduzioneTurni;
-                //chkFrequenza.Checked = false;
                 StrategiaChanged?.Invoke(this, StrategiaEnum.ProduzioneTurni);
                 pnlFrequenza.Enabled = false;
                 pnlProdFissa.Enabled = true;
@@ -96,8 +64,6 @@ namespace FusoEuro5Japan_Client
         {
             if (chkFrequenza.Checked)
             {
-                //Strategia = StrategiaEnum.Ogni_N_pezzi;
-                //chkProdFissa.Checked = false;
                 StrategiaChanged?.Invoke(this, StrategiaEnum.Ogni_N_pezzi);
                 pnlProdFissa.Enabled = false;
                 pnlFrequenza.Enabled = true;
@@ -113,7 +79,15 @@ namespace FusoEuro5Japan_Client
             _bs = bs;
             BindingData();
         }
-
+        public void AggiungiDisegnoAElenco(string disegno) => lBoxDisegniInseriti.Items.Insert(0, disegno); 
+        public void AggiornaElencoDisegni(List<string> disegni)
+        {
+            lBoxDisegniInseriti.Items.Clear();
+            foreach (var item in disegni)
+            {
+                lBoxDisegniInseriti.Items.Add(item);
+            }
+        }
 
         #endregion
 
@@ -121,9 +95,8 @@ namespace FusoEuro5Japan_Client
         private void BindingData()
         {
             txtDisegnoFPT.DataBindings.Add("Text", _bs, "Disegno", false, DataSourceUpdateMode.OnPropertyChanged);
-            lblMessaggio.DataBindings.Add("Text", _bs, "Messaggio");
+            lblMessaggioDisegni.DataBindings.Add("Text", _bs, "Messaggio");
             btnAggiungiDis.DataBindings.Add("Enabled", _bs, "AbilitaPulsanteAggiungi", false, DataSourceUpdateMode.Never);
-            dgvDisegniInseriti.DataBindings.Add("DataSource", _bs, "ElencoDisegniInseriti");
             num_Prod1Turno.DataBindings.Add("Text", _bs, "Obiettivo_1T");
             num_Prod2Turno.DataBindings.Add("Text", _bs, "Obiettivo_2T");
             num_Prod3Turno.DataBindings.Add("Text", _bs, "Obiettivo_3T");
@@ -131,55 +104,11 @@ namespace FusoEuro5Japan_Client
             chkProdFissa.DataBindings.Add("Checked", _bs, "IsStartegiaProduzione");
             chkFrequenza.DataBindings.Add("Checked", _bs, "IsStartegiaFrequenza");
         }
-        private void InizializzaDataGrid_DisegniInseriti()
-        {
-            dgvDisegniInseriti.AutoGenerateColumns = false;
-            dgvDisegniInseriti.ColumnHeadersDefaultCellStyle.BackColor = System.Drawing.Color.FromArgb(128, 255, 255);
-            dgvDisegniInseriti.EnableHeadersVisualStyles = false;
-            dgvDisegniInseriti.Columns.AddRange(
-                new DataGridViewTextBoxColumn
-                {
-                    HeaderText = "DATA",
-                    DataPropertyName = "DataIns",
-                    AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill,
-                },
-                new DataGridViewTextBoxColumn
-                {
-                    HeaderText = "Disegno",
-                    DataPropertyName = "Disegno",
-                    Width=100,
-                    //AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells,
-                }
-                );
-            dgvDisegniInseriti.ClearSelection();
-        }
-
-        private void AggiungiDisegno()
-        {
-            AggiungiDisegnoEvent?.Invoke(this, null);
-        }
-        private void SalvaStrategia()
-        {
-            SalvaStrategiaEvent?.Invoke(this, null);
-        }
-
-        private void ChiudiView()
-        {
-            this.Close();
-        }
-
-        public void AggiornaElencoDisegni(List<string> disegni)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void AggiungiDisegnoAElenco(string disegno)
-        {
-            throw new NotImplementedException();
-        }
-
-
+        private void AggiungiDisegno() => AggiungiDisegnoEvent?.Invoke(this, null);
+        private void SalvaStrategia() => SalvaStrategiaEvent?.Invoke(this, null);
+        private void ChiudiView() => this.Close();
         #endregion
+
 
     }
 }

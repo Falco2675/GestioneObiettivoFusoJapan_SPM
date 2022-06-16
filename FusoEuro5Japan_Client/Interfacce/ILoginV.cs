@@ -1,5 +1,4 @@
-﻿using LoginFPT.Models;
-using System;
+﻿using System;
 using System.Threading;
 using System.Windows.Forms;
 

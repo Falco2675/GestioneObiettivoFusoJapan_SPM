@@ -1,12 +1,4 @@
-﻿using LoginFPT.Models;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
 using System.Windows.Forms;
 using System.Threading;
 
@@ -14,7 +6,7 @@ namespace FusoEuro5Japan_Client
 {
     public partial class LoginV : Form, ILoginV
     {
-        #region Campi privati
+        #region CAMPI PRIVATI
         private BindingSource _bs;
         #endregion
 
@@ -32,12 +24,10 @@ namespace FusoEuro5Japan_Client
             InitializeComponent();
             _bs = new BindingSource();
             txtUsername.Select();
-            //Resetta();
         }
-
         #endregion
 
-        #region Gestori Eventi
+        #region GESTORI EVENTI
         private void txtUsername_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == (char)13)
@@ -58,11 +48,7 @@ namespace FusoEuro5Japan_Client
                     txtUsername.Select();
             }
         }
-        private void txt_Enter(object sender, EventArgs e)
-        {
-            (sender as TextBox).SelectAll();
-        }
-
+        private void txt_Enter(object sender, EventArgs e) => (sender as TextBox).SelectAll();
         private void btnLogin_Click(object sender, EventArgs e) => Login();
         private void btnAnnulla_Click(object sender, EventArgs e) => Chiudi();
         private void lblClose_Click(object sender, EventArgs e) => Chiudi();
@@ -92,10 +78,9 @@ namespace FusoEuro5Japan_Client
             txtPassw.SelectAll();
         }
 
-
         #endregion
 
-        #region Metodi Privati
+        #region METODI PRIVATI
         private void BindingData()
         {
             txtUsername.DataBindings.Add("Text", _bs, "Username", false, DataSourceUpdateMode.OnPropertyChanged);
@@ -103,28 +88,20 @@ namespace FusoEuro5Japan_Client
             btnLogin.DataBindings.Add("Enabled", _bs, "AbilitaPulsanteLogin");
             lblMessaggio.DataBindings.Add("Text", _bs, "Messaggio", false, DataSourceUpdateMode.OnPropertyChanged);
         }
-
         private void Login()
         {
             SetPerStartLogin();
             LoggaUtenteEvent?.Invoke(this, null);
         }
-
         private void SetPerStartLogin()
         {
             txtUsername.Enabled = false;
             txtPassw.Enabled = false;
             btnLogin.Enabled = false;
         }
-
-        private void Chiudi()
-        {
-            this.Close();
-        }
-
+        private void Chiudi() => this.Close();
 
         #endregion
-
 
     }
 }

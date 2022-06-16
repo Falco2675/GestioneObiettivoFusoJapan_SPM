@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using LoginFPT.Gestori;
-using LoginFPT.Models;
 using System.Threading;
 
 namespace FusoEuro5Japan_Client
@@ -80,10 +76,7 @@ namespace FusoEuro5Japan_Client
         #endregion
 
         #region GESTORI EVENTI
-        private void OnLoggaUtenteEvent(object sender, EventArgs e)
-        {
-            EseguiLogin();
-        }
+        private void OnLoggaUtenteEvent(object sender, EventArgs e) => EseguiLogin();
 
         #endregion
 
@@ -97,14 +90,12 @@ namespace FusoEuro5Japan_Client
             _view.Resetta();
             _view.ShowDialog();
             
-            
         }
         #endregion
 
         #region METODI PRIVATI
         private async void EseguiLogin()
         {
-
             _isLoginInCorso = true;
             Messaggio = "";
 
@@ -137,7 +128,6 @@ namespace FusoEuro5Japan_Client
             {
                 _view.SetPerLoginFallito();
             }
-
 
         }
         #endregion

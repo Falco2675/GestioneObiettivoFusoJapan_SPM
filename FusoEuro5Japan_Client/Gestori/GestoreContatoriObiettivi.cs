@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FusoEuro5Japan_Client
 {
@@ -13,7 +9,6 @@ namespace FusoEuro5Japan_Client
         private readonly IGestoreStrategiaDiSelezione _gestoreStrategiaDiProduzione;
         private readonly IGestoreTurni _gestoreTurni;
 
-
         private int _obiettivo_1T;
         private int _obiettivo_2T;
         private int _obiettivo_3T;
@@ -21,7 +16,6 @@ namespace FusoEuro5Japan_Client
         private int _prod_1T;
         private int _prod_2T;
         private int _prod_3T;
-        private int _contatore_del_giorno;
         private string _prod_Ieri;
 
         private bool _isTarget_1T_Raggiunto;
@@ -176,16 +170,6 @@ namespace FusoEuro5Japan_Client
         }
 
         public int Contatore_del_giorno => Prod_1T + Prod_2T + Prod_3T;
-        //{
-        //    get { return _contatore_del_giorno; }
-        //    set
-        //    {
-        //        if (_contatore_del_giorno == value) return;
-        //        _contatore_del_giorno = value;
-        //        ProduzioneGiornalieraChanged?.Invoke(this, null);
-        //    }
-        //}
-
 
         public string Prod_Ieri
         {
@@ -215,7 +199,6 @@ namespace FusoEuro5Japan_Client
         public event EventHandler Target_Prod_3T_RaggiuntoChanged;
         public event EventHandler TargetProduzGiornalieraRaggiuntoChanged;
 
-        public event EventHandler ProduzioneGiornalieraChanged;
         public event EventHandler ProduzioniIeriChanged;
         #endregion
 
@@ -250,20 +233,6 @@ namespace FusoEuro5Japan_Client
                     break;
             }
         }
-
-        #endregion
-
-        #region METODI PRIVATI
-        //private void ControllaTargetGiorno()
-        //{
-        //    if (_gestoreStrategiaDiProduzione.StrategiaEnum == StrategiaEnum.Non_Definita) return;
-        //    Contatore_del_giorno = Prod_1T + Prod_2T + Prod_3T;
-
-        //    IsTarget_GiornalieroRaggiunto = Obiettivo_Giornaliero > 0
-        //        ? Obiettivo_Giornaliero == Contatore_del_giorno
-        //        : false;
-        //}
-
         public void AggiornaObiettivi()
         {
             Obiettivo_Giornaliero = Obiettivo_1T + Obiettivo_2T + Obiettivo_3T;
@@ -281,9 +250,11 @@ namespace FusoEuro5Japan_Client
 
         }
 
-
         #endregion
 
+        #region METODI PRIVATI
+
+        #endregion
 
     }
 }

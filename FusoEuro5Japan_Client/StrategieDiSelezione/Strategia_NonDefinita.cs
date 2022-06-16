@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace FusoEuro5Japan_Client
+﻿namespace FusoEuro5Japan_Client
 {
     public class Strategia_NonDefinita : Strategia_abs
     {
@@ -14,19 +8,10 @@ namespace FusoEuro5Japan_Client
 
         public override string NomeStrategia => "N.D.";
 
-        public override string GetProduzioneTurno_string(int prod, int targetProd)
-        {
-            return "-";
-        }
+        public override string GetProduzioneTurno_string(int prod, int targetProd) => "-";
         public override StrategiaEnum TipoStrategia => StrategiaEnum.Non_Definita;
 
-        //public override bool Azione_Bool { get; protected set; }
+        public override bool IsMotoreTarget() => false;
 
-        public override event EventHandler ObiettivoTurnoRaggiuntoEvent;
-
-        public override bool IsMotoreTarget()
-        {
-            return false;
-        }
     }
 }

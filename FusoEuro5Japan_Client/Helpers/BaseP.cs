@@ -8,8 +8,8 @@ namespace FusoEuro5Japan_Client
     {
         public abstract SynchronizationContext SynchronizeContext { get; set; }
 
-
         public event PropertyChangedEventHandler PropertyChanged;
+
         protected void Notify([CallerMemberName] string propertyName = null)
         {
             if (PropertyChanged != null)

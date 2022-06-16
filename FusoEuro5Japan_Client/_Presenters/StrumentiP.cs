@@ -1,10 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace FusoEuro5Japan_Client
@@ -27,12 +23,9 @@ namespace FusoEuro5Japan_Client
         private int _obiettivo_2T;
         private int _obiettivo_3T;
         private int _ogni_N_Pezzi;
-
+        private StrategiaEnum _strategia;
 
         private string _messaggio;
-        //private StrategiaEnum _strategia;
-
-
         #endregion
 
         #region PROPRIETA'
@@ -69,7 +62,6 @@ namespace FusoEuro5Japan_Client
             get { return _ogni_N_Pezzi; }
             set { _ogni_N_Pezzi = value; }
         }
-        private StrategiaEnum _strategia;
 
         public StrategiaEnum Strategia
         {
@@ -82,18 +74,8 @@ namespace FusoEuro5Japan_Client
             }
         }
 
-
         public bool IsStartegiaProduzione => _strategia == StrategiaEnum.ProduzioneTurni;
         public bool IsStartegiaFrequenza => _strategia == StrategiaEnum.Ogni_N_pezzi;
-
-
-
-        //public IEnumerable<string> ElencoDisegniInseriti
-        //{
-        //    get { return _elencoDisegniInseriti; }
-        //    set { _elencoDisegniInseriti = value; Notify(); }
-        //}
-
 
         public bool AbilitaPulsanteAggiungi => !(string.IsNullOrEmpty(Disegno));
 
@@ -108,7 +90,6 @@ namespace FusoEuro5Japan_Client
                 IGestoreConvalidaDatoRicevuto gestoreConvalidaDato
             )
         {
-
             _view = view;
             _dataSource = dataSource;
             _gestoreConfigurazione = gestoreConfigurazione;
@@ -133,16 +114,11 @@ namespace FusoEuro5Japan_Client
             _view.StrategiaChanged += OnStrategiaChanged;
 
         }
-
-
         #endregion
 
         #region GESTORI EVENTI
-        private void OnAggiungiDisegnoEvent(object sender, EventArgs e) => AggiungiDisegni();
-        private void OnStrategiaChanged(object sender, StrategiaEnum strategia)
-        {
-            Strategia = strategia;
-        }
+        private void OnAggiungiDisegnoEvent(object sender, EventArgs e) => AggiungiDisegno();
+        private void OnStrategiaChanged(object sender, StrategiaEnum strategia) => Strategia = strategia;
         private void OnSalvaStrategiaEvent(object sender, EventArgs e)
         {
             try
@@ -193,7 +169,7 @@ namespace FusoEuro5Japan_Client
         #endregion
 
         #region METODI PRIVATI
-        private void AggiungiDisegni()
+        private void AggiungiDisegno()
         {
             try
             {
@@ -209,18 +185,16 @@ namespace FusoEuro5Japan_Client
                 Messaggio = ex.Message;
             }
         }
+        private void AggiungiDisegniSuDB()
+        {
+            _dataSource.InserisciDisegni(Disegno);
+
+            _elencoDisegniInseriti.Add(Disegno);
+        }
 
         private void ConvalidaDisegni()
         {
             _gestoreConvalidaDato.ConvalidaDisegno(Disegno.Trim());
-        }
-        private void AggiungiDisegniSuDB()
-        {
-            
-            _dataSource.InserisciDisegni(Disegno);
-
-            _elencoDisegniInseriti.Add(Disegno);
-
         }
         private void ResettaCampi()
         {
@@ -232,10 +206,7 @@ namespace FusoEuro5Japan_Client
             Ogni_N_Pezzi = 0;
 
             Messaggio = string.Empty;
-            
-            //Notify(nameof(ElencoDisegniInseriti));
         }
-
         #endregion
 
     }

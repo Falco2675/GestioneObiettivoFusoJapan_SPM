@@ -11,13 +11,10 @@ namespace FusoEuro5Japan_Client
         bool Azione_Bool { get; }
         bool IsMotoreTarget { get; }
 
-        event EventHandler StrategiaDiProduzioneChanged;
-        event EventHandler<string> AzioneDaCompiereChanged;
-        //event EventHandler ObiettivoTurnoRaggiuntoEvent;
+        event EventHandler StrategiaDiSelezioneChanged;
 
         void SetStrategia(IGestoreConfigurazione config);
         string GetProduzioneTurno_string(int prod_1T, int obiettivo_1T);
-        //void EseguiSuMotore(Motore motoreLetto, TurnoEnum turno_enum);
         void ResettaAzione();
         void EseguiNessunaAzione();
     }
